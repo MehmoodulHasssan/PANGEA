@@ -455,11 +455,11 @@ body {
 
 .bgCover {
   /* background: url("../assets/alphalete_white.svg"); */
-  background: url("../assets/panga_white.svg");
+  background: url("../assets/pang3a.png");
   border: 1px solid rgb(77, 77, 77);
   /* display: flex; */
   /* justify-content: center; */
-  height: 280px;
+  height: 250px;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
@@ -912,6 +912,22 @@ body {
   .apni-class {
     height: 40% !important;
   }
+  .slider-big-item{
+    width: 250px!important;
+  }
+  .slider-item{
+    width: 250px!important;
+  }
+  .slider {
+    width: 250px !important;
+  }
+  .banner-3{
+    bottom: 75px !important;
+  }
+  .swiper-button-next{
+    top: 50%;
+    right: 35px;
+  }
 }
 
 
@@ -953,4 +969,12 @@ body {
     width: 100% !important;
   }
 
+}
+@media screen and (min-width: 320px) and (max-width: 1024px) {
+  .left-side-product-page{
+    display: none;
+  }
+  .footer-links-sec, .footer2{
+    border: none!important;
+  }
 }
