@@ -632,8 +632,8 @@ h1 {
 @media screen and (max-width: 600px) {
   .main-card-res {
     display: flex;
-    flex-direction: column-reverse;
-    overflow: scroll !important;
+    flex-direction: column;
+    // overflow: scroll !important;
   }
   .main-card-res-none {
     display: none;
@@ -643,8 +643,8 @@ h1 {
 @media screen and (max-width: 600px) {
   .main-card-res {
     display: flex;
-    flex-direction: column-reverse;
-    overflow: scroll !important;
+    flex-direction: column;
+    // overflow: scroll !important;
   }
   .main-card-res-none {
     display: none;

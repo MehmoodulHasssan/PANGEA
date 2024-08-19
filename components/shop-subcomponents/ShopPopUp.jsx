@@ -26,7 +26,10 @@ const ShopPopUp = ({ setStyles, isStyles, showPopUp, setShowPopUp }) => {
                     drag="y" // Enable vertical dragging
                     dragConstraints={{ top: 0, bottom: 0 }} // Set constraints for dragging
                     onDragEnd={handleDragEnd}
-                    // dragElastic={0.1}
+                    dragElastic={{
+                        top: 0,
+                        bottom: 1
+                    }}
                     initial={{ opacity: 0, y: "100%" }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: "100%" }}

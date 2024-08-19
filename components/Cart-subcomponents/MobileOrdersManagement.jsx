@@ -2,34 +2,28 @@ import React, { useRef, forwardRef, useEffect } from 'react'
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import { motion } from 'framer-motion';
-import { totalPrice } from '@/helpers/totalPrice';
 import { useRouter } from 'next/navigation';
 
 
 
 const cartPricingOverflow = [1, 2, 3, 4, 5]
 
-const OrdersManagementBox = ({ addedItems, removeItem, onDecrement, onIncrement }) => {
+const MobileOrdersManagement = ({ addedItems, removeItem, onDecrement, onIncrement, height }) => {
     const lastElementRef = useRef()
     const router = useRouter()
-    const handleSubmit = () => {
-        //submit order to backend
-        return router.push('/payment')
-    }
+
 
     useEffect(() => {
         lastElementRef.current?.scrollIntoView({ behavior: 'smooth' })
     }, [addedItems])
 
     return (
-        <div className='flex  flex-col lg:w-3/12 md-[430px] text-black border border-black justify-between'>
-            <div className='flex items-center justify-center h-20 border-b border-black'>
-                YOUR BAG
-            </div>
+        <div className={`absolute top-[90px] w-screen flex flex-col ${height ? `h-[${height}px]` : 'h-[430px]'} text-white bg-black border border-slate-200 justify-between`}>
+
             <div className='h-full overflow-y-scroll scrollbar-hide'>
-                {addedItems.length === 0 && <div className='flex min-h-96 text-gray-400 text-xl justify-center items-center h-full'>No items in bag</div>}
+                {addedItems.length === 0 && <div className='flex h-72 text-gray-400 text-xl justify-center items-center'>No items in bag</div>}
                 {addedItems.length > 0 && addedItems.map((item, index) => (
-                    <div key={index} className='h-[16rem] overflow-clip flex flex-col p-4 border border-b-black'>
+                    <div key={index} className='h-[16rem] overflow-clip flex flex-col p-4 border border-b-slate-200'>
                         <div className='flex gap-4 p-4'>
                             <div className='w-24 max-h-[7.5rem] overflow-hidden border border-gray-400 rounded-lg'>
                                 <img className='rounded-lg max-h-fit'
@@ -82,31 +76,8 @@ const OrdersManagementBox = ({ addedItems, removeItem, onDecrement, onIncrement 
                 ))}
 
             </div>
-            <div className='flex flex-col'>
-                <div className='flex items-center justify-center h-12 border-t border-black'>
-                    Free Standard Shipping Unlocked
-                </div>
-                <div className='flex flex-col gap-3 border-y h-32 border-b border-black py-4 '>
-                    <div className='flex justify-between px-6'>
-                        <span>Total:</span>
-                        <span>{`$${addedItems.length === 0 ? 0 : totalPrice(addedItems)}`}</span>
-                    </div>
-                    <div className='flex justify-center items-center'>
-                        <motion.button
-                            className='text-white text-[0.75rem] font-bold py-2 px-24 rounded-full bg-green-400'
-                            whileHover={{ scale: 1.1 }}
-                            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                            onClick={handleSubmit}
-
-                        >
-                            CHECKOUT
-                        </motion.button>
-                    </div>
-
-                </div>
-            </div>
         </div>
     )
 }
 
-export default OrdersManagementBox
+export default MobileOrdersManagement
