@@ -5,29 +5,11 @@ import { motion, easeInOut } from 'framer-motion';
 
 
 const ShopPopUp = ({ setStyles, isStyles, showPopUp, setShowPopUp }) => {
-    const [startY, setStartY] = useState(null);
-    const [currentY, setCurrentY] = useState(0);
 
-    const handleTouchStart = (e) => {
-        setStartY(e.touches[0].clientY);
-    };
-
-    const handleDrag = (e) => {
-        const touchY = e.touches[0].clientY;
-        console.log(e.touches[0].clientY)
-        if (startY && startY < touchY) {
-            setCurrentY(touchY - startY)
-        }
-    };
-    const handleTouchEnd = (e) => {
-        const endY = e.changedTouches[0].clientY;
-        const length = e.changedTouches
-        console.log(length)
-        if (startY && startY < endY - 50) { // swipe down
+    const handleDragEnd = (e, info) => {
+        if (info.offset.y > 70) { // If dragged down more than 50px
             setShowPopUp(false);
         }
-        setStartY(null);
-        setCurrentY(0);
     };
 
     return (
@@ -40,11 +22,11 @@ const ShopPopUp = ({ setStyles, isStyles, showPopUp, setShowPopUp }) => {
 
                 </div>
                 <motion.div
-                    className='fixed z-20 w-screen h-[80%] bottom-0 bg-black'
-                    style={{ transform: `translateY(${currentY}px)` }}
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleDrag}
-                    onTouchEnd={handleTouchEnd}
+                    className='fixed z-20 w-screen h-[80%] bottom-0  bg-black'
+                    drag="y" // Enable vertical dragging
+                    dragConstraints={{ top: 0, bottom: 0 }} // Set constraints for dragging
+                    onDragEnd={handleDragEnd}
+                    // dragElastic={0.1}
                     initial={{ opacity: 0, y: "100%" }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: "100%" }}

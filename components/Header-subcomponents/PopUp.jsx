@@ -7,39 +7,21 @@ const right = Array.from({ length: 2 }, (_, index) => index + 1);
 
 
 const PopUp = ({ showPopUp, handleClose }) => {
-    const [startY, setStartY] = useState(null);
-    const [currentY, setCurrentY] = useState(0);
 
-    const handleTouchStart = (e) => {
-        setStartY(e.touches[0].clientY);
-    };
-
-    const handleDrag = (e) => {
-        const touchY = e.touches[0].clientY;
-        if (startY && startY < touchY) {
-            setCurrentY(touchY - startY)
-        }
-    };
-    const handleTouchEnd = (e) => {
-        const endY = e.changedTouches[0].clientY;
-        const length = e.changedTouches
-        console.log(length)
-        if (startY && startY < endY - 50) { // swipe down
+    const handleDragEnd = (e, info) => {
+        if (info.offset.y > 70) {
             handleClose();
         }
-        setStartY(null);
-        setCurrentY(0);
-    };
+    }
     return (<>
         {showPopUp && <div className='backdrop' onClick={handleClose}></div>}
         <AnimatePresence>
             {showPopUp &&
                 <motion.div
                     className={`popUp-container`}
-                    style={{ transform: `translateY(${currentY}px)` }}
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleDrag}
-                    onTouchEnd={handleTouchEnd}
+                    drag="y" // Enable vertical dragging
+                    dragConstraints={{ top: 0, bottom: 0 }} // Set constraints for dragging
+                    onDragEnd={handleDragEnd}
                     initial={{ opacity: 0, y: "100%" }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: "100%" }}
