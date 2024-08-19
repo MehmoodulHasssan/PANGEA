@@ -10,48 +10,55 @@ import { useDispatch } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
 import CustomToast from '@/components/CustomToast';
 import Image from 'next/image';
-import { BsWindowDesktop } from 'react-icons/bs';
+import MobilePopUpBtns from '@/components/shop-subcomponents/MobilePopUpBtns';
+import { useRef } from 'react';
+import './shop.css'
+import ShopPopUp from '@/components/shop-subcomponents/ShopPopUp';
 
 
 const slides = Array.from({ length: 15 }, (_, index) => index + 1)
 const ShopPage = () => {
-    const [isScrolled, setIsScrolled] = useState(false)
+    const scrolledDiv = useRef(null)
+    const [showPopUp, setShowPopUp] = useState(false)
+    // const [isScrolled, setIsScrolled] = useState(false)
     const [isStyles, setStyles] = useState(true)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        const totalScroll = document.documentElement.scrollHeight
+    // useEffect(() => {
+    //     const totalScroll = document.documentElement.scrollHeight
 
-        const addThreshold = 300; // Scroll position at or above which the class is added
-        const removeThreshold = 315; // Scroll position below which the class is removed
+    //     const addThreshold = 300; // Scroll position at or above which the class is added
+    //     // const removeThreshold = 315; // Scroll position below which the class is removed
 
-        const footerStart = totalScroll - 670 - 1030//667.5
+    //     const footerStart = 322//667.5
 
-        const checkInitialScroll = () => {
-            const scrollY = window.scrollY;
-            console.log(window.scrollY, footerStart)
+    //     const checkInitialScroll = () => {
+    //         const scrollY = window.scrollY;
+    //         console.log(window.scrollY, footerStart)
 
-            // Add class if the initial scroll position is beyond addThreshold
-            if (scrollY >= addThreshold && scrollY < footerStart) {
-                setIsScrolled(true);
-            } else if (scrollY <= removeThreshold) {
-                setIsScrolled(false);
-            } else {
-                if (scrollY >= footerStart) {
-                    setIsScrolled(false)
-                }
-            }
-        };
+    //         // Add class if the initial scroll position is beyond addThreshold
+    //         // if (scrollY >= addThreshold + 10) {
+    //         //     return
+    //         // }
 
-        window.addEventListener("scroll", checkInitialScroll);
+    //         if (scrollY >= addThreshold && scrollY < footerStart) {
+    //             setIsScrolled(true);
+    //         } else if (scrollY < addThreshold) {
+    //             setIsScrolled(false);
+    //         } else if (scrollY >= footerStart) {
+    //             setIsScrolled(false);
+    //         }
+    //     };
 
-        // Initial check to handle cases where the initial scroll position is beyond addThreshold
-        checkInitialScroll();
+    //     window.addEventListener("scroll", checkInitialScroll);
 
-        return () => {
-            window.removeEventListener("scroll", checkInitialScroll);
-        };
-    }, []);
+    //     // Initial check to handle cases where the initial scroll position is beyond addThreshold
+    //     checkInitialScroll();
+
+    //     return () => {
+    //         window.removeEventListener("scroll", checkInitialScroll);
+    //     };
+    // }, []);
 
 
     const notify = ({ product, quantity, adding, removing }) => {
@@ -75,22 +82,43 @@ const ShopPage = () => {
         notify({ product: item, quantity, adding: true, removing: false })
     }
 
+    function isFullyScrolled(div) {
+        return div.scrollTop + div.clientHeight >= div.scrollHeight;
+    }
+
+
+    // Usage example
+    // useEffect(() => {
+    //     scrolledDiv.current.addEventListener('scroll', () => {
+    //         if (isFullyScrolled(scrolledDiv.current)) {
+    //             console.log('The div is fully scrolled!');
+    //             setIsScrolled(false);
+    //         }
+    //     });
+
+    // }, [scrolledDiv.current]);
+
+    // console.log(isScrolled)
+
+
     return (
         <WithHeaderWrapper>
             <Toaster position='bottom-center' />
+            <MobilePopUpBtns
+                isStyles={isStyles}
+                setStyles={setStyles}
+                setShowPopUp={setShowPopUp}
+            />
+            <ShopPopUp
+                showPopUp={showPopUp}
+                setShowPopUp={setShowPopUp}
+                setStyles={setStyles}
+                isStyles={isStyles}
+            />
             <div className='w-full bg-white'>
-                {<div className='relative w-full h-[50vh] overflow-hidden'>
-                    <Image
-                        className='absolute'
-                        src="https://alphalete.uk/cdn/shop/collections/m_sweater_b79c3787-15cf-4367-9f68-e29eb75bcf56_2500x1050_crop_center.jpg?v=1679098832"
-                        alt="image"
-                        layout="fill"
-                        objectFit="cover"
-                    />
-                </div>}
-                <div className={`flex  bg-white px-8 w-full`}>
+                <div className='flex bg-white px-8 w-full'>
                     <div className='relative w-1/5 left-side-product-page  bg-white py-[29px] pr-4 overflow-hidden'>
-                        <div className={`bg-white h-full ${isScrolled ? 'fixed top-[81px]' : 'absolute'} `}>
+                        <div className={`bg-white h-full stikcy top-[81px]`}>
                             <div className='flex flex-col'>
                                 <p className='text-[12px] text-gray-700'>Trending</p>
                                 <h1 className='text-[20px] text-gray-700'>ALL PRODUCTS</h1>
@@ -120,6 +148,7 @@ const ShopPage = () => {
                             <div className='flex  flex-col overflow-scroll scrollbar-hide'>
                                 {vapeProducts.map((product, index) => (
                                     <AnimeButtons
+                                        key={index}
                                         name={product.productName}
                                         options={product.options}
                                     />
@@ -127,7 +156,10 @@ const ShopPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='w-4/5 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  gap-6'>
+                    <div
+                        ref={scrolledDiv}
+                        className={`w-4/5 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  gap-6 h-[555px] overflow-scroll scrollbar-hide`}>
+                        {/* className={`w-4/5 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  gap-6 h-[555px] ${isScrolled ? 'overflow-scroll' : 'overflow-hidden'} scrollbar-hide`}> */}
                         {/* <div className="slider-buttons "> */}
                         {DUMMY_ITEMS.map((product, index) => (
                             <div className="sliders">
@@ -142,8 +174,22 @@ const ShopPage = () => {
                     </div>
                 </div>
             </div>
+
+
         </WithHeaderWrapper>
     )
 }
 
 export default ShopPage
+
+
+{/* {<div className='relative w-full h-[50vh] overflow-hidden'>
+<Image
+className='absolute'
+src="https://alphalete.uk/cdn/shop/collections/m_sweater_b79c3787-15cf-4367-9f68-e29eb75bcf56_2500x1050_crop_center.jpg?v=1679098832"
+alt="image"
+layout="fill"
+objectFit="cover"
+/>
+</div>} */}
+{/* <div className={`flex ${isScrolled ? 'fixed top-[52px]' : ''} z-50 bg-white px-8 w-full`}> */ }
