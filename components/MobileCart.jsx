@@ -19,9 +19,8 @@ const MobileCart = ({ isOpen }) => {
     const cartDiv = useRef()
     const [height, setHeight] = useState(0)
     const addedItems = useSelector((state) => state.itemsFn.items)
-    const stateMessage = useSelector((state) => state.itemsFn.message)
+    // const stateMessage = useSelector((state) => state.itemsFn.message)
     const dispatch = useDispatch()
-    console.log(stateMessage)
     const closeDiv = (e) => {
         if (e.target.id === 'modal-background') {
             dispatch(modalActions.closeModal())
@@ -114,6 +113,7 @@ const MobileCart = ({ isOpen }) => {
                         onDecrement={handleDecrement}
                         onIncrement={handleIncrement}
                         height={height}
+                        isOpen={isOpen}
                     />
                     {/* <ExtraItems
                         addItem={handleAddItem}

@@ -29,10 +29,7 @@ import CustomToast from '@/components/CustomToast';
 import HomeProductSlide from '@/components/HomeProductSlide';
 import Link from 'next/link';
 const slides = Array.from({ length: 40 }, (_, index) => index + 1);
-const buttonSizes = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL'];
-// const womenSlides = Array.from({ length: 8 }, (_, index) => index + 1);
-// const menSlides = Array.from({ length: 8 }, (_, index) => index + 1);
-import pang3aWhite from "../assets/pang3a.png";
+import pang3aWhite from '../assets/pang3a.png';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -92,27 +89,6 @@ const HomePage = () => {
     };
   }, []);
 
-  // State to manage the visibility of the div
-
-  // Function to close the div when clicking the background
-
-  // const container = useRef();
-
-  // useGSAP(
-  //   () => {
-  //     ScrollTrigger.create({
-  //       trigger: '.box-c',
-  //       pin: true,
-  //       start: 'center center',
-  //       end: '+=300',
-  //     });
-  //   },
-  //   {
-  //     scope: container,
-  //   }
-  // );
-  //https://cdn.shopify.com/videos/c/o/v/331b4aa9d8cb4d3b984bd160fa65030b.mp4
-  console.log(state);
   return (
     <WithHeaderWrapper>
       <main className="home">
@@ -149,7 +125,7 @@ const HomePage = () => {
             <Link
               className=" hero-img-btn whitespace-nowrap text-center leading-[100%] max-w-full truncate font-w-600 px-[1.5rem] py-[1rem] text-[13px]  till-desktop:py-[12px] rounded-full transition-all bg-white border border-secondary/20 text-black hover:opacity-80"
               href="/shop"
-            // style="background-color: #ffffff; color: #000000"
+              // style="background-color: #ffffff; color: #000000"
             >
               {' '}
               Shop Now{' '}
@@ -157,18 +133,22 @@ const HomePage = () => {
             <Link
               className="hero-img-btn whitespace-nowrap text-center leading-[100%] max-w-full truncate font-w-600 px-[1.5rem] py-[1rem]  text-[13px] till-desktop:py-[12px] rounded-full transition-all bg-white border border-secondary/20 text-black hover:opacity-80"
               href="/shop"
-            // style="background-color: #ffffff; color: #000000"
+              // style="background-color: #ffffff; color: #000000"
             >
               Shop Trending
             </Link>
           </div>
         </div>
         {/* Upper new arrivals */}
-        <div className="slider-heading" style={{ marginTop: "-50px" }}>
+        <div className="slider-heading" style={{ marginTop: '-50px' }}>
           <h2>
-            <span>{`${women ? `Now` : `Trending`}`}</span> <span>NEW ARRIVALS</span>
+            <span>{`${women ? `Now` : `Trending`}`}</span>{' '}
+            <span>NEW ARRIVALS</span>
           </h2>
-          <button className="button"> <Link href="/shop">SHOP ALL</Link> </button>
+          <button className="button">
+            {' '}
+            <Link href="/shop">SHOP ALL</Link>{' '}
+          </button>
         </div>
         <div className="sliders overflow-x-hidden">
           <div className="slider-buttons">
@@ -229,9 +209,9 @@ const HomePage = () => {
               <SwiperSlide key={index}>
                 <div
                   className="slider-items lg:ps-12 md:ps-8 sm:ps-4 ps-0"
-                // style={
-                //       index === 0 ? { paddingLeft: "50px", zIndex: '100' } : {}
-                //     }
+                  // style={
+                  //       index === 0 ? { paddingLeft: "50px", zIndex: '100' } : {}
+                  //     }
                 >
                   <div className="slider-item">
                     <HomeProductSlide
@@ -338,8 +318,12 @@ const HomePage = () => {
               <div className="banner-info">
                 <h1>New Arrivals</h1>
                 <p>Amplify Reimagined</p>
-                <button className="button"><Link href="/shop">Shop Women</Link></button>
-                <button className="button"><Link href="/shop">Shop Men</Link></button>
+                <button className="button">
+                  <Link href="/shop">Shop Women</Link>
+                </button>
+                <button className="button">
+                  <Link href="/shop">Shop Men</Link>
+                </button>
               </div>
             </div>
             <div
@@ -352,8 +336,12 @@ const HomePage = () => {
               <div className="banner-info">
                 <h1>New Arrivals</h1>
                 <p>Amplify Reimagined</p>
-                <button className="button"><Link href="/shop">Shop Women</Link></button>
-                <button className="button"><Link href="/shop">Shop Men</Link></button>
+                <button className="button">
+                  <Link href="/shop">Shop Women</Link>
+                </button>
+                <button className="button">
+                  <Link href="/shop">Shop Men</Link>
+                </button>
               </div>
             </div>
             <div
@@ -366,13 +354,17 @@ const HomePage = () => {
               <div className="banner-info">
                 <h1>New Arrivals</h1>
                 <p>Amplify Reimagined</p>
-                <button className="button"><Link href="/shop">Shop Women</Link></button>
-                <button className="button"><Link href="/shop">Shop Men</Link></button>
+                <button className="button">
+                  <Link href="/shop">Shop Women</Link>
+                </button>
+                <button className="button">
+                  <Link href="/shop">Shop Men</Link>
+                </button>
               </div>
             </div>
           </div>
 
-          <div className="slider-heading !mt-14" >
+          <div className="slider-heading !mt-14">
             <h2>
               <span>{`Now`}</span> <span> NEW ARRIVALS </span>
             </h2>
@@ -493,8 +485,12 @@ const HomePage = () => {
               <div className="banner-info">
                 <h1>New Arrivals</h1>
                 <p>Amplify Reimagined</p>
-                <button className="button"><Link href="/shop">Shop Women</Link></button>
-                <button className="button"><Link href="/shop">Shop Men</Link></button>
+                <button className="button">
+                  <Link href="/shop">Shop Women</Link>
+                </button>
+                <button className="button">
+                  <Link href="/shop">Shop Men</Link>
+                </button>
               </div>
             </div>
             <div
@@ -507,8 +503,12 @@ const HomePage = () => {
               <div className="banner-info">
                 <h1>New Arrivals</h1>
                 <p>Amplify Reimagined</p>
-                <button className="button"><Link href="/shop">Shop Women</Link></button>
-                <button className="button"><Link href="/shop">Shop Men</Link></button>
+                <button className="button">
+                  <Link href="/shop">Shop Women</Link>
+                </button>
+                <button className="button">
+                  <Link href="/shop">Shop Men</Link>
+                </button>
               </div>
             </div>
             <div class="item3">
@@ -524,8 +524,12 @@ const HomePage = () => {
               <div className="banner-info banner-3">
                 <h1>New Arrivals</h1>
                 <p>Amplify Reimagined</p>
-                <button className="button"><Link href="/shop">Shop Women</Link></button>
-                <button className="button"><Link href="/shop">Shop Men</Link></button>
+                <button className="button">
+                  <Link href="/shop">Shop Women</Link>
+                </button>
+                <button className="button">
+                  <Link href="/shop">Shop Men</Link>
+                </button>
               </div>
             </div>
           </div>
@@ -949,7 +953,9 @@ const HomePage = () => {
             <div className="content">
               <h1>New Arrivals</h1>
               <p>Amplify Reimagined</p>
-              <button className="button"><Link href="/shop">Shop Now</Link></button>
+              <button className="button">
+                <Link href="/shop">Shop Now</Link>
+              </button>
               {/* <button className="button">Shop Men</button> */}
             </div>
           </div>

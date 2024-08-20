@@ -60,10 +60,10 @@ const Cart = ({ isOpen }) => {
 
     return (
         <motion.div
-            initial={{ y: "20%", opacity: 0 }}  // Start from below the screen
-            animate={{ y: isOpen ? "0%" : "20%", opacity: isOpen ? 1 : 0 }} // Slide up when open, slide down when closing
-            exit={{ y: "20%", opacity: 0 }} // Exit with slide down and fade out
-            transition={{ duration: 0.5 }} // Animation duration
+            initial={{ y: "100%", opacity: 0 }}  // Start from below the screen
+            animate={{ y: isOpen ? "0%" : "100%", opacity: isOpen ? 1 : 0 }} // Slide up when open, slide down when closing
+            exit={{ y: "100%", opacity: 0 }} // Exit with slide down and fade out
+            transition={{ duration: 0.3 }} // Animation duration
             id="modal-background"
             className="fixed inset-0 bg-black bg-opacity-50 flex items-end justify-center z-[100]"
             onClick={closeDiv}

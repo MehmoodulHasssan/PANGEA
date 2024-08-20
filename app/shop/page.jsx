@@ -3,7 +3,6 @@ import WithHeaderWrapper from '@/components/WithHeaderWrapper'
 import ProductSlide from '@/components/ProductDetails-subcomponents/ProductSlide';
 import { DUMMY_ITEMS, vapeProducts } from '@/utils';
 import '@/app/styles/main.scss';
-import AnimeButtons from '@/components/shop-subcomponents/SideBarAnimatedButtons';
 import { useEffect, useState } from 'react';
 import { itemsActions } from '@/store/cartItems';
 import { useDispatch } from 'react-redux';
@@ -14,11 +13,15 @@ import MobilePopUpBtns from '@/components/shop-subcomponents/MobilePopUpBtns';
 import { useRef } from 'react';
 import './shop.css'
 import ShopPopUp from '@/components/shop-subcomponents/ShopPopUp';
+import ShopSidebar from '@/components/shop-subcomponents/ShopSidebar';
+import ShopDesktopProduct from '@/components/shop-subcomponents/ShopDesktopProduct';
+import ShopProductMobile from '@/components/shop-subcomponents/ShopProductMobile';
+import { useSelector } from 'react-redux';
 
 
 const slides = Array.from({ length: 15 }, (_, index) => index + 1)
 const ShopPage = () => {
-    const scrolledDiv = useRef(null)
+    const device = useSelector(state => state.deviceFn.deviceType)
     const [showPopUp, setShowPopUp] = useState(false)
     // const [isScrolled, setIsScrolled] = useState(false)
     const [isStyles, setStyles] = useState(true)
@@ -60,7 +63,6 @@ const ShopPage = () => {
     //     };
     // }, []);
 
-
     const notify = ({ product, quantity, adding, removing }) => {
         toast.custom((t) => (
             <CustomToast
@@ -82,6 +84,7 @@ const ShopPage = () => {
         notify({ product: item, quantity, adding: true, removing: false })
     }
 
+    // console.log(showPopUp)
     function isFullyScrolled(div) {
         return div.scrollTop + div.clientHeight >= div.scrollHeight;
     }
@@ -104,78 +107,42 @@ const ShopPage = () => {
     return (
         <WithHeaderWrapper>
             <Toaster position='bottom-center' />
-            <MobilePopUpBtns
-                isStyles={isStyles}
-                setStyles={setStyles}
-                setShowPopUp={setShowPopUp}
-            />
-            <ShopPopUp
-                showPopUp={showPopUp}
-                setShowPopUp={setShowPopUp}
-                setStyles={setStyles}
-                isStyles={isStyles}
-            />
+
             <div className='w-full bg-white'>
-                <div className='flex bg-white px-8 w-full'>
-                    <div className='relative w-1/5 left-side-product-page  bg-white py-[29px] pr-4 overflow-hidden'>
-                        <div className={`bg-white h-full stikcy top-[81px]`}>
-                            <div className='flex flex-col'>
-                                <p className='text-[12px] text-gray-700'>Trending</p>
-                                <h1 className='text-[20px] text-gray-700'>ALL PRODUCTS</h1>
-                                <p className='text-[12px] text-gray-700'>230 Products</p>
-                                <div className="border border-gray-500 rounded-full w-fit mt-2 p-1 flex justify-between items-center">
-                                    <span
-                                        className={`inline-block text-gray-800 text-[10px] rounded-full px-3 py-1 hover:cursor-pointer ${isStyles ? 'bg-gray-300' : ''}`}
-                                        onClick={() => setStyles(true)}
-                                    >
-                                        Styles
-                                    </span>
-                                    <span
-                                        className={`inline-block text-gray-800 text-[10px] rounded-full px-3 py-1 hover:cursor-pointer ${!isStyles ? 'bg-gray-300' : ''}`}
-                                        onClick={() => setStyles(false)}
-                                    >
-                                        Flavors
-                                    </span>
-                                </div>
-                                <div className='w-full h-[1px] bg-gray-300 mt-4'></div>
-                                <input
-                                    type="text"
-                                    placeholder='Search for categories'
-                                    className='w-full h-4 my-[16px] text-gray-800 focus:outline-none placeholder:text-gray-400'
-                                />
-                                <div className='w-full h-[1px] bg-gray-300 mb-[8px]'></div>
-                            </div>
-                            <div className='flex  flex-col overflow-scroll scrollbar-hide'>
-                                {vapeProducts.map((product, index) => (
-                                    <AnimeButtons
-                                        key={index}
-                                        name={product.productName}
-                                        options={product.options}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        ref={scrolledDiv}
-                        className={`w-4/5 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  gap-6 h-[555px] overflow-scroll scrollbar-hide`}>
-                        {/* className={`w-4/5 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  gap-6 h-[555px] ${isScrolled ? 'overflow-scroll' : 'overflow-hidden'} scrollbar-hide`}> */}
-                        {/* <div className="slider-buttons "> */}
-                        {DUMMY_ITEMS.map((product, index) => (
-                            <div className="sliders">
-                                <ProductSlide
-                                    key={index}
-                                    product={product}
+                <div className={`flex ${device === 'desktop' ? 'bg-white' : 'bg-black'} px-8 w-full`}>
+                    {device === 'desktop' ? (
+                        <>
+                            <ShopSidebar
+                                isStyles={isStyles}
+                                setStyles={setStyles}
+                            />
+                            <ShopDesktopProduct
+                                addItem={addItem}
+                            />
+                        </>
+                    )
+                        : (
+                            <>
+                                <ShopProductMobile
                                     addItem={addItem}
-                                    bigItemClass={true}
+                                    showPopUp={showPopUp}
                                 />
-                            </div>
-                        ))}
-                    </div>
+                                <MobilePopUpBtns
+                                    isStyles={isStyles}
+                                    setStyles={setStyles}
+                                    setShowPopUp={setShowPopUp}
+                                />
+                                <ShopPopUp
+                                    showPopUp={showPopUp}
+                                    setShowPopUp={setShowPopUp}
+                                    setStyles={setStyles}
+                                    isStyles={isStyles}
+                                />
+                            </>
+                        )
+                    }
                 </div>
             </div>
-
-
         </WithHeaderWrapper>
     )
 }
