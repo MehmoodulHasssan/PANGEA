@@ -4,7 +4,7 @@ import { IoIosCloseCircle } from "react-icons/io";
 import Image from 'next/image'; // Assuming you are using Next.js; otherwise, use <img />
 
 const CustomToast = ({ product, quantity, adding, removing }) => (
-    <div className="flex items-center bg-white p-4 border border-gray-300 rounded shadow">
+    <div className="flex items-center bg-white p-4 border border-gray-300 rounded-lg shadow">
         {/* Image on the left */}
         <div className="flex-shrink-0 mr-3">
             <Image src={product.image[0]} alt="Icon" width={40} height={40} className="rounded" />

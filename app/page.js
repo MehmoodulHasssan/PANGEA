@@ -30,6 +30,7 @@ import HomeProductSlide from '@/components/HomeProductSlide';
 import Link from 'next/link';
 const slides = Array.from({ length: 40 }, (_, index) => index + 1);
 import pang3aWhite from '../assets/pang3a.png';
+import notify from '@/helpers/notify';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -55,21 +56,6 @@ const HomePage = () => {
     //first add slide data with every mapping product and then fetch it from here
     return router.push('/product-details?id=' + product.id);
   };
-  const notify = ({ product, quantity, adding, removing }) => {
-    toast.custom(
-      (t) => (
-        <CustomToast
-          product={product}
-          quantity={quantity}
-          adding={adding}
-          removing={removing}
-        />
-      ),
-      {
-        duration: 2000,
-      }
-    );
-  };
   const onAddItem = ({ product, quantity = 1 }) => {
     dispatch(itemsActions.addItem({ product, quantity }));
     notify({ product, quantity, adding: true, removing: false });
@@ -92,7 +78,7 @@ const HomePage = () => {
   return (
     <WithHeaderWrapper>
       <main className="home">
-        <Toaster position="bottom-center" />
+        {/* <Toaster position="bottom-center" /> */}
         {ageVerification && <AgeVerificationModal />}
         {state === CURRENT_STATES.LOGOUT && <SignInModal />}
         {/* <div className="topPage">

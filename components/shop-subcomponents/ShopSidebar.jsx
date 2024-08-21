@@ -4,7 +4,7 @@ import AnimeButtons from '@/components/shop-subcomponents/SideBarAnimatedButtons
 
 const ShopSidebar = ({ isStyles, setStyles }) => {
     return (
-        <div className='relative w-1/5 left-side-product-page  bg-white py-[29px] pr-4 overflow-hidden'>
+        <div className='relative w-1/5 left-side-product-page bg-white py-[29px] pr-4 overflow-hidden hidden lg:block'>
             <div className={`bg-white h-full stikcy top-[81px]`}>
                 <div className='flex flex-col'>
                     <p className='text-[12px] text-gray-700'>Trending</p>

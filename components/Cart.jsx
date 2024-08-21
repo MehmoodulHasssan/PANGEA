@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
 import CustomToast from './CustomToast';
 import { useRouter } from 'next/navigation';
+import notify from '@/helpers/notify';
 
 
 const Cart = ({ isOpen }) => {
@@ -22,21 +23,6 @@ const Cart = ({ isOpen }) => {
         if (e.target.id === 'modal-background') {
             dispatch(modalActions.closeModal())
         }
-    };
-    const notify = ({ product, quantity, adding, removing }) => {
-        toast.custom((t) => (
-            <CustomToast
-                product={product}
-                // size={size}
-                quantity={quantity}
-                adding={adding}
-                removing={removing}
-            />
-        ), {
-            duration: 2000
-
-        }
-        )
     };
     const handleRemoveItem = (item) => {
         dispatch(itemsActions.removeItem(item))
@@ -79,7 +65,7 @@ const Cart = ({ isOpen }) => {
                     onIncrement={handleIncrement}
                 />
             </div>
-            <Toaster position='bottom-center' />
+            {/* <Toaster position='bottom-center' /> */}
         </motion.div>
     )
 }

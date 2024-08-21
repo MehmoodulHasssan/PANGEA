@@ -8,12 +8,12 @@ import Cart from './Cart'
 import MobileCart from './MobileCart'
 import { setDeviceType } from '@/store/currentDevice'
 import { useDispatch } from 'react-redux'
+import { Toaster } from 'react-hot-toast'
 
 
 const WithHeaderWrapper = ({ children }) => {
-    // const isMobile = () => window.innerWidth <= 768;
-    // const [isMobileDevice, setIsMobileDevice] = useState(false);
     const dispatch = useDispatch();
+
 
     useEffect(() => {
         const handleResize = () => {
@@ -39,6 +39,7 @@ const WithHeaderWrapper = ({ children }) => {
     return (
         <>
             <Header />
+            <Toaster position='bottom-center' />
             <div id="smooth-wrapper">
                 <div id="smooth-content">
                     <AnimatePresence>

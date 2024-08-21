@@ -281,7 +281,7 @@ header {
 }
 .popUp-container {
   position: fixed;
-  height: 60%;
+  height: 80%;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -296,7 +296,7 @@ header {
 .sub-container {
   display: flex;
   justify-content: space-between;
-  padding: 20px 50px;
+  padding: 20px 30px;
 }
 
 .left-col,
@@ -315,19 +315,19 @@ header {
 .popUp-first {
   padding-bottom: 5px;
   color: #f2f2f2;   
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .pop-Up-header-links {
   font-weight: 400 !important;
-  font-size: 16px;
+  font-size: 12px;
   display: block;
   line-height: 24px;
   text-decoration: none;
   color: hsl(0deg 0% 96% / 80%);
   position: relative;
   max-width: fit-content;
-  padding-bottom: 5px;
+  // padding-bottom: 3px;
   &:hover {
     cursor: pointer;
   }

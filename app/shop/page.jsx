@@ -6,8 +6,6 @@ import '@/app/styles/main.scss';
 import { useEffect, useState } from 'react';
 import { itemsActions } from '@/store/cartItems';
 import { useDispatch } from 'react-redux';
-import toast, { Toaster } from 'react-hot-toast';
-import CustomToast from '@/components/CustomToast';
 import Image from 'next/image';
 import MobilePopUpBtns from '@/components/shop-subcomponents/MobilePopUpBtns';
 import { useRef } from 'react';
@@ -17,6 +15,7 @@ import ShopSidebar from '@/components/shop-subcomponents/ShopSidebar';
 import ShopDesktopProduct from '@/components/shop-subcomponents/ShopDesktopProduct';
 import ShopProductMobile from '@/components/shop-subcomponents/ShopProductMobile';
 import { useSelector } from 'react-redux';
+import notify from '@/helpers/notify';
 
 
 const slides = Array.from({ length: 15 }, (_, index) => index + 1)
@@ -63,19 +62,6 @@ const ShopPage = () => {
     //     };
     // }, []);
 
-    const notify = ({ product, quantity, adding, removing }) => {
-        toast.custom((t) => (
-            <CustomToast
-                product={product}
-                quantity={quantity}
-                adding={adding}
-                removing={removing}
-            />
-        ), {
-            duration: 2000
-        }
-        )
-    };
 
     const addItem = ({ product, quantity = 1 }) => {
         const item = DUMMY_ITEMS.find((item) => item.id === product.id)
@@ -106,41 +92,33 @@ const ShopPage = () => {
 
     return (
         <WithHeaderWrapper>
-            <Toaster position='bottom-center' />
-
             <div className='w-full bg-white'>
-                <div className={`flex ${device === 'desktop' ? 'bg-white' : 'bg-black'} px-8 w-full`}>
-                    {device === 'desktop' ? (
-                        <>
-                            <ShopSidebar
-                                isStyles={isStyles}
-                                setStyles={setStyles}
-                            />
-                            <ShopDesktopProduct
-                                addItem={addItem}
-                            />
-                        </>
-                    )
-                        : (
-                            <>
-                                <ShopProductMobile
-                                    addItem={addItem}
-                                    showPopUp={showPopUp}
-                                />
-                                <MobilePopUpBtns
-                                    isStyles={isStyles}
-                                    setStyles={setStyles}
-                                    setShowPopUp={setShowPopUp}
-                                />
-                                <ShopPopUp
-                                    showPopUp={showPopUp}
-                                    setShowPopUp={setShowPopUp}
-                                    setStyles={setStyles}
-                                    isStyles={isStyles}
-                                />
-                            </>
-                        )
-                    }
+                <div className={`flex bg-black lg:bg-white px-8 w-full`}>
+
+                    <ShopSidebar
+                        isStyles={isStyles}
+                        setStyles={setStyles}
+                    />
+                    <ShopDesktopProduct
+                        addItem={addItem}
+                    />
+                    <ShopProductMobile
+                        addItem={addItem}
+                        showPopUp={showPopUp}
+                    />
+                    <MobilePopUpBtns
+                        isStyles={isStyles}
+                        setStyles={setStyles}
+                        setShowPopUp={setShowPopUp}
+                    />
+
+
+                    {(device === 'mobile' || device === 'tablet') && <ShopPopUp
+                        showPopUp={showPopUp}
+                        setShowPopUp={setShowPopUp}
+                        setStyles={setStyles}
+                        isStyles={isStyles}
+                    />}
                 </div>
             </div>
         </WithHeaderWrapper>

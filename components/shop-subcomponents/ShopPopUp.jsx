@@ -22,7 +22,7 @@ const ShopPopUp = ({ setStyles, isStyles, showPopUp, setShowPopUp }) => {
 
                 </div>
                 <motion.div
-                    className='fixed z-20 w-screen h-[80%] bottom-0  bg-black'
+                    className='fixed z-20 w-screen h-[80%] left-0 bottom-0  bg-black'
                     drag="y" // Enable vertical dragging
                     dragConstraints={{ top: 0, bottom: 0 }} // Set constraints for dragging
                     onDragEnd={handleDragEnd}

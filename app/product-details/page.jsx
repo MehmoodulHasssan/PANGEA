@@ -5,10 +5,9 @@ import DetailsSwiper from '@/components/ProductDetails-subcomponents/DetailsSwip
 import WithHeaderWrapper from '@/components/WithHeaderWrapper';
 import ProductsGrid from '@/components/ProductDetails-subcomponents/ProductsGrid';
 import { DUMMY_DETAILS, DUMMY_ITEMS } from '@/utils.js'
-import CustomToast from '@/components/CustomToast';
-import toast, { Toaster } from 'react-hot-toast';
 import { itemsActions } from '@/store/cartItems';
 import { useDispatch } from 'react-redux';
+import notify from '@/helpers/notify';
 
 
 export default function DetailsPage() {
@@ -24,20 +23,6 @@ export default function DetailsPage() {
         notify({ product: item, quantity, adding: true, removing: false })
     };
 
-    const notify = ({ product, quantity, adding, removing }) => {
-        toast.custom((t) => (
-            <CustomToast
-                product={product}
-                quantity={quantity}
-                adding={adding}
-                removing={removing}
-            />
-        ), {
-            duration: 2000
-
-        }
-        )
-    };
     const handleCenterSlide = (index) => {
         if (swiperRef.current && swiperRef.current.swiper) {
             const swiper = swiperRef.current.swiper;
@@ -62,7 +47,6 @@ export default function DetailsPage() {
     }, [])
     return (
         <WithHeaderWrapper>
-            <Toaster position="bottom-center" />
             <div className='h-[87vh] relative apni-class-main'>
                 <DetailsSwiper
                     productImages={product && product.images}

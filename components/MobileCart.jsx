@@ -12,6 +12,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import CustomToast from './CustomToast';
 import { useRouter } from 'next/navigation';
 import { totalPrice } from '@/helpers/totalPrice';
+import notify from '@/helpers/notify';
 
 
 const MobileCart = ({ isOpen }) => {
@@ -32,21 +33,6 @@ const MobileCart = ({ isOpen }) => {
     }, [])
     console.log(height)
 
-    const notify = ({ product, quantity, adding, removing }) => {
-        toast.custom((t) => (
-            <CustomToast
-                product={product}
-                // size={size}
-                quantity={quantity}
-                adding={adding}
-                removing={removing}
-            />
-        ), {
-            duration: 2000
-
-        }
-        )
-    };
     const handleRemoveItem = (item) => {
         dispatch(itemsActions.removeItem(item))
         notify({ product: item.product, adding: false, removing: true })
@@ -144,7 +130,7 @@ const MobileCart = ({ isOpen }) => {
 
                 </div>
             </motion.div>
-            <Toaster position='bottom-center' />
+            {/* <Toaster position='bottom-center' /> */}
         </motion.div>
     )
 }
