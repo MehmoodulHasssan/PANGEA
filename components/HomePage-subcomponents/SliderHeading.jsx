@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const SliderHeading = ({ women, mt }) => {
     return (
-        <div className={`slider-heading ${mt && '!mt-14'}`} style={{ marginTop: '-50px' }}>
+        <div className={`slider-heading`} >
             <h2>
                 <span>{`${women ? `Now` : `Trending`}`}</span>{' '}
                 <span>NEW ARRIVALS</span>
@@ -12,7 +12,7 @@ const SliderHeading = ({ women, mt }) => {
                 {' '}
                 <Link href="/shop">SHOP ALL</Link>{' '}
             </button>
-        </div>
+        </div >
     )
 }
 

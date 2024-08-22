@@ -7,7 +7,7 @@ import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { motion, AnimatePresence } from 'framer-motion';
 
 
-const MobileProductSlide = ({ product, addItem }) => {
+const MobileProductSlide = ({ product, addItem, vertical }) => {
     const [showQuantity, setShowQuantity] = useState(false)
     const [quantity, setQuantity] = useState(0)
     // console.log(product)
@@ -28,6 +28,7 @@ const MobileProductSlide = ({ product, addItem }) => {
             onClick={handleSlideClick}
         >
             <Swiper
+                direction={vertical ? 'vertical' : 'horizontal'}
                 // loop={true}
                 spaceBetween={0}
                 slidesPerView={1}
@@ -42,7 +43,7 @@ const MobileProductSlide = ({ product, addItem }) => {
                 {product.image?.map((image, index) => (
                     <SwiperSlide key={index}>
                         <div
-                            className='w-full h-full rounded-xl relative'
+                            className='w-full h-full rounded-xl overflow-hidden relative'
                         >
                             <img
                                 className="rounded-xl object-cover"

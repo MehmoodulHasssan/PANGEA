@@ -11,6 +11,7 @@ const ShopProductMobile = ({ addItem }) => {
                     key={index}
                     product={product}
                     addItem={addItem}
+                    vertical={false}
                 />
             ))}
         </div>

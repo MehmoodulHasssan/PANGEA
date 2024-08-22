@@ -96,6 +96,7 @@ body.no-scroll {
   width: 100%;
   position: relative;
   overflow: visible;
+  /* display: none; */
 
   >.swiper-button-prev {
     top: 50% !important;
@@ -617,15 +618,19 @@ body.no-scroll {
 }
 
 .bg-img {
-  background-image: url("../assets/hero.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   height: 95vh;
   width: 100%;
   /* z-index: -100; */
-  top: -84px;
   position: relative;
+
+  >img {
+    position: absolute;
+    /* top: -84px; */
+    /* background-image: url("../assets/hero.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; */
+  }
 }
 
 
@@ -884,6 +889,7 @@ body.no-scroll {
   }
 
   .slider-heading h2 span {
+    margin-top: 20px;
     font-size: 14px;
   }
 

@@ -2,6 +2,7 @@
 // import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 // import { useGSAP } from '@gsap/react';
+import bgImage from '@assets/hero.jpg';
 import './styles/main.scss';
 import { useRouter } from 'next/navigation';
 import React, { useRef, useState, useEffect } from 'react';
@@ -19,10 +20,26 @@ import TopContainer from '@/components/HomePage-subcomponents/TopContainer';
 import SliderHeading from '@/components/HomePage-subcomponents/SliderHeading';
 import SliderButtons from '@/components/HomePage-subcomponents/SliderButtons';
 import DesktopLargeSwiper from '@/components/HomePage-subcomponents/DesktopLargeSwiper';
-import MiddleContainer from '@/components/HomePage-subcomponents/MiddleContainer';
-import BottomContainer from '@/components/HomePage-subcomponents/BottomContainer';
+import LowerContainer from '@/components/HomePage-subcomponents/LowerContainer';
 import DesktopSmallSwiper from '@/components/HomePage-subcomponents/DesktopSmallSwiper';
+import MobileSwiper from '@/components/HomePage-subcomponents/MobileSwiper';
+import MobileSmallSwiper from '@/components/HomePage-subcomponents/MobileSmallSwiper';
+import Image from 'next/image';
 
+const topImages = [
+  'https://alphalete.uk/cdn/shop/files/web_2mensshorts-graphic.jpg?crop=center&v=1714233659&width=1400',
+  'https://alphalete.uk/cdn/shop/files/4U8A0538.jpg?crop=center&v=1714233619&width=1400',
+  'https://alphalete.uk/cdn/shop/files/DSC06397.jpg?crop=center&v=1714233714&width=1400',
+];
+
+const videos = [
+  'https://cdn.shopify.com/videos/c/o/v/9d4812a2c25248fbbff2509f4093f0ad.mp4',
+];
+
+const bottomImages = [
+  'https://alphalete.uk/cdn/shop/files/aa24-apr27-34.jpg?crop=center&v=1714233984&width=1400',
+  'https://alphalete.uk/cdn/shop/files/aa24-apr27-36.jpg?crop=center&v=1714233923&width=1400',
+];
 const HomePage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -56,39 +73,30 @@ const HomePage = () => {
         {/* <Toaster position="bottom-center" /> */}
         {ageVerification && <AgeVerificationModal />}
         {state === CURRENT_STATES.LOGOUT && <SignInModal />}
-        {/* <div className="topPage">
-          <aside className="video-background">
-            <video className="video-overlay min-w-[100%]" autoPlay muted loop>
-              <source
-                src="https://cdn.shopify.com/videos/c/o/v/331b4aa9d8cb4d3b984bd160fa65030b.mp4"
-                type="video/webm"
-              />
-              Your browser does not support the video tag.
-            </video>
-          </aside>
-          <div className="content">
-            <h1>New Arrivals</h1>
-            <p>Amplify Reimagined</p>
-            <button className="button">Shop Women</button>
-            <button className="button">Shop Men</button>
-          </div>
-        </div> */}
-        <div className="bg-img"></div>
-        <TopContainer women={women} />
+        <div className="bg-img">
+          <Image
+            src={bgImage}
+            // style={{ objectFit: 'cover', height: 'auto', width: 'auto' }}
+            className=" object-cover h-full w-full"
+          />
+          <TopContainer women={women} />
+        </div>
         {/* Upper new arrivals */}
         <SliderHeading />
         <div className="sliders overflow-x-hidden">
           <SliderButtons women={women} setWomen={setWomen} />
+          <MobileSwiper />
           <DesktopLargeSwiper
             handleNavigateDetails={hanldeNavigateDetails}
             onAddItem={onAddItem}
           />
-          <MiddleContainer />
-          <SliderHeading mt={'14'} women={women} />{' '}
-          {/* Lower new arrivals || !mt-14 */}
+          <LowerContainer images={topImages} />
+          <SliderHeading women={women} /> {/* Lower new arrivals || !mt-14 */}
           <SliderButtons women={women} />
           <DesktopSmallSwiper />
-          <BottomContainer />
+          <MobileSmallSwiper />
+          {/* <BottomContainer /> */}
+          <LowerContainer images={bottomImages} videos={videos} />
           <PreFooter />
         </div>
       </main>
@@ -98,6 +106,25 @@ const HomePage = () => {
 
 export default HomePage;
 
+{
+  /* <div className="topPage">
+  <aside className="video-background">
+    <video className="video-overlay min-w-[100%]" autoPlay muted loop>
+      <source
+        src="https://cdn.shopify.com/videos/c/o/v/331b4aa9d8cb4d3b984bd160fa65030b.mp4"
+        type="video/webm"
+      />
+      Your browser does not support the video tag.
+    </video>
+  </aside>
+  <div className="content">
+    <h1>New Arrivals</h1>
+    <p>Amplify Reimagined</p>
+    <button className="button">Shop Women</button>
+    <button className="button">Shop Men</button>
+  </div>
+</div> */
+}
 /* <Swiper
   className="mySwiper4 swiper-h"
   spaceBetween={50}

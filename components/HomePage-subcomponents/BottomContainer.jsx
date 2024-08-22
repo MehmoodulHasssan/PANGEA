@@ -1,5 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
+import BannerInfo from './Container-subcomponents/BannerInfo'
+
+const bottomImages = ['https://alphalete.uk/cdn/shop/files/aa24-apr27-34.jpg?crop=center&v=1714233984&width=1400',
+    'https://alphalete.uk/cdn/shop/files/aa24-apr27-36.jpg?crop=center&v=1714233923&width=1400'
+]
+
 
 const BottomContainer = () => {
     return (
@@ -29,20 +35,11 @@ const BottomContainer = () => {
                     backgroundSize: 'cover',
                 }}
             >
-                <div className="banner-info">
-                    <h1>New Arrivals</h1>
-                    <p>Amplify Reimagined</p>
-                    <button className="button">
-                        <Link href="/shop">Shop Women</Link>
-                    </button>
-                    <button className="button">
-                        <Link href="/shop">Shop Men</Link>
-                    </button>
-                </div>
+                <BannerInfo />
             </div>
             <div class="item3">
                 {/* <aside className="video-background2"> */}
-                <video className="video-overlay2" autoPlay muted loop>
+                <video className="" autoPlay muted loop>
                     <source
                         src="https://cdn.shopify.com/videos/c/o/v/9d4812a2c25248fbbff2509f4093f0ad.mp4"
                         type="video/webm"
