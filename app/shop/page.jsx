@@ -65,7 +65,7 @@ const ShopPage = () => {
 
     const addItem = ({ product, quantity = 1 }) => {
         const item = DUMMY_ITEMS.find((item) => item.id === product.id)
-        console.log(item)
+        // console.log(item)
         dispatch(itemsActions.addItem({ product: item, quantity }))
         notify({ product: item, quantity, adding: true, removing: false })
     }

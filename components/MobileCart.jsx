@@ -8,8 +8,6 @@ import ExtraItems from './Cart-subcomponents/ExtraItems';
 import MobileOrdersManagement from './Cart-subcomponents/MobileOrdersManagement';
 import { itemsActions } from '@/store/cartItems';
 import { useSelector } from 'react-redux';
-import toast, { Toaster } from 'react-hot-toast';
-import CustomToast from './CustomToast';
 import { useRouter } from 'next/navigation';
 import { totalPrice } from '@/helpers/totalPrice';
 import notify from '@/helpers/notify';
@@ -18,7 +16,9 @@ import notify from '@/helpers/notify';
 const MobileCart = ({ isOpen }) => {
     const router = useRouter()
     const cartDiv = useRef()
+    const upperDiv = useRef()
     const [height, setHeight] = useState(0)
+    const [topMargin, setTopMargin] = useState(0)
     const addedItems = useSelector((state) => state.itemsFn.items)
     // const stateMessage = useSelector((state) => state.itemsFn.message)
     const dispatch = useDispatch()
@@ -29,6 +29,7 @@ const MobileCart = ({ isOpen }) => {
     };
 
     useEffect(() => {
+        setTopMargin(upperDiv.current?.clientHeight)
         setHeight(cartDiv.current?.clientHeight - 245)
     }, [])
     console.log(height)
@@ -87,11 +88,18 @@ const MobileCart = ({ isOpen }) => {
                 exit={{ y: '100%' }}
             >
                 <div className="relative h-full w-full bg-black text-slate-100 pt-10 rounded-t-2xl">
-                    <div className='absolute top-0 w-screen bg-black rounded-t-2xl '>
-                        <div className=' w-[50px] h-[5px] mx-auto my-[15px] bg-white rounded-[3px] hover:cursor-pointer'></div>
-                    </div>
-                    <div className='absolute top-[35px] w-full flex items-center justify-center h-16 border border-slate-200'>
-                        YOUR BAG
+                    <div
+                        className='absolute top-0 w-full h-auto flex flex-col'
+
+                    >
+                        <div className='bg-black rounded-t-2xl '>
+                            <div className=' w-[50px] h-[5px] mx-auto my-[15px] bg-white rounded-[3px] hover:cursor-pointer'></div>
+                        </div>
+                        <div
+                            ref={upperDiv}
+                            className='w-full flex items-center justify-center h-16 border border-slate-200'>
+                            YOUR BAG
+                        </div>
                     </div>
                     <MobileOrdersManagement
                         addedItems={addedItems}
@@ -99,6 +107,7 @@ const MobileCart = ({ isOpen }) => {
                         onDecrement={handleDecrement}
                         onIncrement={handleIncrement}
                         height={height}
+                        topMargin={topMargin}
                         isOpen={isOpen}
                     />
                     {/* <ExtraItems

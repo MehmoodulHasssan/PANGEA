@@ -4,7 +4,7 @@ import Header from './Header'
 import Footer from './Footer'
 import { useSelector } from 'react-redux'
 import { AnimatePresence } from 'framer-motion'
-import Cart from './Cart'
+import DesktopCart from './DesktopCart'
 import MobileCart from './MobileCart'
 import { setDeviceType } from '@/store/currentDevice'
 import { useDispatch } from 'react-redux'
@@ -47,7 +47,7 @@ const WithHeaderWrapper = ({ children }) => {
                             device === 'mobile' || device === 'tablet' ? (
                                 <MobileCart isOpen={isOpen} />
                             ) : (
-                                <Cart isOpen={isOpen} />
+                                <DesktopCart isOpen={isOpen} />
                             )
                         )}
                     </AnimatePresence>

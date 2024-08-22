@@ -14,11 +14,11 @@ import { useRouter } from 'next/navigation';
 import notify from '@/helpers/notify';
 
 
-const Cart = ({ isOpen }) => {
+const DesktopCart = ({ isOpen }) => {
     const addedItems = useSelector((state) => state.itemsFn.items)
     const stateMessage = useSelector((state) => state.itemsFn.message)
     const dispatch = useDispatch()
-    console.log(stateMessage)
+    // console.log(stateMessage)
     const closeDiv = (e) => {
         if (e.target.id === 'modal-background') {
             dispatch(modalActions.closeModal())
@@ -70,4 +70,4 @@ const Cart = ({ isOpen }) => {
     )
 }
 
-export default Cart
+export default DesktopCart

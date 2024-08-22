@@ -23,7 +23,7 @@ const AnimeButtons = ({ name, options }) => {
     return (
         <>
             <div
-                className="flex items-center text-[12px] text-gray-800 cursor-pointer"
+                className="flex justify-between items-center text-[12px] text-gray-800 cursor-pointer"
                 onClick={toggleOpen}
             >
                 <span>{name}</span>

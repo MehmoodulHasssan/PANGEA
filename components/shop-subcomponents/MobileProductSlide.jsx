@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const MobileProductSlide = ({ product, addItem }) => {
     const [showQuantity, setShowQuantity] = useState(false)
     const [quantity, setQuantity] = useState(0)
-    console.log(product)
+    // console.log(product)
     const handleSlideClick = () => {
         if (showQuantity) {
             setShowQuantity(false)

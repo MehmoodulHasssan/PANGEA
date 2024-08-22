@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 
 const cartPricingOverflow = [1, 2, 3, 4, 5]
 
-const MobileOrdersManagement = ({ addedItems, removeItem, onDecrement, onIncrement, height, isOpen }) => {
+const MobileOrdersManagement = ({ addedItems, removeItem, onDecrement, onIncrement, height, topMargin, isOpen }) => {
     const lastElementRef = useRef()
     const router = useRouter()
 
@@ -29,9 +29,10 @@ const MobileOrdersManagement = ({ addedItems, removeItem, onDecrement, onIncreme
     useEffect(() => {
         lastElementRef.current?.scrollIntoView({ behavior: 'smooth' })
     }, [addedItems])
-
+    console.log(topMargin)
     return (
-        <div className={`absolute top-[90px] w-screen flex flex-col overflow-y-scroll scrollbar-hide ${height ? `h-[${height}px]` : 'h-[430px]'} text-white bg-black border border-slate-200 justify-between`}>
+        // <div className={`absolute top-[90px] w-screen flex flex-col overflow-y-scroll scrollbar-hide ${height ? `h-[${height}px]` : 'h-[430px]'} text-white bg-black border border-slate-200 justify-between lg:hidden`}>
+        <div className={`mt-[54px] w-screen flex flex-col overflow-y-scroll scrollbar-hide ${height ? `h-[${height}px]` : 'h-[430px]'} text-white bg-black border border-slate-200 justify-between lg:hidden`}>
 
             {/* <div className='h-full overflow-y-scroll scrollbar-hide overflow-touch'> */}
             {addedItems.length === 0 && <div className='flex h-72 text-gray-400 text-xl justify-center items-center'>No items in bag</div>}

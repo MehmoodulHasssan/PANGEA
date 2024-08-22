@@ -22,7 +22,7 @@ const OrdersManagementBox = ({ addedItems, removeItem, onDecrement, onIncrement 
     }, [addedItems])
 
     return (
-        <div className='flex  flex-col lg:w-3/12 md-[430px] text-black border border-black justify-between'>
+        <div className='hidden lg:flex lg:flex-col lg:w-3/12 md-[430px] text-black border border-black justify-between'>
             <div className='flex items-center justify-center h-20 border-b border-black'>
                 YOUR BAG
             </div>
