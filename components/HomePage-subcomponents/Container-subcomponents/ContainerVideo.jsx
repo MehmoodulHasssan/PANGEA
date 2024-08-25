@@ -7,6 +7,7 @@ const ContainerVideo = ({ video }) => {
             aspectRatio: '4/5',
             position: 'relative',
             width: '100%',
+            overflow: 'hidden',
         }}>
             {/* <aside className="video-background2"> */}
             <video autoPlay muted loop>

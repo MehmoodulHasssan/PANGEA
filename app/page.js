@@ -74,11 +74,7 @@ const HomePage = () => {
         {ageVerification && <AgeVerificationModal />}
         {state === CURRENT_STATES.LOGOUT && <SignInModal />}
         <div className="bg-img">
-          <Image
-            src={bgImage}
-            // style={{ objectFit: 'cover', height: 'auto', width: 'auto' }}
-            className=" object-cover h-full w-full"
-          />
+          <Image src={bgImage} className=" object-cover h-full w-full" />
           <TopContainer women={women} />
         </div>
         {/* Upper new arrivals */}

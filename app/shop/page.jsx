@@ -16,6 +16,7 @@ import ShopDesktopProduct from '@/components/shop-subcomponents/ShopDesktopProdu
 import ShopProductMobile from '@/components/shop-subcomponents/ShopProductMobile';
 import { useSelector } from 'react-redux';
 import notify from '@/helpers/notify';
+import TopImage from '@/components/shop-subcomponents/TopImage';
 
 
 const slides = Array.from({ length: 15 }, (_, index) => index + 1)
@@ -93,6 +94,8 @@ const ShopPage = () => {
     return (
         <WithHeaderWrapper>
             <div className='w-full bg-white'>
+
+                <TopImage />
                 <div className={`flex bg-black lg:bg-white px-8 w-full`}>
 
                     <ShopSidebar

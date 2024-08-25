@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 // import 'swiper/css/navigation';
@@ -7,7 +7,7 @@ import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { motion, AnimatePresence } from 'framer-motion';
 
 
-const MobileProductSlide = ({ product, addItem, vertical }) => {
+const MobileProductSlide = ({ product, addItem, vertical, bgClicked, setBgClicked }) => {
     const [showQuantity, setShowQuantity] = useState(false)
     const [quantity, setQuantity] = useState(0)
     // console.log(product)
@@ -20,12 +20,21 @@ const MobileProductSlide = ({ product, addItem, vertical }) => {
         }
     }
 
+    useEffect(() => {
+        if (bgClicked) {
+            if (showQuantity) {
+                setShowQuantity(false)
+            }
+            setBgClicked(false)
+        }
+    }, [bgClicked])
+
 
 
     return (
         <div
             className='relative flex flex-col'
-            onClick={handleSlideClick}
+        // onClick={handleSlideClick}
         >
             <Swiper
                 direction={vertical ? 'vertical' : 'horizontal'}
@@ -51,7 +60,12 @@ const MobileProductSlide = ({ product, addItem, vertical }) => {
                                 alt={`Slide ${index}`}
                             />
                             <p className="absolute w-12 h-12 flex justify-center items-center bottom-0 right-0 text-black"
-                                onClick={() => { setShowQuantity(true) }}
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    // setBgClicked(true)
+                                    setShowQuantity(true)
+
+                                }}
                             >
                                 <FaPlus />
                             </p>

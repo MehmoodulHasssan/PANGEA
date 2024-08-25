@@ -2,10 +2,12 @@ import React from 'react'
 import { DUMMY_ITEMS, vapeProducts } from '@/utils';
 import AnimeButtons from '@/components/shop-subcomponents/SideBarAnimatedButtons';
 
+
 const ShopSidebar = ({ isStyles, setStyles }) => {
     return (
-        <div className='relative w-1/5 left-side-product-page bg-white py-[29px] pr-4 overflow-hidden hidden lg:block'>
-            <div className={`bg-white h-full stikcy top-[81px]`}>
+        <div className='sticky top-[52px] h-[92vh] w-1/5 left-side-product-page bg-white py-[29px] pr-4 overflow-hidden hidden lg:block'>
+
+            <div className={`bg-white h-full`}>
                 <div className='flex flex-col'>
                     <p className='text-[12px] text-gray-700'>Trending</p>
                     <h1 className='text-[20px] text-gray-700'>ALL PRODUCTS</h1>
