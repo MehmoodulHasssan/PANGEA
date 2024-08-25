@@ -8,6 +8,8 @@ import { DUMMY_DETAILS, DUMMY_ITEMS } from '@/utils.js'
 import { itemsActions } from '@/store/cartItems';
 import { useDispatch } from 'react-redux';
 import notify from '@/helpers/notify';
+import ShopProductMobile from '@/components/shop-subcomponents/ShopProductMobile';
+import SliderButtons from '@/components/HomePage-subcomponents/SliderButtons';
 
 
 export default function DetailsPage() {
@@ -47,7 +49,7 @@ export default function DetailsPage() {
     }, [])
     return (
         <WithHeaderWrapper>
-            <div className='h-[87vh] relative apni-class-main'>
+            <div className='lg:h-[87vh] relative apni-class-main'>
                 <DetailsSwiper
                     productImages={product && product.images}
                     ref={swiperRef}
@@ -61,6 +63,12 @@ export default function DetailsPage() {
             <ProductsGrid
                 addItem={handleAddItem}
             />
+            <div className='px-6 pt-8'>
+                <div className='sliders'>
+                    <SliderButtons />
+                </div>
+                <ShopProductMobile />
+            </div>
         </WithHeaderWrapper>
     );
 }

@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const TopContainer = () => {
     return (
-        <div className=" z-[1] bottom-[30px] absolute p-8 hero-img-content ">
+        <div className=" z-[1] bottom-0 left-0 absolute p-12 hero-img-content ">
             <div className="w-fit max-w-full min-w-[20rem] line-clamp-3 pb-2 md:pb-4 leading-[100%] font-secondary font-w-500 uppercase text-[14px] md:text-[30px] text-white">
                 <p className="uppercase">Your Journy,</p>
                 <p className="uppercase">Our mission</p>

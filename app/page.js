@@ -73,7 +73,7 @@ const HomePage = () => {
         {/* <Toaster position="bottom-center" /> */}
         {ageVerification && <AgeVerificationModal />}
         {state === CURRENT_STATES.LOGOUT && <SignInModal />}
-        <div className="bg-img">
+        <div className="relative w-screen h-screen">
           <Image src={bgImage} className="object-cover h-full w-full" />
           <TopContainer women={women} />
         </div>
@@ -88,7 +88,7 @@ const HomePage = () => {
           />
           <LowerContainer images={topImages} />
           <SliderHeading women={women} /> {/* Lower new arrivals || !mt-14 */}
-          <SliderButtons women={women} />
+          <SliderButtons women={women} setWomen={setWomen} />
           <DesktopSmallSwiper />
           <MobileSmallSwiper />
           {/* <BottomContainer /> */}

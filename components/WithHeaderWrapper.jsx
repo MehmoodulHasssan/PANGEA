@@ -38,7 +38,7 @@ const WithHeaderWrapper = ({ children }) => {
     console.log(device)
     return (
         <>
-            <Header />
+            <Header fixed={true} />
             <Toaster position='bottom-center' />
             <div id="smooth-wrapper">
                 <div id="smooth-content">

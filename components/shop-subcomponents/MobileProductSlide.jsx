@@ -5,21 +5,30 @@ import 'swiper/css';
 import { FreeMode, Navigation } from 'swiper/modules';
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { motion, AnimatePresence } from 'framer-motion';
+import { itemsActions } from '@/store/cartItems';
+import { useDispatch } from 'react-redux';
+import notify from '@/helpers/notify';
+import { DUMMY_ITEMS } from '@/utils';
+import { useRouter } from 'next/navigation';
 
 
-const MobileProductSlide = ({ product, addItem, vertical, bgClicked, setBgClicked }) => {
+const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
     const [showQuantity, setShowQuantity] = useState(false)
     const [quantity, setQuantity] = useState(0)
+    const dispatch = useDispatch()
+    const router = useRouter()
     // console.log(product)
-    const handleSlideClick = () => {
-        if (showQuantity) {
-            setShowQuantity(false)
-        } else {
-            //product details logic
-            console.log('clicked')
-        }
+    const handleAddItem = ({ product, quantity = 1 }) => {
+        const item = DUMMY_ITEMS.find((item) => item.id === product.id)
+        dispatch(itemsActions.addItem({ product: item, quantity }))
+        notify({ product: item, quantity, adding: true, removing: false })
     }
 
+    const handleSlideClick = () => {
+        if (!showQuantity) {
+            router.push('/product-details?id=' + product.id)
+        }
+    }
     useEffect(() => {
         if (bgClicked) {
             if (showQuantity) {
@@ -53,6 +62,7 @@ const MobileProductSlide = ({ product, addItem, vertical, bgClicked, setBgClicke
                     <SwiperSlide key={index}>
                         <div
                             className='w-full h-full rounded-xl overflow-hidden relative'
+                            onClick={handleSlideClick}
                         >
                             <img
                                 className="rounded-xl object-cover"
@@ -97,7 +107,7 @@ const MobileProductSlide = ({ product, addItem, vertical, bgClicked, setBgClicke
                                 <FaPlus
                                     onClick={() => {
                                         if (quantity > 0) {
-                                            addItem({ product, quantity });
+                                            handleAddItem({ product, quantity });
                                         }
                                     }}
                                 // className={`plus ${quantity === 0 ? 'hover:cursor-not-allowed' : ''}`}

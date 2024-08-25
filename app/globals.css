@@ -48,6 +48,8 @@ body.no-scroll {
 
 .header-nav {
   transition: background-color 0.3s ease;
+  position: fixed;
+  top: 0;
 
   &.transparent {
     background-color: transparent;
@@ -881,7 +883,7 @@ body.no-scroll {
 
   .hero-img-btn {
     padding: 10px !important;
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .slider-heading {
@@ -919,9 +921,9 @@ body.no-scroll {
     padding: 20px 0px 20px 20px !important;
   }
 
-  .apni-class-main {
+  /* .apni-class-main {
     height: 110vh;
-  }
+  } */
 
   .apni-class {
     height: 40% !important;
