@@ -9,9 +9,9 @@ import React, { useRef, useState, useEffect } from 'react';
 import SignInModal from '@/components/SignInModal';
 import AgeVerificationModal from '@/components/AgeVerificationModal';
 import { useSelector } from 'react-redux';
-import { CURRENT_STATES } from '@/store/currentState';
+import { CURRENT_STATES } from '@/store/slices/currentState';
 import WithHeaderWrapper from '@/components/WithHeaderWrapper';
-import { itemsActions } from '@/store/cartItems';
+import { itemsActions } from '@/store/slices/cartItems';
 import { useDispatch } from 'react-redux';
 import pang3aWhite from '../assets/pang3a.png';
 import notify from '@/helpers/notify';
@@ -73,7 +73,7 @@ const HomePage = () => {
         {/* <Toaster position="bottom-center" /> */}
         {ageVerification && <AgeVerificationModal />}
         {state === CURRENT_STATES.LOGOUT && <SignInModal />}
-        <div className="relative w-screen h-screen">
+        <div className="relative max-w-[100%] h-screen">
           <Image src={bgImage} className="object-cover h-full w-full" />
           <TopContainer women={women} />
         </div>

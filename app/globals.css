@@ -857,7 +857,17 @@ body.no-scroll {
     /* justify-content: center !important; */
   }
 }
+@media screen and (min-width: 1024px) and (max-width: 1280px) {
+  .footer2{
+    border: none!important;
+  }
+}
 
+@media screen and (min-width: 320px) and (max-width: 375px) {
+  body{
+    width: 362px; 
+  }
+}
 @media screen and (min-width: 320px) and (max-width: 426px) {
   .product-page-det-card {
     right: auto !important;

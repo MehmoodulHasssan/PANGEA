@@ -1,21 +1,17 @@
-import React, { useRef, forwardRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
-
-
-const cartPricingOverflow = [1, 2, 3, 4, 5]
-
 const MobileOrdersManagement = ({ addedItems, removeItem, onDecrement, onIncrement, height, topMargin, isOpen }) => {
-    const lastElementRef = useRef()
-    const router = useRouter()
+    const lastElementRef = useRef();
+    const containerRef = useRef(); // Ref to the container for managing scrolling
+    const router = useRouter();
 
     useEffect(() => {
         if (isOpen) {
             document.body.classList.add('no-scroll');
-
         } else {
             document.body.classList.remove('no-scroll');
         }
@@ -27,14 +23,17 @@ const MobileOrdersManagement = ({ addedItems, removeItem, onDecrement, onIncreme
     }, [isOpen]);
 
     useEffect(() => {
-        lastElementRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }, [addedItems])
-    console.log(topMargin)
-    return (
-        // <div className={`absolute top-[90px] w-screen flex flex-col overflow-y-scroll scrollbar-hide ${height ? `h-[${height}px]` : 'h-[430px]'} text-white bg-black border border-slate-200 justify-between lg:hidden`}>
-        <div className={`mt-[54px] w-screen flex flex-col overflow-y-scroll scrollbar-hide ${height ? `h-[${height}px]` : 'h-[430px]'} text-white bg-black border border-slate-200 justify-between lg:hidden`}>
+        if (addedItems.length > 0) {
+            lastElementRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [addedItems]);
 
-            {/* <div className='h-full overflow-y-scroll scrollbar-hide overflow-touch'> */}
+    return (
+        <div
+            ref={containerRef}
+            style={{ height: height }} // Set the height dynamically
+            className={`mt-[54px] w-screen flex flex-col overflow-y-scroll scrollbar-hide text-white bg-black border border-slate-200 justify-between lg:hidden`}
+        >
             {addedItems.length === 0 && <div className='flex h-72 text-gray-400 text-xl justify-center items-center'>No items in bag</div>}
             {addedItems.length > 0 && addedItems.map((item, index) => (
                 <div key={index} className='h-[16rem] flex flex-col p-4 border border-b-slate-200'>
@@ -55,7 +54,7 @@ const MobileOrdersManagement = ({ addedItems, removeItem, onDecrement, onIncreme
                             <span className='text-sm font-normal p-[0.15rem] border border-gray-400 w-12 text-center'>NEW</span>
                         </div>
                     </div>
-                    <span class="block mx-auto w-[276px] h-px bg-gray-300"></span>
+                    <span className="block mx-auto w-[276px] h-px bg-gray-300"></span>
                     <div className='flex justify-between items-center p-4'>
                         <div className=" w-fit flex items-center space-x-2 px-[0.1rem] py-[0.1rem] rounded-full border border-gray-400">
                             <button
@@ -88,10 +87,8 @@ const MobileOrdersManagement = ({ addedItems, removeItem, onDecrement, onIncreme
                     {index === addedItems.length - 1 && <div ref={lastElementRef} />}
                 </div>
             ))}
-
         </div>
-        // </div>
     )
 }
 
-export default MobileOrdersManagement
+export default MobileOrdersManagement;
