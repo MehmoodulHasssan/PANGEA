@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation'
 import { isEmail, isEqualsToOtherValue, isNotEmpty, isPasswordValid } from '@/helpers/validationsFuncitons'
 import { useSelector } from 'react-redux'
 import ViewPasswordIco from '@/components/auth-input-subcomponents/ViewPasswordIco'
-import { useState } from 'react'
 
 const SignUpPage = () => {
     const [showPassword, setShowPassword] = useState(false)
