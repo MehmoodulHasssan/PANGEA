@@ -6,8 +6,10 @@ import WithHeaderWrapper from '@/components/WithHeaderWrapper'
 import { useRouter } from 'next/navigation'
 import { isEmail, isEqualsToOtherValue, isNotEmpty, isPasswordValid } from '@/helpers/validationsFuncitons'
 import { useSelector } from 'react-redux'
+import ViewPasswordIco from '@/components/auth-input-subcomponents/ViewPasswordIco'
 
 const SignUpPage = () => {
+    const [showPassword, setShowPassword] = useState(false)
     const router = useRouter()
     const data = useSelector((state) => state.authInputFn.signUp)
     const handleNavigateSignup = () => {
@@ -21,7 +23,7 @@ const SignUpPage = () => {
     return (
         <WithHeaderWrapper>
             <div
-                className="h-screen w-screen flex items-center justify-center bg-white "
+                className="h-screen max-w-[100%] flex items-center justify-center bg-white "
             // onClick={handleOutsideClick}
             >
                 <div className="bg-white flex flex-col gap-3 rounded-lg w-full max-w-lg mx-4 sm:mx-0 p-6">
@@ -73,7 +75,12 @@ const SignUpPage = () => {
                             placeholder='password'
                             error={'Password must contain atleast 8 digits'}
                             childType={'signUp'}
-                        />
+                        >
+                            <ViewPasswordIco
+                                showPassword={showPassword}
+                                setShowPassword={setShowPassword}
+                            />
+                        </CustomAuthInput>
 
                         <div className='w-full h-[1px] bg-gray-300'></div>
 
