@@ -107,7 +107,7 @@ export const GET = async (request, { params }) => {
     const inventory = inventoryResponse.data.counts;
 
     const suggestionItems = await axios.get(
-      'http://localhost:3000/api/get-all-items'
+      `${process.env.VERCEL_DOMAIN_URL}/api/get-all-items`
     );
 
     // Log the inventory response to debug issues
