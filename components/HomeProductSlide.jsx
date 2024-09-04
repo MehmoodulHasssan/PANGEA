@@ -22,7 +22,7 @@ const HomeProductSlide = ({ product, onAddItem, handleNavigateDetails }) => {
     const productName = product?.item_data?.name
     const productType = product?.item_data?.product_type
     const inventoryAlert = product?.item_data?.variations[0]?.item_variation_data.location_overrides[0]?.inventory_alert_type
-    console.log(inventoryAlert)
+    // console.log(inventoryAlert)
 
 
 
