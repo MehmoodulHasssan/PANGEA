@@ -29,7 +29,7 @@ export const GET = async (request, response) => {
       items = items.concat(response.data.objects);
       cursor = response.data.cursor;
     } while (cursor);
-    console.log(items.slice(0, 5));
+    console.log(Object.values(items).slice(0,6))
     return NextResponse.json(items); // Return the items;
   } catch (error) {
     console.log(error);
