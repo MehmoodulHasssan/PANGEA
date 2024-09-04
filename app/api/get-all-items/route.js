@@ -4,8 +4,8 @@ import { NextResponse, NextRequest } from 'next/server';
 export const GET = async (request, response) => {
   let items = [];
   let cursor = null;
-  console.log('came here');
-  console.log(request);
+  console.log('came to get-all-items route');
+  // console.log(request);
 
   try {
     do {
@@ -29,7 +29,7 @@ export const GET = async (request, response) => {
       items = items.concat(response.data.objects);
       cursor = response.data.cursor;
     } while (cursor);
-
+    console.log(items.slice(0, 5));
     return NextResponse.json(items); // Return the items;
   } catch (error) {
     console.log(error);
