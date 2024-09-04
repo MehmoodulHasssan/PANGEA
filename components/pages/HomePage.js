@@ -65,6 +65,7 @@ const HomePage = ({ data }) => {
     return router.push('/product-details?id=' + product.id);
   };
   const onAddItem = ({ product, quantity = 1 }) => {
+    console.log(product, quantity);
     dispatch(itemsActions.addItem({ product, quantity }));
     notify({ product, quantity, adding: true, removing: false });
   };
