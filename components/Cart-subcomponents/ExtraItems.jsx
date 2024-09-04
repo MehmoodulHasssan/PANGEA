@@ -14,7 +14,7 @@ const ExtraItems = ({ addItem }) => {
     const router = useRouter()
 
     function handleNavigateToDetails(product) {
-        return router.push('/product-details?id=' + product.id)
+        return router.push('/product-details/' + product.id)
     }
 
     return (

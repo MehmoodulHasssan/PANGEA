@@ -62,7 +62,7 @@ const HomePage = ({ data }) => {
 
   const hanldeNavigateDetails = (product) => {
     //first add slide data with every mapping product and then fetch it from here
-    return router.push('/product-details?id=' + product.id);
+    return router.push('/product-details/' + product.id);
   };
   const onAddItem = ({ product, quantity = 1 }) => {
     console.log(product, quantity);
