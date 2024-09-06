@@ -12,8 +12,12 @@ import InputElement from '../paymentDetails-subcomponents.jsx/InputElement';
 import { isNotEmpty } from '@/helpers/validationsFuncitons';
 import { useRadio } from '@/store/paymentTypeContext';
 import { motion, AnimatePresence } from 'framer-motion'
+import SquarePayment from '../paymentDetails-subcomponents.jsx/SquarePayment';
+
 
 const CreditCardInput = () => {
+
+    // console.log(total)
     const { selectedPaymentOption, setSelectedPaymentOption } = useRadio()
     console.log(selectedPaymentOption)
     return (
@@ -61,6 +65,18 @@ const CreditCardInput = () => {
                     transition={{ duration: 0.3 }}
                     exit={{ height: 0, opacity: 0 }}
                 >
+                    <SquarePayment />
+
+                </motion.div>
+            </AnimatePresence>
+            {/* <AnimatePresence>
+                <motion.div
+                    className={`w-full ${selectedPaymentOption === 'creditCard' ? 'mt-4' : 'mt-0'}`}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: selectedPaymentOption === 'creditCard' ? 'auto' : 0, opacity: selectedPaymentOption === 'creditCard' ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    exit={{ height: 0, opacity: 0 }}
+                >
                     <InputElement
                         childType={'creditCard'}
                         validFn={(value) => !isNotEmpty(value)}
@@ -86,7 +102,7 @@ const CreditCardInput = () => {
                         id="name"
                         error="Name on card is required" />
                 </motion.div>
-            </AnimatePresence>
+            </AnimatePresence> */}
         </div>
     )
 }

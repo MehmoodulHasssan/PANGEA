@@ -58,12 +58,6 @@ const DeliverySection = ({ childType }) => {
                 childType={childType}
                 validFn={(value) => !isNotEmpty(value)}
                 type="text"
-                id="lastName"
-                error="Last name is required" />
-            <InputElement
-                childType={childType}
-                validFn={(value) => !isNotEmpty(value)}
-                type="text"
                 id="address"
                 error="Address is required" />
 
