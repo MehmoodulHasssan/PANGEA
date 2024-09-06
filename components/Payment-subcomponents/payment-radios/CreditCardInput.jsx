@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import visaico from "@assets/visa.svg";
 import mastercardico from "@assets/mastercard.svg";
@@ -16,10 +16,11 @@ import SquarePayment from '../paymentDetails-subcomponents.jsx/SquarePayment';
 
 
 const CreditCardInput = () => {
+    const [loading, setLoading] = useState(false)
 
     // console.log(total)
     const { selectedPaymentOption, setSelectedPaymentOption } = useRadio()
-    console.log(selectedPaymentOption)
+    // console.log(selectedPaymentOption)
     return (
         <div className="flex flex-col items-center space-x-2 p-4 rounded-md1">
             <div className="flex justify-between w-full">
@@ -65,10 +66,19 @@ const CreditCardInput = () => {
                     transition={{ duration: 0.3 }}
                     exit={{ height: 0, opacity: 0 }}
                 >
-                    <SquarePayment />
+                    <SquarePayment
+                        loading={loading}
+                        setLoading={setLoading}
+                    />
 
                 </motion.div>
             </AnimatePresence>
+            {loading &&
+                <div className="fixed h-screen w-screen top-0 inset-0 z-50 flex items-center justify-center bg-black gap-16 bg-opacity-90 text-white">
+                    <div class="loader"></div>
+                    <div className="text-2xl">Processing Payment...</div>
+                </div>
+            }
             {/* <AnimatePresence>
                 <motion.div
                     className={`w-full ${selectedPaymentOption === 'creditCard' ? 'mt-4' : 'mt-0'}`}
@@ -103,6 +113,7 @@ const CreditCardInput = () => {
                         error="Name on card is required" />
                 </motion.div>
             </AnimatePresence> */}
+
         </div>
     )
 }

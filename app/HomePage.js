@@ -77,7 +77,7 @@ const HomePage = ({ data }) => {
   //     setageVerification(false);
   //   };
   // }, []);
-
+  console.log(state);
   return (
     <WithHeaderWrapper>
       <main className="home">
@@ -85,7 +85,11 @@ const HomePage = ({ data }) => {
         {ageVerification && <AgeVerificationModal />}
         {/* {state === CURRENT_STATES.LOGOUT && <SubscribeModal />} */}
         <div className="relative max-w-[100%] h-screen">
-          <Image src={bgImage} className="object-cover h-full w-full" />
+          <Image
+            src={bgImage}
+            className="object-cover h-full w-full"
+            priority={true}
+          />
           <TopContainer women={women} />
         </div>
         {/* Upper new arrivals */}

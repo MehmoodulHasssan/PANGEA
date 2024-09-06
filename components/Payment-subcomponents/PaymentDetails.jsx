@@ -123,6 +123,7 @@ const PaymentDetails = ({ onReviewOrder }) => {
         {/* Footer Links Section */}
         <FooterLinks />
       </div>
+
     </div>
     // </div>
   );
