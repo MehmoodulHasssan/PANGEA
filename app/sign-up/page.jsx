@@ -103,7 +103,6 @@ const SignUpPage = () => {
 
                         <AuthInputButton>
                             {isLoading ? <span className="small-loader"></span> : 'Sign Up'}
-
                         </AuthInputButton>
                     </form>
                     <div className="flex justify-center text-xs mt-2">
