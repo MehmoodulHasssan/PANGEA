@@ -19,7 +19,7 @@ const suggestionsImages = [
 ];
 
 let totalImages = 0
-const ProductSlide = ({ product, addItem, bigItemClass }) => {
+const ProductSlide = ({ product, addItem, bigItemClass, isLoading }) => {
     const [loadedImagesCount, setLoadedImagesCount] = useState(0);
     const [imageLoading, setImageLoading] = useState(true);
     const dispatch = useDispatch()
@@ -59,9 +59,10 @@ const ProductSlide = ({ product, addItem, bigItemClass }) => {
             return newCount;
         });
     };
+    console.log(isLoading)
     return (
         <div className='h-[470px] overflow-hidden'>
-            {images && imageLoading && (
+            {isLoading || (images && imageLoading) && (
                 <div className="mt-[30px] h-full">
                     <LargeSwiperCardSkeleton maxHeight={470} maxWidth={330} />
                 </div>

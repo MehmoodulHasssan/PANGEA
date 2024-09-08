@@ -74,23 +74,25 @@ const ShopPage = ({ data }) => {
         <TopImage />
         <div className={`flex bg-black lg:bg-white px-8 w-full`}>
           <ShopSidebar isStyles={isStyles} setStyles={setStyles} />
-          {isLoading ? (
+          {/* {isLoading ? (
             <div className="fixed h-screen w-screen top-0 inset-0 z-50 flex items-center justify-center bg-black gap-16 bg-opacity-90 text-white">
               <div class="loader"></div>
             </div>
-          ) : (
-            <>
-              <ShopDesktopProduct
-                addItem={addItem}
-                products={Array.isArray(resData) ? resData : splicedDataArray}
-              />
-              <ShopProductMobile
-                addItem={addItem}
-                showPopUp={showPopUp}
-                products={Array.isArray(resData) ? resData : splicedDataArray}
-              />
-            </>
-          )}
+          ) : ( */}
+          <>
+            <ShopDesktopProduct
+              addItem={addItem}
+              products={Array.isArray(resData) ? resData : splicedDataArray}
+              isLoading={isLoading}
+            />
+            <ShopProductMobile
+              addItem={addItem}
+              showPopUp={showPopUp}
+              products={Array.isArray(resData) ? resData : splicedDataArray}
+              isLoading={isLoading}
+            />
+          </>
+          {/* )} */}
           <MobilePopUpBtns
             isStyles={isStyles}
             setStyles={setStyles}

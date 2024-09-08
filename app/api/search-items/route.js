@@ -34,7 +34,6 @@ export const POST = async (request) => {
   }
 
   console.log('query body:', queryBody);
-
   try {
     const response = await axios.post(
       'https://connect.squareup.com/v2/catalog/search-catalog-items',
