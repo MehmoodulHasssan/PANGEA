@@ -7,7 +7,6 @@ import ProductsGrid from '@/components/ProductDetails-subcomponents/ProductsGrid
 import { DUMMY_DETAILS, DUMMY_ITEMS } from '@/utils.js'
 import { itemsActions } from '@/store/slices/cartItems';
 import { useDispatch } from 'react-redux';
-import notify from '@/helpers/notify';
 import ShopProductMobile from '@/components/shop-subcomponents/ShopProductMobile';
 import SliderButtons from '@/components/HomePage-subcomponents/SliderButtons';
 
@@ -23,14 +22,6 @@ export default function DetailsPage({ data }) {
     const splicedDataArray = reversedDataArray.splice(0, 30);
 
     const images = data.item_data?.ecom_image_uris
-
-
-
-    const handleAddItem = ({ product, quantity = 1 }) => {
-        const item = DUMMY_ITEMS.find((item) => item.id === product.id)
-        dispatch(itemsActions.addItem({ product: item, quantity }))
-        notify({ product: item, quantity, adding: true, removing: false })
-    };
 
     const handleCenterSlide = (index) => {
         if (swiperRef.current && swiperRef.current.swiper) {
@@ -62,13 +53,11 @@ export default function DetailsPage({ data }) {
                     ref={swiperRef}
                 />
                 <AbsolutePart
-                    addItem={handleAddItem}
                     product={data}
                     centerSlide={handleCenterSlide}
                 />
             </div>
             <ProductsGrid
-                addItem={handleAddItem}
                 products={splicedDataArray}
             />
             <div className='px-6 pt-8'>

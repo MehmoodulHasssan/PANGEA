@@ -41,7 +41,6 @@ const DesktopCart = ({ isOpen }) => {
     };
     const handleRemoveItem = (item) => {
         dispatch(itemsActions.removeItem(item))
-        notify({ product: item.product, adding: false, removing: true })
     }
     const handleDecrement = (item) => {
         if (item.quantity === 1) {
@@ -56,7 +55,7 @@ const DesktopCart = ({ isOpen }) => {
 
     const handleAddItem = ({ product, quantity = 1 }) => {
         dispatch(itemsActions.addItem({ product, quantity }))
-        notify({ product, quantity, adding: true, removing: false })
+        // notify({ product, quantity, adding: true, removing: false })
     };
 
     useEffect(() => {

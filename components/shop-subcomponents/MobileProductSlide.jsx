@@ -7,10 +7,7 @@ import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { motion, AnimatePresence } from 'framer-motion';
 import { itemsActions } from '@/store/slices/cartItems';
 import { useDispatch } from 'react-redux';
-import notify from '@/helpers/notify';
-import { DUMMY_ITEMS } from '@/utils';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
 import Image from 'next/image';
 import LargeSwiperCardSkeleton from '../HomePage-subcomponents/LargeSwiperCardSkeleton';
 
@@ -51,9 +48,7 @@ const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
 
     // console.log(product)
     const handleAddItem = ({ product, quantity = 1 }) => {
-        // const item = DUMMY_ITEMS.find((item) => item.id === product.id)
         dispatch(itemsActions.addItem({ product, quantity }))
-        notify({ product, quantity, adding: true, removing: false })
     }
 
     const handleSlideClick = () => {

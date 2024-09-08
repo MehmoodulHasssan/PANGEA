@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import AnimatingButton from './AnimatingButton'
 import { motion } from 'framer-motion'
 import parseProductDetails from '@/helpers/parseProductDetails'
-
+import { itemsActions } from '@/store/slices/cartItems'
+import { useDispatch } from 'react-redux'
 // const buttonSizes = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL']
 
-const AbsolutePart = ({ product, centerSlide, addItem }) => {
+const AbsolutePart = ({ product, centerSlide }) => {
+    const dispatch = useDispatch()
     const [selectedImage, setSelectedImage] = useState(null)
-    // const [selectedSize, setSelectedSize] = useState(null)
     const images = product?.item_data?.ecom_image_uris
     const productPrice = product?.item_data?.variations[0]?.item_variation_data.price_money.amount
     const productName = product?.item_data?.name
@@ -24,6 +25,9 @@ const AbsolutePart = ({ product, centerSlide, addItem }) => {
 
     // console.log(product)
     // console.log(description)
+    const handleAddItem = ({ product, quantity = 1 }) => {
+        dispatch(itemsActions.addItem({ product, quantity }))
+    };
 
     const handleSelectedImage = (index) => {
         setSelectedImage(index)
@@ -68,7 +72,7 @@ const AbsolutePart = ({ product, centerSlide, addItem }) => {
                                 className={` text-white bg-black text-[0.75rem] font-bold py-2 px-24 rounded-full hover:cursor-pointer`}
                                 whileHover={{ scale: 1.1 }}
                                 transition={{ type: "spring", stiffness: 800, damping: 10 }}
-                                onClick={() => addItem({ product })}
+                                onClick={() => handleAddItem({ product })}
                             >
                                 Add To Bag
                             </motion.button>

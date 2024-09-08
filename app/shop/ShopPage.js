@@ -42,7 +42,7 @@ const ShopPage = ({ data }) => {
     // const item = DUMMY_ITEMS.find((item) => item.id === product.id);
     // console.log(item)
     dispatch(itemsActions.addItem({ product, quantity }));
-    notify({ product, quantity, adding: true, removing: false });
+    // notify({ product, quantity, adding: true, removing: false });
   };
 
   useEffect(() => {

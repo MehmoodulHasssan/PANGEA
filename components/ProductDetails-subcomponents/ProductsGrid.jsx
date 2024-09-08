@@ -7,7 +7,7 @@ import { DUMMY_ITEMS } from '@/utils';
 import ProductSlide from './ProductSlide';
 
 
-const ProductsGrid = ({ products, addItem }) => {
+const ProductsGrid = ({ products }) => {
     const [women, setWomen] = useState(true)
 
     return (
@@ -34,7 +34,6 @@ const ProductsGrid = ({ products, addItem }) => {
                             <ProductSlide
                                 key={index}
                                 product={product}
-                                addItem={addItem}
                             />
                         ))}
 

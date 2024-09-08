@@ -4,29 +4,32 @@ import { MdDelete, MdModeEdit } from "react-icons/md";
 import { motion } from 'framer-motion';
 import { totalPrice } from '@/helpers/totalPrice';
 import { useRouter } from 'next/navigation';
-
+import { useSelector } from 'react-redux';
+import Image from 'next/image';
 
 
 const cartPricingOverflow = [1, 2, 3, 4, 5]
 
 const OrdersManagementBox = ({ addedItems, removeItem, onDecrement, onIncrement }) => {
+    const itemAddIndicator = useSelector(state => state.itemsFn.added)
     const lastElementRef = useRef()
     const router = useRouter()
     const handleSubmit = () => {
         //submit order to backend
         return router.push('/payment')
     }
+    console.log(itemAddIndicator)
 
     useEffect(() => {
         lastElementRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }, [addedItems])
+    }, [itemAddIndicator])
 
     return (
-        <motion.div className='hidden lg:flex lg:flex-col lg:w-3/12 md-[430px] text-black border border-gray-400 justify-between'>
+        <motion.div layout className='hidden lg:flex lg:flex-col lg:w-3/12 md-[430px] text-black border border-gray-400 justify-between'>
             <div className='flex items-center justify-center h-20 border-b border-gray-400'>
                 YOUR BAG
             </div>
-            <div className='h-full overflow-y-scroll scrollbar-hide'>
+            <motion.div layout className='h-full overflow-y-scroll scrollbar-hide'>
                 {addedItems.length === 0 && <div className='flex min-h-96 text-gray-400 text-xl justify-center items-center h-full'>No items in bag</div>}
                 {addedItems.length > 0 && addedItems.map((item, index) => (
                     //    const images = product?.item_data?.ecom_image_uris
@@ -36,12 +39,18 @@ const OrdersManagementBox = ({ addedItems, removeItem, onDecrement, onIncrement 
                     <div key={index} className='h-[auto] overflow-clip flex flex-col p-4 border border-b-gray-400'>
                         <div className='flex gap-4 p-4'>
                             <div
-                                className=' max-w-[7.5rem] overflow-hidden border border-gray-400 rounded-lg flex items-center'
+                                className='max-w-[7.5rem] overflow-hidden border border-gray-400 rounded-lg flex items-center'
                                 style={{ aspectRatio: '4/5' }}
                             >
-                                <img className='rounded-lg object-fit'
+                                <Image className='rounded-lg'
                                     src={item.product?.item_data?.ecom_image_uris ? item.product?.item_data?.ecom_image_uris[0] : ''}
-                                    alt="image" />
+                                    alt="image"
+                                    layout='responsive'
+                                    height={5}
+                                    width={4}
+                                    objectPosition='center'
+                                    objectFit='cover'
+                                />
                             </div>
                             <div className='flex flex-col gap-1'>
                                 <span className='text-[12px]'>{item.product?.item_data?.name}</span>
@@ -89,7 +98,7 @@ const OrdersManagementBox = ({ addedItems, removeItem, onDecrement, onIncrement 
                     </div>
                 ))}
 
-            </div>
+            </motion.div>
             <div className='flex flex-col'>
                 <div className='flex items-center justify-center h-12 border-t border-gray-400'>
                     Free Standard Shipping Unlocked

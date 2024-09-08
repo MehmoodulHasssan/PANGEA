@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Skeleton from 'react-loading-skeleton';
 import LargeSwiperCardSkeleton from '../HomePage-subcomponents/LargeSwiperCardSkeleton';
+import { itemsActions } from '@/store/slices/cartItems';
 
 const suggestionsImages = [
     'https://www.nuro.la/uploads/1/4/3/6/143644655/s864328628968731809_p7_i3_w3000.png',
@@ -19,7 +20,7 @@ const suggestionsImages = [
 ];
 
 let totalImages = 0
-const ProductSlide = ({ product, addItem, bigItemClass, isLoading }) => {
+const ProductSlide = ({ product, bigItemClass, isLoading }) => {
     const [loadedImagesCount, setLoadedImagesCount] = useState(0);
     const [imageLoading, setImageLoading] = useState(true);
     const dispatch = useDispatch()
@@ -50,6 +51,10 @@ const ProductSlide = ({ product, addItem, bigItemClass, isLoading }) => {
             setQuantity(quantity - 1)
         }
     }
+
+    const handleAddItem = ({ product, quantity = 1 }) => {
+        dispatch(itemsActions.addItem({ product, quantity }));
+    };
     const handleImageLoad = () => {
         setLoadedImagesCount((prevCount) => {
             const newCount = prevCount + 1;
@@ -59,7 +64,7 @@ const ProductSlide = ({ product, addItem, bigItemClass, isLoading }) => {
             return newCount;
         });
     };
-    console.log(isLoading)
+
     return (
         <div className='h-[470px] overflow-hidden'>
             {isLoading || (images && imageLoading) && (
@@ -135,7 +140,7 @@ const ProductSlide = ({ product, addItem, bigItemClass, isLoading }) => {
                                     <FaPlus
                                         onClick={() => {
                                             if (quantity > 0) {
-                                                addItem({ product, quantity });
+                                                handleAddItem({ product, quantity });
                                             }
                                         }}
                                         className={`plus ${quantity === 0 ? 'hover:cursor-not-allowed' : ''}`}

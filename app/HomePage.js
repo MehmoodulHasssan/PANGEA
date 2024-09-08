@@ -52,7 +52,6 @@ const HomePage = ({ data }) => {
 
   // console.log(data);
   const state = useSelector((state) => state.stateFn.currentState);
-  const [men, setMen] = useState(false);
 
   const innerSwiperRef = useRef();
 
@@ -61,14 +60,10 @@ const HomePage = ({ data }) => {
   const splicedDataArray = reversedDataArray.splice(0, 30);
 
   const handleNavigateDetails = (product) => {
-    console.log('clicked');
-    //first add slide data with every mapping product and then fetch it from here
     return router.push('/product-details/' + product.id);
   };
   const onAddItem = ({ product, quantity = 1 }) => {
-    console.log(product, quantity);
     dispatch(itemsActions.addItem({ product, quantity }));
-    notify({ product, quantity, adding: true, removing: false });
   };
 
   // useEffect(() => {
