@@ -1,6 +1,8 @@
 import React from 'react'
 import { DUMMY_ITEMS, vapeProducts } from '@/utils';
 import AnimeButtons from '@/components/shop-subcomponents/SideBarAnimatedButtons';
+import { categoryActions } from '@/store/slices/categorySlice';
+import { useDispatch } from 'react-redux';
 
 const CATEGORIES = [
     {
@@ -18,6 +20,7 @@ const CATEGORIES = [
 ]
 
 const ShopSidebar = ({ isStyles, setStyles }) => {
+    const dispatch = useDispatch()
     return (
         <div className='sticky top-[52px] h-[92vh] w-1/5 left-side-product-page bg-white py-[29px] pr-4 overflow-hidden hidden lg:block'>
 
@@ -43,7 +46,8 @@ const ShopSidebar = ({ isStyles, setStyles }) => {
                     <div className='w-full h-[1px] bg-gray-300 mt-4'></div>
                     <input
                         type="text"
-                        placeholder='Search for categories'
+                        placeholder='Search for items by name'
+                        onChange={(e) => dispatch(categoryActions.setSearchTerm(e.target.value))}
                         className='w-full h-4 my-[16px] text-gray-800 focus:outline-none placeholder:text-gray-400'
                     />
                     <div className='w-full h-[1px] bg-gray-300 mb-[8px]'></div>

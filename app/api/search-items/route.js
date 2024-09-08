@@ -1,19 +1,44 @@
 import axios from 'axios';
 import { NextResponse, NextRequest } from 'next/server';
 
-export const POST = async (request, { params }) => {
-  const { categoryId } = params;
+export const POST = async (request) => {
+  const reqBody = await request.json();
+  console.log(reqBody);
+  const { categoryId, searchTerm } = reqBody;
+
+  let queryBody;
   let items = [];
-  console.log('came to get-all-items route');
-  // console.log(request);
+
+  if (!categoryId && !searchTerm) {
+    return NextResponse.error();
+  }
+
+  if (!searchTerm) {
+    queryBody = {
+      sort_order: 'ASC',
+      category_ids: [categoryId],
+    };
+  } else {
+    if (!categoryId) {
+      queryBody = {
+        sort_order: 'ASC',
+        text_filter: searchTerm,
+      };
+    } else {
+      queryBody = {
+        sort_order: 'ASC',
+        category_ids: [categoryId],
+        text_filter: searchTerm,
+      };
+    }
+  }
+
+  console.log('query body:', queryBody);
 
   try {
     const response = await axios.post(
       'https://connect.squareup.com/v2/catalog/search-catalog-items',
-      {
-        sort_order: 'ASC',
-        category_ids: [categoryId],
-      },
+      queryBody,
       {
         headers: {
           Authorization: `Bearer ${process.env.NEXT_SQUARE_ACCESS_TOKEN_PROD}`,

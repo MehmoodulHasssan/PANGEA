@@ -21,6 +21,6 @@ export default function categoryToId(category) {
     case 'Candy Pod - 1ml - Broad Spec':
       return 'SUDSLEREIATLI5UV7GMLC62O';
     default:
-      return 0;
+      return null;
   }
 }

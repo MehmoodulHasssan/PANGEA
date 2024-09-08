@@ -76,7 +76,7 @@ const DesktopLargeSwiper = ({ onAddItem, handleNavigateDetails, data }) => {
             //       index === 0 ? { paddingLeft: "50px", zIndex: '100' } : {}
             //     }
             >
-              <SkeletonTheme color="#d3d3e0" highlightColor="#e1e1e1" />
+              {/* <SkeletonTheme color="#d3d3e0" highlightColor="#e1e1e1" /> */}
               <div className="slider-item">
                 <HomeProductSlide
                   key={index}

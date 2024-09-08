@@ -27,10 +27,10 @@ const ShopPage = ({ data }) => {
   const selectedCategory = useSelector(
     (state) => state.categoryFn.selectedCategory
   );
-
+  const searchTerm = useSelector((state) => state.categoryFn.searchTerm);
   const [showPopUp, setShowPopUp] = useState(false);
-  // const [isScrolled, setIsScrolled] = useState(false)
   const [isStyles, setStyles] = useState(true);
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const dispatch = useDispatch();
 
   const dataArray = Object.values(data);
@@ -46,15 +46,26 @@ const ShopPage = ({ data }) => {
   };
 
   useEffect(() => {
-    if (selectedCategory !== 'null') {
+    const handler = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 300); // 300ms delay
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (selectedCategory || debouncedSearchTerm) {
       postData({
-        url:
-          'http://localhost:3000/api/search-by-category/' +
-          categoryToId(selectedCategory),
-        data: '',
+        url: 'http://localhost:3000/api/search-items',
+        data: {
+          categoryId: categoryToId(selectedCategory),
+          searchTerm: debouncedSearchTerm,
+        },
       });
     }
-  }, [selectedCategory]);
+  }, [selectedCategory, debouncedSearchTerm]);
   console.log(selectedCategory);
   console.log(resData);
   return (
@@ -68,16 +79,18 @@ const ShopPage = ({ data }) => {
               <div class="loader"></div>
             </div>
           ) : (
-            <ShopDesktopProduct
-              addItem={addItem}
-              products={Array.isArray(resData) ? resData : splicedDataArray}
-            />
+            <>
+              <ShopDesktopProduct
+                addItem={addItem}
+                products={Array.isArray(resData) ? resData : splicedDataArray}
+              />
+              <ShopProductMobile
+                addItem={addItem}
+                showPopUp={showPopUp}
+                products={Array.isArray(resData) ? resData : splicedDataArray}
+              />
+            </>
           )}
-          <ShopProductMobile
-            addItem={addItem}
-            showPopUp={showPopUp}
-            products={Array.isArray(resData) ? resData : splicedDataArray}
-          />
           <MobilePopUpBtns
             isStyles={isStyles}
             setStyles={setStyles}
