@@ -8,10 +8,6 @@ import ExtraItems from './Cart-subcomponents/ExtraItems';
 import OrdersManagementBox from './Cart-subcomponents/OrdersManagementBox';
 import { itemsActions } from '@/store/slices/cartItems';
 import { useSelector } from 'react-redux';
-import toast, { Toaster } from 'react-hot-toast';
-import CustomToast from './CustomToast';
-import { useRouter } from 'next/navigation';
-import notify from '@/helpers/notify';
 import useFetch from '@/hooks/useFetch';
 
 
@@ -55,7 +51,6 @@ const DesktopCart = ({ isOpen }) => {
 
     const handleAddItem = ({ product, quantity = 1 }) => {
         dispatch(itemsActions.addItem({ product, quantity }))
-        // notify({ product, quantity, adding: true, removing: false })
     };
 
     useEffect(() => {
@@ -81,6 +76,7 @@ const DesktopCart = ({ isOpen }) => {
                     isLoading={isLoading}
                 />
                 <OrdersManagementBox
+                    isOpen={isOpen}
                     addedItems={addedItems}
                     removeItem={handleRemoveItem}
                     onDecrement={handleDecrement}

@@ -25,7 +25,7 @@ const HomeProductSlide = ({ product, onAddItem, handleNavigateDetails }) => {
     const [loadedImagesCount, setLoadedImagesCount] = useState(0)
     const [quantity, setQuantity] = useState(0)
     const images = product?.item_data?.ecom_image_uris
-    const productPrice = product?.item_data?.variations[0]?.item_variation_data.price_money.amount
+    const productPrice = product?.item_data?.variations[0]?.item_variation_data.price_money.amount / 100
     const productName = product?.item_data?.name
     const productType = product?.item_data?.product_type
     const inventoryAlert = product?.item_data?.variations[0]?.item_variation_data.location_overrides[0]?.inventory_alert_type

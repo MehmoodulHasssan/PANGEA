@@ -62,8 +62,8 @@ header {
 
   width: 100%;
   margin: auto;
-  border-bottom: 1px solid rgb(77, 77, 77);
-  position: sticky;
+  // border-bottom: 1px solid rgb(77, 77, 77);
+  position: fixed;
   top: 0;
   z-index: 60;
   // background-color: #02020200;
@@ -245,9 +245,6 @@ header {
 }
 .example05 a span {
   @include hover-underline("slide", "left-in-right");
-}
-.cart {
-  position: relative;
 }
 .p {
   position: absolute;

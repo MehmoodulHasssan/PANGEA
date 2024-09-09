@@ -29,7 +29,7 @@ const ProductSlide = ({ product, bigItemClass, isLoading }) => {
 
     //extracting data from raw form
     const images = product?.item_data?.ecom_image_uris
-    const productPrice = product?.item_data?.variations[0]?.item_variation_data.price_money.amount
+    const productPrice = product?.item_data?.variations[0]?.item_variation_data.price_money.amount / 100
     const productName = product?.item_data?.name
     const productType = product?.item_data?.product_type
     const inventoryAlert = product?.item_data?.variations[0]?.item_variation_data.location_overrides[0]?.inventory_alert_type
@@ -75,9 +75,6 @@ const ProductSlide = ({ product, bigItemClass, isLoading }) => {
             <SwiperSlide>
                 <div
                     className="slider-items"
-                // style={
-                //     index === 0 ? { margin: '30px 20px', zIndex: '100' } : {}
-                // }
                 >
                     <div className={`${bigItemClass ? "slider-big-item" : "slider-item"}`}>
                         <div className={bigItemClass ? "big-item-image-box" : "item-image-box"}>
@@ -122,9 +119,6 @@ const ProductSlide = ({ product, bigItemClass, isLoading }) => {
                                 </div>
                             </Swiper>
                             <p className="new">NEW</p>
-                            <p className="plus">
-                                <FaPlus />
-                            </p>
                         </div>
                         <div className="flex flex-col h-[40px] transition-all duration-300 relative cursor-pointer">
                             <div className='flex flex-col bg-white py-2'>

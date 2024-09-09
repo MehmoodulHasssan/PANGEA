@@ -32,6 +32,7 @@ const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
 
+
   //its because the normal state of redux causes hydration error
   useEffect(() => {
     setCartItemsNo(addedItems.length);
@@ -108,10 +109,11 @@ const Header = () => {
         <div className="header">
           <div className="flex h-full items-center gap-5">
             <Image
-              onClick={() => (window.location.href = "/")}
+              onClick={() => (router.push("/"))}
               src={pang3aWhite}
               alt="Logo Here"
-              className="h-[22px] object-contain w-auto"
+              className="h-[22px] object-contain w-auto hover:cursor-pointer"
+              title="Go to Home Page"
             />
             <div className="example05 flex items-center">
               <div
@@ -135,8 +137,8 @@ const Header = () => {
           <div className="relative">
             <FaSearch />
             <div onClick={showCartModal} className="relative">
-              <SlBag className="cart" />
-              <p className="mt-[15px] w-[20px] absolute pr-0 top-2 right-0.5 bg-white !text-black border-0 rounded-full text-center cart-num">
+              <SlBag className="relative" />
+              <p className="mt-[15px] w-[20px] absolute pr-0 top-2 right-0.5 bg-white !text-black border-0 rounded-full text-center cart-num hover:cursor-pointer">
                 {cartItemsNo}
               </p>
             </div>

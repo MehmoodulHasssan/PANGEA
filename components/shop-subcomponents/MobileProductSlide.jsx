@@ -27,7 +27,7 @@ const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
     if (images) {
         imagesArray = Object.values(images)
     }
-    const productPrice = product?.item_data?.variations[0]?.item_variation_data.price_money.amount
+    const productPrice = product?.item_data?.variations[0]?.item_variation_data.price_money.amount / 100
     const productName = product?.item_data?.name
     const productType = product?.item_data?.product_type
     const inventoryAlert = product?.item_data?.variations[0]?.item_variation_data.location_overrides[0]?.inventory_alert_type
