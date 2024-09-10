@@ -5,7 +5,7 @@ import 'swiper/css/grid';
 import 'swiper/css/pagination';
 import { FreeMode, Grid, Navigation, Pagination } from 'swiper/modules';
 import HomeProductSlide from '../HomeProductSlide';
-import { DUMMY_ITEMS } from '@/utils';
+// import { DUMMY_ITEMS } from '@/utils';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 import { SkeletonTheme } from 'react-loading-skeleton';
 

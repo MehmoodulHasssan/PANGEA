@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import '@/app/styles/main.scss';
-import { DUMMY_ITEMS } from '@/utils';
+// import { DUMMY_ITEMS } from '@/utils';
 import ProductSlide from '@/components/ProductDetails-subcomponents/ProductSlide';
 import DummyProductSlide from '../ProductDetails-subcomponents/DummyProductSlide';
 

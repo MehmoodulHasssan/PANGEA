@@ -9,8 +9,8 @@ export const POST = async (request) => {
   let queryBody;
   let items = [];
 
-  if (!categoryId && !searchTerm) {
-    return NextResponse.error();
+  if (!categoryId && searchTerm.trim() === '') {
+    return NextResponse.json('All fields are required', { status: 400 });
   }
 
   if (!searchTerm) {

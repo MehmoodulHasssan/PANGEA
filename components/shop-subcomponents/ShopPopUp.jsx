@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { DUMMY_ITEMS, vapeProducts } from '@/utils';
 import PopUpAnimeButtons from './PopUpAnimeButtons';
 import { motion, easeInOut } from 'framer-motion';
 

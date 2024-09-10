@@ -1,30 +1,17 @@
 import React from 'react'
-import { DUMMY_ITEMS, vapeProducts } from '@/utils';
+// import { DUMMY_ITEMS, vapeProducts } from '@/utils';
 import AnimeButtons from '@/components/shop-subcomponents/SideBarAnimatedButtons';
 import { categoryActions } from '@/store/slices/categorySlice';
 import { useDispatch } from 'react-redux';
+import { PASCAL_CATEGORIES } from '@/utils';
 
-const CATEGORIES = [
-    {
-        category: 'Nuro Disposable',
-        subCategories: ['1ml - Classic', '1ml - Limited Edition', '1ml - Essential', '3ml - Classic', '3ml - Super Blend', '3ml - Broad Spec']
-    },
-    {
-        category: 'Nuro Cartridge',
-        subCategories: ['1ml - Limited Edition', '1ml - Classic']
-    },
-    {
-        category: 'Candy Pod',
-        subCategories: ['1ml - Broad Spec']
-    },
-]
 
 const ShopSidebar = ({ isStyles, setStyles }) => {
     const dispatch = useDispatch()
     return (
         <div className='sticky top-[52px] h-[92vh] w-1/5 left-side-product-page bg-white py-[29px] pr-4 overflow-hidden hidden lg:block'>
 
-            <div className={`bg-white h-full`}>
+            <div className={`bg-white h-full  overflow-scroll scrollbar-hide`}>
                 <div className='flex flex-col'>
                     <p className='text-[12px] text-gray-700'>Trending</p>
                     <h1 className='text-[20px] text-gray-700'>ALL PRODUCTS</h1>
@@ -52,8 +39,8 @@ const ShopSidebar = ({ isStyles, setStyles }) => {
                     />
                     <div className='w-full h-[1px] bg-gray-300 mb-[8px]'></div>
                 </div>
-                <div className='flex  flex-col overflow-scroll scrollbar-hide'>
-                    {CATEGORIES.map((ele, index) => (
+                <div className='flex flex-col'>
+                    {PASCAL_CATEGORIES.map((ele, index) => (
                         <AnimeButtons
                             key={index}
                             name={ele.category}

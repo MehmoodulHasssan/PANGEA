@@ -1,7 +1,7 @@
 'use client';
 import WithHeaderWrapper from '@/components/WithHeaderWrapper';
 import ProductSlide from '@/components/ProductDetails-subcomponents/ProductSlide';
-import { DUMMY_ITEMS, vapeProducts } from '@/utils';
+// import { DUMMY_ITEMS, vapeProducts } from '@/utils';
 import '@/app/styles/main.scss';
 import { useEffect, useState } from 'react';
 import { itemsActions } from '@/store/slices/cartItems';
@@ -18,7 +18,7 @@ import { useSelector } from 'react-redux';
 import notify from '@/helpers/notify';
 import TopImage from '@/components/shop-subcomponents/TopImage';
 import usePost from '@/hooks/usePost';
-import categoryToId from '@/helpers/categoryToId';
+import { categoryToId } from '@/helpers/categoryToId';
 
 const slides = Array.from({ length: 15 }, (_, index) => index + 1);
 const ShopPage = ({ data }) => {
@@ -56,7 +56,12 @@ const ShopPage = ({ data }) => {
   }, [searchTerm]);
 
   useEffect(() => {
-    if (selectedCategory || debouncedSearchTerm) {
+    console.log(selectedCategory, categoryToId(selectedCategory));
+    if (
+      (selectedCategory && categoryToId(selectedCategory)) ||
+      debouncedSearchTerm.trim() !== ''
+    ) {
+      // console.log(selectedCategory);
       postData({
         url: 'http://localhost:3000/api/search-items',
         data: {
@@ -66,8 +71,8 @@ const ShopPage = ({ data }) => {
       });
     }
   }, [selectedCategory, debouncedSearchTerm]);
-  console.log(selectedCategory);
-  console.log(resData);
+
+  // console.log(resData);
   return (
     <WithHeaderWrapper>
       <div className="w-full bg-white">

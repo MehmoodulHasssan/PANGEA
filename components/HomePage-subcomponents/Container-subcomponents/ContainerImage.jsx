@@ -2,7 +2,8 @@ import React from 'react'
 import BannerInfo from '@/components/HomePage-subcomponents/Container-subcomponents/BannerInfo'
 import Image from 'next/image'
 
-const ContainerImage = ({ image }) => {
+const ContainerImage = ({ data }) => {
+    const [hovered, setHovered] = React.useState(false)
     return (
         <div
             style={{
@@ -13,11 +14,13 @@ const ContainerImage = ({ image }) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 // backgroundImage: `url(${image})`,
-                // backgroundSize: 'cover',
+                backgroundColor: '#211d1d',
             }}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
         >
             <Image
-                src={image}
+                src={data.url}
                 alt="image"
                 layout="responsive"
                 objectFit="cover"
@@ -25,9 +28,9 @@ const ContainerImage = ({ image }) => {
                 objectPosition='center'
                 height={5} // Maintain aspect ratio
                 width={4}  // Maintain aspect ratio
-                className='-z-10'
+                className={`transition-all duration-700 ${hovered ? 'scale-105' : 'scale-100'}`}
             />
-            <BannerInfo />
+            <BannerInfo data={data} />
         </div>
     )
 }

@@ -3,7 +3,7 @@ import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/pagination';
 import '@/app/styles/main.scss';
-import { DUMMY_ITEMS } from '@/utils';
+// import { DUMMY_ITEMS } from '@/utils';
 import ProductSlide from './ProductSlide';
 
 

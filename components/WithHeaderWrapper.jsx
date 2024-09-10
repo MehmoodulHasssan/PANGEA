@@ -44,8 +44,8 @@ const WithHeaderWrapper = ({ children }) => {
         <>
             <Header fixed={true} />
             <Toaster position='bottom-center' />
-            <div id="smooth-wrapper">
-                <div id="smooth-content">
+            <div id="smooth-wrapper scrollbar-hide">
+                <div id="smooth-content scrollbar-hide">
                     <AnimatePresence>
                         {isOpen && (
                             device === 'mobile' || device === 'tablet' ? (
