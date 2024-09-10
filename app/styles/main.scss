@@ -214,8 +214,9 @@ h1 {
     align-items: center;
 
     .slider-item {
-      height: 400px;
-      width: 230px;
+      // aspect-ratio: 7/12;
+      // max-height: 454px;
+      width: 100%;
 
       &:hover .item-images {
         opacity: 1;
@@ -231,7 +232,7 @@ h1 {
         flex-direction: column;
         gap: 2px;
         align-items: start;
-        height: 40px;
+        // height: 40px;
         transition: all 0.3s;
         position: relative;
         color: rgb(10, 10, 10);

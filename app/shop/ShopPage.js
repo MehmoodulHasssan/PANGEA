@@ -77,7 +77,7 @@ const ShopPage = ({ data }) => {
     <WithHeaderWrapper>
       <div className="w-full bg-white">
         <TopImage />
-        <div className={`flex bg-black lg:bg-white px-8 w-full`}>
+        <div className={`flex bg-white px-8 w-full`}>
           <ShopSidebar isStyles={isStyles} setStyles={setStyles} />
           {/* {isLoading ? (
             <div className="fixed h-screen w-screen top-0 inset-0 z-50 flex items-center justify-center bg-black gap-16 bg-opacity-90 text-white">

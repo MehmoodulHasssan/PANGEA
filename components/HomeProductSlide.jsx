@@ -10,6 +10,9 @@ import '@/app/styles/main.scss';
 import Image from 'next/image';
 import Skeleton from 'react-loading-skeleton';
 import LargeSwiperCardSkeleton from './HomePage-subcomponents/LargeSwiperCardSkeleton';
+import { itemsActions } from '@/store/slices/cartItems';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
 
 
 const suggestionsImages = [
@@ -20,7 +23,9 @@ const suggestionsImages = [
 ];
 
 let totalImages = 0
-const HomeProductSlide = ({ product, onAddItem, handleNavigateDetails }) => {
+const HomeProductSlide = ({ product }) => {
+    const dispatch = useDispatch()
+    const router = useRouter()
     const [imageLoading, setImageLoading] = useState(true)
     const [loadedImagesCount, setLoadedImagesCount] = useState(0)
     const [quantity, setQuantity] = useState(0)
@@ -46,114 +51,119 @@ const HomeProductSlide = ({ product, onAddItem, handleNavigateDetails }) => {
         });
     };
 
-    return (
-        <>
-            <div className='h-full'>
-                {images && imageLoading &&
-                    <LargeSwiperCardSkeleton maxWidth={278} maxHeight={400} />
-                }
-                <div className="item-image-box">
-                    <Swiper
-                        className="imageSwiper"
-                        cssMode={true}
-                        // direction='horizontal'
-                        slidesPerView={1}
-                        navigation={true}
-                        modules={[Navigation]}
-                    >
-                        <div className="button-overlay prev-button-overlay">
-                            <GrFormPrevious />
-                        </div>
-                        {images && Object.keys(images).map((key, imgIndex) => (
-                            <SwiperSlide
-                                // className="imageSlide"
-                                key={imgIndex}
-                                onClick={() => handleNavigateDetails(product)}
-                            >
-                                <div style={{ aspectRatio: '4/5', position: 'relative', width: '100%', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#eeecec', borderRadius: '10px' }}>
-                                    <Image
-                                        layout='responsive'
-                                        objectFit='contain'
-                                        height={5}
-                                        width={4}
-                                        objectPosition='center'
-                                        quality={50}
-                                        onLoad={() => {
-                                            handleImageLoad()
-                                            // console.log('loaded image')
-                                        }}
-                                        loading='lazy'
-                                        // onClick={() => handleNavigateDetails(product)}
-                                        className="hover:cursor-pointer"
-                                        src={images[key]}
-                                        alt={'product image'}
-                                    />
-                                    <p className="new">NEW</p>
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                        <div className="button-overlay next-button-overlay">
-                            <GrFormNext />
-                        </div>
-                    </Swiper>
-                </div>
-                <div className="item-info">
-                    <h5 className="hide">{productName && productName}</h5>
-                    <p className="hide text-gray-700">{`$${productPrice.toFixed(2)}`}</p>
-                    {inventoryAlert && <p className="hide bg-gradient">
-                        {inventoryAlert.replace('_', ' ')}
-                    </p>}
+    const handleAddItem = ({ product, quantity = 1 }) => {
+        dispatch(itemsActions.addItem({ product, quantity }));
+    };
 
-                    <div className="item-sizes-box">
-                        <div>
-                            <p>QUICK ADD</p>
-                            <FaPlus
-                                className="plus"
-                                onClick={() => {
-                                    if (quantity > 0) {
-                                        onAddItem({ product, quantity })
-                                    }
-                                }
-                                }
-                            />
-                        </div>
-                        <div className="separator !bg-[#eeecec]"></div>
-                        <div className="item-sizes">
-                            <p
-                                onClick={() => {
-                                    if (quantity > 0) {
-                                        setQuantity(quantity - 1)
-                                    }
-                                }
-                                }
-                            >
-                                <FaMinus />
-                            </p>
-                            <div>{quantity}</div>
-                            <p
-                                onClick={
-                                    () => setQuantity(quantity + 1)
-                                }
-                            >
-                                <FaPlus />
-                            </p>
-                        </div>
+    const handleNavigateDetails = (product) => {
+        return router.push('/product-details/' + product.id)
+    }
+
+    return (
+
+        <div className='h-full w-full overflow-hidden'>
+            {images && imageLoading &&
+                <LargeSwiperCardSkeleton />
+            }
+            <div className="item-image-box">
+                <Swiper
+                    className="imageSwiper"
+                    cssMode={true}
+                    // direction='horizontal'
+                    slidesPerView={1}
+                    navigation={true}
+                    modules={[Navigation]}
+                >
+                    <div className="button-overlay prev-button-overlay">
+                        <GrFormPrevious />
                     </div>
-                    <div className="item-images">
-                        {suggestionsImages.map((image, imgIndex) => (
-                            <div key={imgIndex} style={{ aspectRatio: '4/5', position: 'relative', width: '100%', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#eeecec', borderRadius: '10px' }}>
-                                <Image src={image} alt="image" layout='responsive' width={4} height={5} />
+                    {images && Object.keys(images).map((key, imgIndex) => (
+                        <SwiperSlide
+                            // className="imageSlide"
+                            key={imgIndex}
+                            onClick={() => handleNavigateDetails(product)}
+                        >
+                            <div style={{ aspectRatio: '4/5', position: 'relative', width: '100%', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#eeecec', borderRadius: '10px' }}>
+                                <Image
+                                    layout='responsive'
+                                    objectFit='contain'
+                                    height={5}
+                                    width={4}
+                                    objectPosition='center'
+                                    quality={50}
+                                    onLoad={() => {
+                                        handleImageLoad()
+                                        // console.log('loaded image')
+                                    }}
+                                    loading='lazy'
+                                    // onClick={() => handleNavigateDetails(product)}
+                                    className="hover:cursor-pointer"
+                                    src={images[key]}
+                                    alt={'product image'}
+                                />
+                                <p className="new">NEW</p>
                             </div>
-                        ))}
-                        {/* {images && Object.keys(images).map((image, imgIndex) => (
+                        </SwiperSlide>
+                    ))}
+                    <div className="button-overlay next-button-overlay">
+                        <GrFormNext />
+                    </div>
+                </Swiper>
+            </div>
+            <div className="item-info">
+                <h5 className="hide">{productName && productName}</h5>
+                <p className="hide text-gray-700">{`$${productPrice.toFixed(2)}`}</p>
+                {inventoryAlert && <p className="hide bg-gradient">
+                    {inventoryAlert.replace('_', ' ')}
+                </p>}
+
+                <div className="item-sizes-box">
+                    <div>
+                        <p>QUICK ADD</p>
+                        <FaPlus
+                            className="plus"
+                            onClick={() => {
+                                if (quantity > 0) {
+                                    handleAddItem({ product, quantity })
+                                }
+                            }
+                            }
+                        />
+                    </div>
+                    <div className="separator !bg-[#eeecec]"></div>
+                    <div className="item-sizes">
+                        <p
+                            onClick={() => {
+                                if (quantity > 0) {
+                                    setQuantity(quantity - 1)
+                                }
+                            }
+                            }
+                        >
+                            <FaMinus />
+                        </p>
+                        <div>{quantity}</div>
+                        <p
+                            onClick={
+                                () => setQuantity(quantity + 1)
+                            }
+                        >
+                            <FaPlus />
+                        </p>
+                    </div>
+                </div>
+                <div className="item-images">
+                    {suggestionsImages.map((image, imgIndex) => (
+                        <div key={imgIndex} style={{ aspectRatio: '4/5', position: 'relative', width: '100%', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#eeecec', borderRadius: '10px' }}>
+                            <Image src={image} alt="image" layout='responsive' width={4} height={5} />
+                        </div>
+                    ))}
+                    {/* {images && Object.keys(images).map((image, imgIndex) => (
                     <img key={imgIndex} src={image} alt="image" />
                 ))} */}
-                    </div>
                 </div>
             </div>
-        </>
-
-
+        </div>
     )
 }
 

@@ -5,6 +5,11 @@ import 'swiper/css/pagination';
 import '@/app/styles/main.scss';
 // import { DUMMY_ITEMS } from '@/utils';
 import ProductSlide from './ProductSlide';
+import HomeProductSlide from '../HomeProductSlide';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/grid';
+import 'swiper/css/pagination';
 
 
 const ProductsGrid = ({ products }) => {
@@ -30,11 +35,31 @@ const ProductsGrid = ({ products }) => {
                     </div>
 
                     <div className='grid p-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6  lg:grid-cols-3'>
-                        {products.map((product, index) => (
+                        {/* {products.map((product, index) => (
                             <ProductSlide
                                 key={index}
                                 product={product}
                             />
+                        ))} */}
+                        {products.map((product, index) => (
+                            <SwiperSlide key={index}>
+                                <div
+                                    className="slider-items lg:ps-12 md:ps-8 sm:ps-4 ps-0"
+                                // style={
+                                //       index === 0 ? { paddingLeft: "50px", zIndex: '100' } : {}
+                                //     }
+                                >
+                                    {/* <SkeletonTheme color="#d3d3e0" highlightColor="#e1e1e1" /> */}
+                                    <div className="slider-item">
+                                        <HomeProductSlide
+                                            key={product.id}
+                                            product={product}
+                                        //   onAddItem={onAddItem}
+                                        //   handleNavigateDetails={handleNavigateDetails}
+                                        />
+                                    </div>
+                                </div>
+                            </SwiperSlide>
                         ))}
 
                     </div>

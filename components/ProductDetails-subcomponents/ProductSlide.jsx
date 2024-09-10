@@ -66,7 +66,7 @@ const ProductSlide = ({ product, bigItemClass, isLoading }) => {
     };
 
     return (
-        <div className='h-[470px] overflow-hidden'>
+        <div className='overflow-hidden'>
             {isLoading || (images && imageLoading) && (
                 <div className="mt-[30px] h-full">
                     <LargeSwiperCardSkeleton maxHeight={470} maxWidth={330} />
