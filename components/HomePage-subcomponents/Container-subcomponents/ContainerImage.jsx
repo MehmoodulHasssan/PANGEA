@@ -14,7 +14,7 @@ const ContainerImage = ({ data }) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 // backgroundImage: `url(${image})`,
-                backgroundColor: '#211d1d',
+                backgroundColor: 'rgb(216 215 215)',
             }}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
@@ -28,7 +28,7 @@ const ContainerImage = ({ data }) => {
                 objectPosition='center'
                 height={5} // Maintain aspect ratio
                 width={4}  // Maintain aspect ratio
-                className={`transition-all duration-700 ${hovered ? 'scale-105' : 'scale-100'}`}
+                className={`transition-all duration-700 ${hovered ? 'scale-110' : 'scale-100'}`}
             />
             <BannerInfo data={data} />
         </div>

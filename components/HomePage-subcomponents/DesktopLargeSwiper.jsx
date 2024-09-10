@@ -7,20 +7,12 @@ import { FreeMode, Grid, Navigation, Pagination } from 'swiper/modules';
 import HomeProductSlide from '../HomeProductSlide';
 // import { DUMMY_ITEMS } from '@/utils';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
-import { SkeletonTheme } from 'react-loading-skeleton';
 
 
 const DesktopLargeSwiper = ({ onAddItem, handleNavigateDetails, data }) => {
 
   const swiperRef = useRef(null);
-  // console.log(typeof data)
-  // console.log(data['0'])
-  // console.log(Object.keys(data))
-  // Object.keys(data).map((key) => {
-  //   console.log(data[key])
-  // })
 
-  // console.log(reversed)
   return (
     <div className="hidden lg:block">
       <Swiper

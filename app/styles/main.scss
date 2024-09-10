@@ -21,7 +21,7 @@
 
   &:hover {
     background-color: #c7c7c7;
-    color: rgb(0, 0, 0);
+    // color: rgb(0, 0, 0);
   }
 }
 h1 {
@@ -66,13 +66,14 @@ h1 {
   width: 120%;
 }
 .item-image-box {
-  height: 312px;
+  // height: 312px;
+  aspect-ratio: 4/5;
   width: 100%;
   background-color: rgb(255, 255, 255);
   position: relative;
-  border-radius: 20px;
+  // border-radius: 20px;
   overflow: hidden;
-
+  
   // .item-image {
   //   width: 100%;
   //   height: 100%;
@@ -141,30 +142,47 @@ h1 {
 
 .slider-heading {
   // width: 90%;
-  margin: auto;
+  // margin: auto;
   // margin-top: 50px;
   display: flex;
   flex-direction: row;
   border-radius: 20px;
   justify-content: space-between;
-  margin-left: 20px;
-  margin-right: 4%;
+  // margin-left: 20px;
+  // margin-right: 4%;
+  padding: 22px 21px 0px 21px;
+  color:rgb(10, 10, 10);
   h2 {
     margin-top: 5px;
     font-size: 20px;
-    color: white;
+    // color: white;
   }
   span {
     font-size: 18px;
     display: block;
-    color: white;
   }
   button {
-    background-color: rgb(250, 250, 250);
-    color: black;
+    display: block;
+  background-color: black;
+  color: white;
+  padding: 7px 20px;
+  font-size: 11px;
+  // font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  //   Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  letter-spacing: 1px;
+  border-radius: 25px;
+  text-transform: uppercase;
+  margin: 10px 0;
+  height: 40px;
+  transition: all 0.5s ease;
+  &:hover{
+    cursor: pointer;
+    background-color: rgb(70, 62, 62);
   }
 }
+}
 .sliders {
+  color:rgb(10, 10, 10);
   > div.slider-buttons {
     // &:first-of-type {
       border: 1px solid rgb(114, 114, 114);
@@ -179,10 +197,10 @@ h1 {
     // }
     > span {
       display: inline-block;
-      color: rgb(248, 248, 248);
+      // color: rgb(248, 248, 248);
       font-size: 10px;
       border-radius: 15px;
-      padding: 3px 12px;
+      padding: 5px 12px;
       &:hover {
         cursor: pointer;
       }
@@ -205,7 +223,7 @@ h1 {
       }
       &:hover .item-sizes-box {
         opacity: 1;
-        transition: all 0.3s;
+        transition: all 0.7s;
       }
       .item-info {
         margin-top: 5px;
@@ -216,36 +234,38 @@ h1 {
         height: 40px;
         transition: all 0.3s;
         position: relative;
+        color: rgb(10, 10, 10);
         cursor: pointer;
         h5 {
-          font-size: 10px;
-          color: white;
+          font-size: 11px;
           text-align: start;
         }
         p {
           font-size: 12px;
-            color: rgb(211, 211, 211);
-            &:last-of-type {
-              font-size: 10px;
-              color: red
-            }
+        }
+        p.bg-gradient {
+          padding: 2px 5px;
+          background: linear-gradient(90deg, #3dbfff, #a649ff);
+          border-radius: 5px;
+          font-size: 10px;
+          text-align: center;
         }
 
         &:hover .item-sizes {
           opacity: 1;
-          transition: all 0.3s;
+          transition: transform 0.7s;
         }
         &:hover .hide {
           opacity: 0;
-          transition: all 0.3s;
+          transition: all 0.7s;
         }
       }
       .item-sizes-box {
         position: absolute;
         opacity: 0;
         width: 87%;
-        background-color: black;
-        border: 1px solid rgb(61, 61, 61);
+        background-color: white;
+        // border: 1px solid rgb(61, 61, 61);
         border-radius: 8px;
         padding: 10px;
         top: -40px;
@@ -315,27 +335,29 @@ h1 {
       }
       .item-images {
         opacity: 0;
-        height: 60px;
-        border: 1px solid rgb(61, 61, 61);
+        height: 67px;
+        // border: 1px solid rgb(61, 61, 61);
         position: absolute;
         top: 0px;
         left: 0px;
-        background-color: black;
+        background-color: white;
         border-radius: 8px;
         width: 100%;
-        padding: 2px 5px;
+        // padding: 2px 5px;
         transition: all 0.3s;
         display: flex;
+        gap: 2px;
         justify-content: center;
         align-items: center;
         overflow: hidden;
         z-index: 8;
 
         img {
-          width: 45px;
-          height: 100%;
+          // width: 45px;
+          // height: 100%;
           border-radius: 5px;
           margin: 0 4px;
+          background-color: #eeecec;
         }
       }
     }
@@ -358,16 +380,17 @@ h1 {
         height: 40px;
         transition: all 0.3s;
         position: relative;
+        color: rgb(10, 10, 10);
         cursor: pointer;
         h5 {
           font-size: 12px;
-          color: white;
+          // color: white;
         }
         p {
           font-size: 10px;
-          &:last-of-type {
-            color: rgb(211, 211, 211);
-          }
+          // &:last-of-type {
+          //   color: rgb(211, 211, 211);
+          // }
         }
 
         &:hover .item-sizes {

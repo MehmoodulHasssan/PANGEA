@@ -48,7 +48,7 @@ const HomeProductSlide = ({ product, onAddItem, handleNavigateDetails }) => {
 
     return (
         <>
-            <div className='h-[400px] overflow-hidden'>
+            <div className='h-full'>
                 {images && imageLoading &&
                     <LargeSwiperCardSkeleton maxWidth={278} maxHeight={400} />
                 }
@@ -66,45 +66,44 @@ const HomeProductSlide = ({ product, onAddItem, handleNavigateDetails }) => {
                         </div>
                         {images && Object.keys(images).map((key, imgIndex) => (
                             <SwiperSlide
-                                className="imageSlide"
+                                // className="imageSlide"
                                 key={imgIndex}
                                 onClick={() => handleNavigateDetails(product)}
                             >
-                                <Image
-                                    layout='fill'
-                                    objectFit='cover'
-                                    objectPosition='center'
-                                    quality={50}
-                                    onLoad={() => {
-                                        handleImageLoad()
-                                        // console.log('loaded image')
-                                    }}
-                                    loading='lazy'
-                                    // onClick={() => handleNavigateDetails(product)}
-                                    className="hover:cursor-pointer"
-                                    src={images[key]}
-                                    alt={'product image'}
-                                />
+                                <div style={{ aspectRatio: '4/5', position: 'relative', width: '100%', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#eeecec', borderRadius: '10px' }}>
+                                    <Image
+                                        layout='responsive'
+                                        objectFit='contain'
+                                        height={5}
+                                        width={4}
+                                        objectPosition='center'
+                                        quality={50}
+                                        onLoad={() => {
+                                            handleImageLoad()
+                                            // console.log('loaded image')
+                                        }}
+                                        loading='lazy'
+                                        // onClick={() => handleNavigateDetails(product)}
+                                        className="hover:cursor-pointer"
+                                        src={images[key]}
+                                        alt={'product image'}
+                                    />
+                                    <p className="new">NEW</p>
+                                </div>
                             </SwiperSlide>
                         ))}
                         <div className="button-overlay next-button-overlay">
                             <GrFormNext />
                         </div>
                     </Swiper>
-                    <p className="new">NEW</p>
-                    <p className="plus">
-                        <FaPlus />
-                    </p>
                 </div>
                 <div className="item-info">
                     <h5 className="hide">{productName && productName}</h5>
-                    <p className="hide">{`$${productPrice.toFixed(2)}`}</p>
-                    <p className="hide ">
-                        {inventoryAlert && inventoryAlert}
-                    </p>
-                    {/* <p className="hide">
-                {productType && productType} <span> 4 colors</span>
-            </p> */}
+                    <p className="hide text-gray-700">{`$${productPrice.toFixed(2)}`}</p>
+                    {inventoryAlert && <p className="hide bg-gradient">
+                        {inventoryAlert.replace('_', ' ')}
+                    </p>}
+
                     <div className="item-sizes-box">
                         <div>
                             <p>QUICK ADD</p>
@@ -118,7 +117,7 @@ const HomeProductSlide = ({ product, onAddItem, handleNavigateDetails }) => {
                                 }
                             />
                         </div>
-                        <div className="separator"></div>
+                        <div className="separator !bg-[#eeecec]"></div>
                         <div className="item-sizes">
                             <p
                                 onClick={() => {
@@ -142,7 +141,9 @@ const HomeProductSlide = ({ product, onAddItem, handleNavigateDetails }) => {
                     </div>
                     <div className="item-images">
                         {suggestionsImages.map((image, imgIndex) => (
-                            <img key={imgIndex} src={image} alt="image" />
+                            <div key={imgIndex} style={{ aspectRatio: '4/5', position: 'relative', width: '100%', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#eeecec', borderRadius: '10px' }}>
+                                <Image src={image} alt="image" layout='responsive' width={4} height={5} />
+                            </div>
                         ))}
                         {/* {images && Object.keys(images).map((image, imgIndex) => (
                     <img key={imgIndex} src={image} alt="image" />
