@@ -3,9 +3,13 @@ import LargeSwiperCardSkeleton from '../HomePage-subcomponents/LargeSwiperCardSk
 
 const DummyProductSlide = () => {
     return (
-        <div className='w-full overflow-hidden' style={{ aspectRatio: '7/12' }}>
-            <div className="mt-[30px] w-full h-full">
-                <LargeSwiperCardSkeleton maxHeight={470} maxWidth={330} />
+        <div className="w-full ps-12">
+            <div className='w-full mt-[30px] overflow-hidden relative'
+                style={{ aspectRatio: '7/12' }}
+            >
+                <LargeSwiperCardSkeleton />
+                {/* <div className="mt-[30px] relative w-full h-full">
+            </div> */}
             </div>
         </div>
     )

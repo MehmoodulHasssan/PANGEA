@@ -25,7 +25,7 @@ const ExtraItems = ({ addItem, products, isLoading }) => {
 
     return (
         <div className='main-card-res-none lg:w-9/12 flex md:items-center md:w-[550px] sm:w-[400px]  flex-col overflow-x-auto scrollbar-hide border border-t-gray-400'>
-            <div className="sliders">
+            <div className="sliders w-full">
                 <div className="slider-buttons !mt-[30px]">
                     <span
                         onClick={() => setRecommended(true)}
@@ -50,7 +50,6 @@ const ExtraItems = ({ addItem, products, isLoading }) => {
                             <div
                                 className="slider-items lg:ps-12 md:ps-8 sm:ps-4 ps-0"
                             >
-                                {/* <SkeletonTheme color="#d3d3e0" highlightColor="#e1e1e1" /> */}
                                 <div
                                     className="slider-item"
                                 // style={{ aspectRatio: '7/11' }}
