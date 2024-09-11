@@ -138,7 +138,7 @@ const Header = () => {
             </div>
           </div>
           <div className="relative">
-            <FaSearch />
+            {/* <FaSearch /> */}
             <div onClick={showCartModal} className="relative">
               <SlBag className="relative" />
               <p className="mt-[15px] w-[20px] absolute pr-0 top-2 right-0.5 bg-white !text-black border-0 rounded-full text-center cart-num hover:cursor-pointer">
@@ -147,7 +147,7 @@ const Header = () => {
             </div>
             <RxHamburgerMenu
               color="white"
-              className="burger"
+              className={`burger ${isScrolled ? "scrolled" : ""}`}
               onClick={() => {
                 if (!showPopUp) {
                   handleOpenPopUp()
