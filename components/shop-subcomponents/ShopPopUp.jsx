@@ -14,13 +14,14 @@ const ShopPopUp = ({ setStyles, isStyles, showPopUp, setShowPopUp }) => {
 
     return (
         <>
-            {showPopUp && <>
-                <AnimatePresence>
+            <AnimatePresence>
+                {showPopUp &&
                     <motion.div
                         class="fixed inset-0 w-full h-full bg-black bg-opacity-50 z-30 block"
                         onClick={() => setShowPopUp(false)}
                     >
                         <motion.div
+                            onClick={(e) => { e.stopPropagation() }}
                             className='fixed z-20 w-screen h-[80%] left-0 bottom-0  bg-white rounded-t-xl overflow-hidden'
                             drag="y" // Enable vertical dragging
                             dragConstraints={{ top: 0, bottom: 0 }} // Set constraints for dragging
@@ -57,10 +58,8 @@ const ShopPopUp = ({ setStyles, isStyles, showPopUp, setShowPopUp }) => {
                         </motion.div>
 
                     </motion.div>
-                </AnimatePresence>
-                {/* <AnimatePresence></AnimatePresence> */}
-            </>
-            }
+                }
+            </AnimatePresence>
         </>
     )
 }
