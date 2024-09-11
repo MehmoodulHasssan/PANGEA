@@ -113,7 +113,7 @@ const HomeProductSlide = ({ product }) => {
             <div className="item-info">
                 <h5 className="hide">{productName && productName}</h5>
                 <p className="hide text-gray-700">{`$${productPrice.toFixed(2)}`}</p>
-                {inventoryAlert && <p className="hide bg-gradient">
+                {inventoryAlert && <p className="hide text-white bg-gradient">
                     {inventoryAlert.replace('_', ' ')}
                 </p>}
 

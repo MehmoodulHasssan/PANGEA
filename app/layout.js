@@ -40,9 +40,7 @@ export default function RootLayout({ children }) {
       <head />
       <body className={inter.className}>
         <ReduxProviderWrapper>
-          <SkeletonTheme baseColor="#ececec" highlightColor="#d8d8d">
-            {children}
-          </SkeletonTheme>
+          <SkeletonTheme baseColor="#ececec">{children}</SkeletonTheme>
         </ReduxProviderWrapper>
       </body>
     </html>
