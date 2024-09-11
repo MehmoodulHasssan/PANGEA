@@ -52,7 +52,7 @@ export default function DetailsPage({ data }) {
             <ProductsGrid
                 products={splicedDataArray}
             />
-            <div className='px-6 pt-8'>
+            <div className='px-6 pt-8 lg:hidden'>
                 <div className='sliders'>
                     <SliderButtons />
                 </div>

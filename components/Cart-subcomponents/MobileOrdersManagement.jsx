@@ -52,7 +52,7 @@ const MobileOrdersManagement = ({ addedItems, height, topMargin, isOpen }) => {
         <div
             ref={containerRef}
             style={{ height: height }} // Set the height dynamically
-            className={` w-screen flex h-full flex-col overflow-y-scroll scrollbar-hide text-white bg-black border border-slate-200 justify-between lg:hidden`}
+            className={` w-screen flex h-full flex-col overflow-y-scroll scrollbar-hide text-black bg-white border border-slate-200 justify-between lg:hidden`}
         >
             {addedItems.length === 0 && <div className='flex h-72 text-gray-400 text-xl justify-center items-center'>No items in bag</div>}
             {addedItems.length > 0 && addedItems.map((item, index) => (
@@ -62,7 +62,7 @@ const MobileOrdersManagement = ({ addedItems, height, topMargin, isOpen }) => {
                 // const productType = product?.item_data?.product_type
                 <div key={index} className='flex flex-col p-4 border border-b-slate-200'>
                     <div className='flex gap-4 p-4'>
-                        <div style={{ aspectRatio: '4/5' }} className='max-w-32 overflow-hidden border border-gray-400 rounded-lg'>
+                        <div style={{ aspectRatio: '4/5' }} className='max-w-32 overflow-hidden border border-gray-400 flex items-center rounded-lg'>
                             {/* <div className='w-24 max-h-[7.5rem] overflow-hidden border border-gray-400 rounded-lg'> */}
                             <Image className='rounded-lg'
                                 src={item.product?.item_data?.ecom_image_uris ? item.product?.item_data?.ecom_image_uris[0] : ''}
@@ -84,7 +84,7 @@ const MobileOrdersManagement = ({ addedItems, height, topMargin, isOpen }) => {
                             <span>
                                 {`$${item.product?.item_data?.variations[0]?.item_variation_data.price_money.amount}`}
                             </span>
-                            <span className='text-xs text-slate-100 font-normal p-[0.15rem] border-[2px] border-gray-400 w-12 rounded-md text-center'>NEW</span>
+                            <span className='text-xs text-gray-500 font-normal p-[0.15rem] border-[1px] border-gray-400 w-12 rounded-md text-center shadow-md'>NEW</span>
                         </div>
                     </div>
                     <span className="block mx-auto w-[276px] h-px bg-gray-300"></span>
@@ -100,7 +100,7 @@ const MobileOrdersManagement = ({ addedItems, height, topMargin, isOpen }) => {
                                 <MdModeEdit className="text-gray-600 w-6" />
                             </button>
                         </div>
-                        <span>{`$${(item.quantity * item.product?.item_data?.variations[0]?.item_variation_data.price_money.amount).toFixed(2)}`}</span>
+                        <span>{`$${((item.quantity * item.product?.item_data?.variations[0]?.item_variation_data.price_money.amount) / 100).toFixed(2)}`}</span>
                         <div className=" w-fit flex items-center space-x-2 px-[0.1rem] py-[0.1rem] rounded-full border border-gray-400">
                             <button
                                 className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-200 transition"

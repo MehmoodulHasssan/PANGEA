@@ -66,13 +66,13 @@ const MobileCart = ({ isOpen, products }) => {
                 transition={{ duration: 0.3 }}
                 exit={{ y: '100%' }}
             >
-                <div className="relative h-full w-full flex flex-col bg-black text-slate-100 pt-10 rounded-t-2xl">
+                <div className="relative h-full w-full flex flex-col bg-white text-black pt-10 rounded-t-2xl">
+                    <div className='bg-white rounded-t-2xl absolute w-full top-0 '>
+                        <div className=' w-[50px] h-[5px] mx-auto my-[15px] bg-gray-500 rounded-[3px] hover:cursor-pointer'></div>
+                    </div>
                     <div
                         className='w-full h-auto flex flex-col'
                     >
-                        <div className='bg-black rounded-t-2xl '>
-                            <div className=' w-[50px] h-[5px] mx-auto my-[15px] bg-white rounded-[3px] hover:cursor-pointer'></div>
-                        </div>
                         <div
                             ref={upperDiv}
                             className='w-full flex items-center justify-center h-16 border border-slate-200'>
@@ -88,7 +88,7 @@ const MobileCart = ({ isOpen, products }) => {
                     {/* <ExtraItems
                         addItem={handleAddItem}
                     /> */}
-                    <div className=' w-full flex flex-col bg-black'>
+                    <div className=' w-full flex flex-col bg-white'>
                         <div className='flex items-center justify-center h-12 border border-slate-200'>
                             Free Standard Shipping Unlocked
                         </div>
@@ -99,7 +99,7 @@ const MobileCart = ({ isOpen, products }) => {
                             </div>
                             <div className='flex justify-center items-center'>
                                 <motion.button
-                                    className='text-white text-[0.75rem] font-bold py-4 px-24 rounded-full bg-green-400'
+                                    className='text-black text-[0.75rem] font-bold py-4 px-24 rounded-full bg-green-400'
                                     whileHover={{ scale: 1.1 }}
                                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                                     onClick={handleSubmit}

@@ -120,7 +120,7 @@ const OrdersManagementBox = ({ addedItems, removeItem, onDecrement, onIncrement,
                                     <CgDetailsMore className="text-gray-600 w-6" />
                                 </button>
                             </div>
-                            <span>{`$${(item.quantity * item.product?.item_data?.variations[0]?.item_variation_data.price_money.amount).toFixed(2)}`}</span>
+                            <span>{`$${((item.quantity * item.product?.item_data?.variations[0]?.item_variation_data.price_money.amount) / 100).toFixed(2)}`}</span>
                             <div className=" w-fit flex items-center space-x-2 px-[0.1rem] py-[0.1rem] rounded-full border border-gray-400">
                                 <button
                                     className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-200 transition"
