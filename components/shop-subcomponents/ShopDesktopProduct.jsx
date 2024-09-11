@@ -14,7 +14,7 @@ const ShopDesktopProduct = ({ addItem, products, isLoading }) => {
     return (
         <div className="sliders w-4/5 hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {isLoading && slides2.map((slide, index) => (
-                <DummyProductSlide key={index} />
+                <DummyProductSlide key={index} maxW={'250px'} />
             ))}
             {!isLoading && products.map((product, index) => (
                 <SwiperSlide key={index}>
@@ -23,7 +23,7 @@ const ShopDesktopProduct = ({ addItem, products, isLoading }) => {
                     >
                         {/* <SkeletonTheme color="#d3d3e0" highlightColor="#e1e1e1" /> */}
                         <div
-                            className="slider-item"
+                            className="slider-item !max-w-[300px]"
                         // style={{ aspectRatio: '7/11' }}
                         >
                             <HomeProductSlide

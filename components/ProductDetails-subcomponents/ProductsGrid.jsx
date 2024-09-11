@@ -42,7 +42,7 @@ const ProductsGrid = ({ products }) => {
                             />
                         ))} */}
                         {products.map((product, index) => (
-                            <SwiperSlide key={index}>
+                            <SwiperSlide key={product.id}>
                                 <div
                                     className="slider-items lg:ps-12 md:ps-8 sm:ps-4 ps-0"
                                 // style={

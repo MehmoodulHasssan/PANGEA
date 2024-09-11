@@ -216,10 +216,11 @@ body.no-scroll {
   display: none !important;
 }
 
-/* .newClass {
-  padding-left: 40px!important;
-} */
-/* .mySwiper5 {
+.newClass {
+  padding-left: 40px !important;
+}
+
+.mySwiper5 {
   width: 90%;
   margin: 60px auto;
   height: fit-content;
@@ -234,9 +235,10 @@ body.no-scroll {
     justify-content: center;
     align-items: center;
   }
-} */
+}
+
 .home {
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
 }
 
 .apni-class {
@@ -245,7 +247,7 @@ body.no-scroll {
 
 .swiper-slide {
   color: #f3f3f3;
-  /* height: calc(100% / 3); */
+  height: calc(100% / 3);
   /* height: 100%; */
   display: flex;
   justify-content: start;

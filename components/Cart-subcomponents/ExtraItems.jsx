@@ -43,10 +43,10 @@ const ExtraItems = ({ addItem, products, isLoading }) => {
 
                 <div className='grid pl-4 pr-14 lg:grid-cols-3 2xl:grid-cols-4 '>
                     {isLoading && slides2.map((slide, index) => (
-                        <DummyProductSlide key={index} />
+                        <DummyProductSlide key={Math.random()} maxW='250px' />
                     ))}
                     {!isLoading && products.map((product, index) => (
-                        <SwiperSlide key={index}>
+                        <SwiperSlide key={product.id}>
                             <div
                                 className="slider-items lg:ps-12 md:ps-8 sm:ps-4 ps-0"
                             >
