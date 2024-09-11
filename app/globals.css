@@ -220,22 +220,6 @@ body.no-scroll {
   padding-left: 40px !important;
 }
 
-.mySwiper5 {
-  width: 90%;
-  margin: 60px auto;
-  height: fit-content;
-  overflow: scroll;
-  display: flex;
-  cursor: grab;
-
-  .swiper-slide {
-    color: #f3f3f3;
-    /* height: calc(100% / 3); */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
 
 .home {
   overflow-x: hidden;
@@ -245,16 +229,6 @@ body.no-scroll {
   overflow-x: hidden !important;
 }
 
-.swiper-slide {
-  color: #f3f3f3;
-  width: 100%;
-  height: calc(100% / 3);
-  /* height: 100%; */
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  /* background-color: #000000; */
-}
 
 /* .test .swiper-wrapper {
   height: 400px !important;

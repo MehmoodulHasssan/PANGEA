@@ -19,6 +19,7 @@ const DesktopLargeSwiper = ({ onAddItem, handleNavigateDetails, data }) => {
         freeMode={true}
         direction="horizontal"
         modules={[FreeMode]}
+        spaceBetween={25}
         className="mySwiper test ms-[30px]"
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
@@ -63,7 +64,8 @@ const DesktopLargeSwiper = ({ onAddItem, handleNavigateDetails, data }) => {
         {data.map((product, index) => (
           <SwiperSlide key={product.id}>
             <div
-              className="slider-items lg:ps-12 md:ps-8 sm:ps-4 ps-0"
+              className="slider-items"
+            // className="slider-items lg:ps-12 md:ps-8 sm:ps-4 ps-0"
             // style={
             //       index === 0 ? { paddingLeft: "50px", zIndex: '100' } : {}
             //     }
