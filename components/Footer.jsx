@@ -10,6 +10,7 @@ import {
 import pang3aBlack from "@assets/Pang3aBlack.png"
 import AuthInputButton from "./auth-input-subcomponents/AuthInputButton";
 import CustomAuthInput from "./auth-input-subcomponents/CustomAuthInput";
+import Image from "next/image";
 
 
 const Footer = () => {
@@ -172,7 +173,19 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="bgCover"></div>
+      <div className="bgCover">
+        <div className="w-3/4 h- flex items-center justify-center">
+          <Image
+            layout="responsive"
+            height={100}
+            width={400}
+            objectFit="cover"
+            src={pang3aBlack}
+            alt="cover"
+            quality={50}
+          />
+        </div>
+      </div>
     </>
   );
 };

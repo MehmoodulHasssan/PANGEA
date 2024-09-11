@@ -230,6 +230,7 @@ body.no-scroll {
 }
 
 
+
 /* .test .swiper-wrapper {
   height: 400px !important;
 } */
@@ -441,14 +442,16 @@ body.no-scroll {
 
 .bgCover {
   /* background: url("../assets/alphalete_white.svg"); */
-  background: url("/assets/pang3aBlack.png");
-  border: 1px solid rgb(77, 77, 77);
-  /* display: flex; */
-  /* justify-content: center; */
+  /* background: url("/assets/pang3aBlack.png"); */
+  /* border: 1px solid rgb(77, 77, 77); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 163px;
   height: 250px;
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat;
   background-position: center center;
-  background-size: contain;
+  background-size: contain; */
 }
 
 .footer-main {
