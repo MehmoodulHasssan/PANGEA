@@ -173,8 +173,8 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="bgCover">
-        <div className="w-3/4 h- flex items-center justify-center">
+      <div className="flex items-center justify-center px-4 md:px-12 lg:px-[163px] py-0">
+        <div className="w-full lg:w-3/4 h- flex items-center justify-center">
           <Image
             layout="responsive"
             height={100}
