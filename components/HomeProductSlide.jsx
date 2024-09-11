@@ -61,7 +61,7 @@ const HomeProductSlide = ({ product }) => {
 
     return (
 
-        <div className='h-full w-full overflow-hidden'>
+        <div className='h-full w-full overflow-hidden relative'>
             {images && imageLoading &&
                 <LargeSwiperCardSkeleton />
             }
@@ -120,19 +120,24 @@ const HomeProductSlide = ({ product }) => {
                 <div className="item-sizes-box">
                     <div>
                         <p>QUICK ADD</p>
-                        <FaPlus
+                        <button
                             className="plus"
+
                             onClick={() => {
                                 if (quantity > 0) {
                                     handleAddItem({ product, quantity })
                                 }
                             }
                             }
-                        />
+                            title='Add to cart'
+                        >
+                            <FaPlus
+                            />
+                        </button>
                     </div>
                     <div className="separator !bg-[#eeecec]"></div>
                     <div className="item-sizes">
-                        <p
+                        <button
                             onClick={() => {
                                 if (quantity > 0) {
                                     setQuantity(quantity - 1)
@@ -141,15 +146,15 @@ const HomeProductSlide = ({ product }) => {
                             }
                         >
                             <FaMinus />
-                        </p>
+                        </button>
                         <div>{quantity}</div>
-                        <p
+                        <button
                             onClick={
                                 () => setQuantity(quantity + 1)
                             }
                         >
                             <FaPlus />
-                        </p>
+                        </button>
                     </div>
                 </div>
                 <div className="item-images">

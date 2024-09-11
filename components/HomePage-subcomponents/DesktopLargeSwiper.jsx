@@ -69,7 +69,10 @@ const DesktopLargeSwiper = ({ onAddItem, handleNavigateDetails, data }) => {
             //     }
             >
               {/* <SkeletonTheme color="#d3d3e0" highlightColor="#e1e1e1" /> */}
-              <div className="slider-item" style={{ aspectRatio: '7/12' }}>
+              <div
+                className="slider-item"
+              // style={{ aspectRatio: '7/12' }}
+              >
                 <HomeProductSlide
                   key={index}
                   product={product}

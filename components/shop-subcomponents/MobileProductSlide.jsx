@@ -72,7 +72,10 @@ const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
 
 
     return (
-        <div className='max-h-full overflow-hidden' style={{ aspectRatio: '7/13' }}>
+        <div
+            className='max-h-full overflow-hidden relative'
+        // style={{ aspectRatio: '7/13' }}
+        >
             {imageLoading && <LargeSwiperCardSkeleton />}
             <div
                 className='relative flex flex-col'
