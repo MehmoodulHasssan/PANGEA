@@ -15,7 +15,7 @@ import '@/app/styles/spinner.scss'
 
 const SignInPage = () => {
     const dispatch = useDispatch()
-    const { isLoading, isError, isSuccess, postData } = usePost()
+    const { isLoading, isError, isSuccess, resData, postData } = usePost()
     const [showPassword, setShowPassword] = useState(false)
     const router = useRouter()
     const data = useSelector((state) => state.authInputFn.signIn)
@@ -33,7 +33,7 @@ const SignInPage = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            dispatch(stateActions.userLogin())
+            dispatch(stateActions.userLogin(resData.email))
             router.push('/')
         }
     }, [isSuccess])
