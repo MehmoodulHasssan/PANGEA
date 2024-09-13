@@ -13,6 +13,7 @@ import LargeSwiperCardSkeleton from '../HomePage-subcomponents/LargeSwiperCardSk
 import '@/app/styles/main.scss';
 
 
+let inventoryAlert = null
 let totalImages = 0
 const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
     const [showQuantity, setShowQuantity] = useState(false)
@@ -28,10 +29,15 @@ const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
     if (images) {
         imagesArray = Object.values(images)
     }
-    const productPrice = product?.item_data?.variations[0]?.item_variation_data.price_money.amount / 100
+    const productPrice = product?.item_data?.variations[0]?.item_variation_data.price_money?.amount
     const productName = product?.item_data?.name
     const productType = product?.item_data?.product_type
-    const inventoryAlert = product?.item_data?.variations[0]?.item_variation_data.location_overrides[0]?.inventory_alert_type
+    if (Array.isArray(product?.item_data?.variations)) {
+        if (Array.isArray(product?.item_data?.variations[0]?.item_variation_data.location_overrides)) {
+            inventoryAlert = product?.item_data?.variations[0]?.item_variation_data.location_overrides[0]?.inventory_alert_type
+        }
+    }
+    // const inventoryAlert = product?.item_data?.variations[0]?.item_variation_data.location_overrides[0]?.inventory_alert_type
     // console.log(product.item_data.variations[0])
 
     if (images) {
@@ -140,7 +146,7 @@ const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
                     {/* <p className="text-[8px] text-gray-300">
                     {productType} <span> 4 colors</span>
                 </p> */}
-                    <p className="text-[10px] text-gray-700">${productPrice && productPrice}</p>
+                    <p className="text-[10px] text-gray-700">${productPrice && (productPrice / 100).toFixed(2)}</p>
                     {inventoryAlert && <p className="text-[8px] w-fit text-white bg-gradient-to-r from-[#3dbfff] to-[#a649ff] rounded-full p-1">{inventoryAlert.replace('_', ' ')}</p>}
                     {/* padding: 2px 5px;
           background: linear-gradient(90deg, #3dbfff, #a649ff);

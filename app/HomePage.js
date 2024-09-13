@@ -76,8 +76,10 @@ const HomePage = ({ data }) => {
   const innerSwiperRef = useRef();
 
   const dataArray = Object.values(data);
-  const reversedDataArray = dataArray.reverse();
-  const splicedDataArray = reversedDataArray.splice(0, 30);
+  // const reversedDataArray = dataArray.reverse();
+  const splicedDataArray = dataArray;
+  // const splicedDataArray = dataArray.splice(0, 30);
+  console.log(splicedDataArray);
 
   const handleNavigateDetails = (product) => {
     return router.push('/product-details/' + product.id);

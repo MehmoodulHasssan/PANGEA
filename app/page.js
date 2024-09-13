@@ -7,7 +7,7 @@ export default async function Page() {
   const token = cookieStore.get('token'); // Fetch the 'token' cookie
   try {
     const response = await axios.get(
-      `${process.env.NEXT_LOCAL_DOMAIN_URL}/api/get-all-items`,
+      `${process.env.NEXT_VERCEL_DOMAIN_URL}/api/get-all-items`,
       {
         withCredentials: true,
         headers: {
