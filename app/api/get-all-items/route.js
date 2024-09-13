@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { NextResponse, NextRequest } from 'next/server';
-import { cookies } from 'next/headers';
+import { stateActions } from '@/store/slices/currentState';
+import { useDispatch } from 'react-redux';
 
 export const GET = async (request) => {
-  const cookieStore = cookies(); // Get cookies from the request
-  const token = cookieStore.get('token'); // Fetch the 'token' cookie
-  console.log('Token:', token?.value); // Check if the token is available
+  // Check if the token is available
+  const token = request.headers.get('Authorization').split(' ')[1];
+  if (token) {
+  }
   let items = [];
   let cursor = null;
   console.log('came to get-all-items route');
