@@ -41,7 +41,13 @@ const Header = () => {
   }, [addedItems]);
 
   useEffect(() => {
-    setIsLogin(state);
+    if (state === 'userLogin') {
+      setIsLogin(true);
+    } else {
+      if (state === 'loggedOut') {
+        setIsLogin(false);
+      }
+    }
   }, [state])
 
   useEffect(() => {

@@ -28,7 +28,12 @@ const PaymentDetails = ({ onReviewOrder }) => {
       console.log(state)
       setIsLogin(true);
       dispatch(paymentActions.setValueInContact('email', state.userEmail))
+    } else {
+      if (state.currentState === 'loggedOut') {
+        setIsLogin(false)
+      }
     }
+
   }, [state])
   return (
     // <div className="w-full lg:w-1/2">
