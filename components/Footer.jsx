@@ -7,7 +7,7 @@ import {
   BsTiktok,
   BsYoutube,
 } from "react-icons/bs";
-import pang3aBlack from "@assets/Pang3aBlack.png"
+import pang3aBlack from "@assets/Footer.png"
 import AuthInputButton from "./auth-input-subcomponents/AuthInputButton";
 import CustomAuthInput from "./auth-input-subcomponents/CustomAuthInput";
 import Image from "next/image";

@@ -83,7 +83,7 @@ const HomeProductSlide = ({ product }) => {
                             key={imgIndex}
                             onClick={() => handleNavigateDetails(product)}
                         >
-                            <div style={{ aspectRatio: '4/5', position: 'relative', width: '100%', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#eeecec', borderRadius: '10px' }}>
+                            <div style={{ aspectRatio: '4/5', position: 'relative', width: '100%', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#F6F6F6', borderRadius: '10px' }}>
                                 <Image
                                     layout='responsive'
                                     objectFit='contain'

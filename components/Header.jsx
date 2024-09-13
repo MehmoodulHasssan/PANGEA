@@ -14,8 +14,8 @@ import { modalActions } from "@/store/slices/openModel";
 import { itemsActions } from "@/store/slices/cartItems";
 import PopUp from "@/components/Header-subcomponents/PopUp";
 import Image from "next/image";
-import pang3aBlack from "@assets/Pang3aBlack.png";
-import pang3aWhite from "../assets/pang3a.png";
+import pang3aBlack from "@assets/headerPhoto.png";
+import pang3aWhite from "@assets/headerWhite.png";
 import _ from "lodash";
 import DropDown from "@/components/Header-subcomponents/DropDown";
 
@@ -117,6 +117,7 @@ const Header = () => {
               alt="Logo Here"
               className="h-[22px] object-contain w-auto hover:cursor-pointer"
               title="Go to Home Page"
+              priority={true}
             />
             <div className="example05 flex items-center">
               <div
