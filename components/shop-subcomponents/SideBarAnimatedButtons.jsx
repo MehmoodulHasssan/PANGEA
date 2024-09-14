@@ -33,19 +33,27 @@ const AnimeButtons = ({ category, subCategories }) => {
                     className='text-sm'
                     animate={controls}
                     variants={addSignVariants}
-
                 >
                     <FaPlus />
                 </motion.span>
             </div>
-            {subCategories.length > 0 && subCategories.map((subCategory, index) => (
+            {subCategories.length > 0 ? subCategories.map((subCategory, index) => (
                 <AnimeListItem
-                    key={index}
+                    key={subCategory.id}
                     subCategory={subCategory}
                     controls={controls}
                     listItemsVariants={listItemsVariants}
                 />
-            ))}
+            )) :
+                (
+                    <AnimeListItem
+                        key={category.id + 1}
+                        subCategory={category}
+                        controls={controls}
+                        listItemsVariants={listItemsVariants}
+                    />
+                )
+            }
             <div className='w-full h-[1px] my-[8px] bg-gray-300' />
         </>
     );
