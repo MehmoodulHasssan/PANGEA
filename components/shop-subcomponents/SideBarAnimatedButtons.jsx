@@ -3,7 +3,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { FaPlus } from "react-icons/fa6"
 import AnimeListItem from './AnimeListItem';
 
-const AnimeButtons = ({ name, options }) => {
+const AnimeButtons = ({ category, subCategories }) => {
     const controls = useAnimation();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -28,7 +28,7 @@ const AnimeButtons = ({ name, options }) => {
                 className="flex justify-between items-center text-[12px] text-gray-800 cursor-pointer"
                 onClick={toggleOpen}
             >
-                <span>{name}</span>
+                <span>{category.name}</span>
                 <motion.span
                     className='text-sm'
                     animate={controls}
@@ -38,13 +38,12 @@ const AnimeButtons = ({ name, options }) => {
                     <FaPlus />
                 </motion.span>
             </div>
-            {options.map((option, index) => (
+            {subCategories.length > 0 && subCategories.map((subCategory, index) => (
                 <AnimeListItem
                     key={index}
-                    option={option}
+                    subCategory={subCategory}
                     controls={controls}
                     listItemsVariants={listItemsVariants}
-                    category={name}
                 />
             ))}
             <div className='w-full h-[1px] my-[8px] bg-gray-300' />
