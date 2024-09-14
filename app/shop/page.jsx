@@ -21,13 +21,13 @@ export default async function Page() {
         );
 
         const response = { data: dataResponse?.data, categories: categoryResponse?.data };
-        console.log(response.categories)
+        console.log(response)
         // const dataArray = Object.values(response?.data);
         // const reversedDataArray = dataArray.reverse();
 
         return <ShopPage data={response} />;
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         return <div>Error: {error.message}</div>;
     }
 }
