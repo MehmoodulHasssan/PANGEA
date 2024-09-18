@@ -1,4 +1,10 @@
+import Image from 'next/image';
 import React from 'react'
+import firstImg from '@assets/dropDown1.webp'
+import secondImg from '@assets/dropDown2Short.jpg'
+import thirdImg from '@assets/dropDown3Shortre.jpg'
+
+const dropdownImages = [firstImg, secondImg, thirdImg];
 
 const items = Array.from({ length: 5 }, (_, index) => index + 1);
 const DropDown = ({ showDropdown, setShowDropdown }) => {
@@ -26,18 +32,19 @@ const DropDown = ({ showDropdown, setShowDropdown }) => {
                     </div>
                     <div className="right">
                         <div className="image-container">
-                            <img
-                                src="https://alphalete.uk/cdn/shop/files/IceTankHeat2_2500x.jpg?v=1721064079"
-                                alt="Image 1"
-                            />
-                            <img
-                                src="https://alphalete.uk/cdn/shop/files/IceTankHeat5_2500x.jpg?v=1721064079"
-                                alt="Image 2"
-                            />
-                            <img
-                                src="https://alphalete.uk/cdn/shop/files/IceTankHeat5_2500x.jpg?v=1721064079"
-                                alt="Image 3"
-                            />
+                            {dropdownImages.map((image, index) => (
+                                <Image
+                                    key={image}
+                                    src={image}
+                                    priority={true}
+                                    alt="Image 1"
+                                    layout='responsive'
+                                    height={5}
+                                    width={4}
+                                    objectFit='cover'
+                                    objectPosition='center'
+                                />
+                            ))}
                         </div>
                     </div>
                 </div>
