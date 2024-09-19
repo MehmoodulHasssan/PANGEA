@@ -7,7 +7,7 @@
 @font-face {
   font-family: "GT America Extended Bold";
   src: url("../public/fonts/GT-America-Extended-Bold-Trial.woff2") format("woff2");
-  font-weight: bold;
+  /* font-weight: bold; */
   /* Adjust based on your font’s weight if needed */
   font-style: normal;
   /* Adjust if the font style is italic or oblique */
@@ -46,11 +46,32 @@ body.no-scroll {
   -webkit-overflow-scrolling: touch;
 }
 
-.header-nav {
+.header-nav-white {
   transition: background-color 0.3s ease;
   position: fixed;
   top: 0;
   color: #f2f2f2;
+
+  &.transparent {
+    background-color: transparent;
+  }
+
+  &.scrolled {
+    background-color: #fcf9f9;
+    color: black
+  }
+
+  &:hover {
+    background-color: #fcf9f9;
+    color: black
+  }
+}
+
+.header-nav-black {
+  transition: background-color 0.3s ease;
+  position: fixed;
+  top: 0;
+  color: black;
 
   &.transparent {
     background-color: transparent;

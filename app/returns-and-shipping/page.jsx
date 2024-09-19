@@ -1,25 +1,18 @@
-'use client'
-import WithHeaderWrapper from '@/components/WithHeaderWrapper'
-import React from 'react'
+import axios from "axios";
+import ReturnsAndShipping from "./ReturnPage";
+export default async function Page() {
+    try {
+        const response = await axios.get(
+            `${process.env.NEXT_VERCEL_DOMAIN_URL}/api/get-all-categories`,
+            {
+                withCredentials: true,
+            }
+        );
 
-const ReturnsAndShipping = () => {
-    return (
-        <WithHeaderWrapper>
-            <div className='mt-24 p-6 md:p-8 text-gray-800 bg-white shadow-md rounded-lg max-w-3xl mx-auto'>
-                <h1 className='text-2xl md:text-3xl font-semibold text-center mb-6'>Returns & Shipping Policy</h1>
 
-                <h2 className='text-xl md:text-2xl font-semibold mb-2'>Returns & Warranties</h2>
-                <p className='mb-4'>Defective items may be returned within 30 days of the delivery date (some exclusions apply, e.g., E-Liquids).</p>
-
-                <h2 className='text-xl md:text-2xl font-semibold mb-2'>Shipping & Delivery</h2>
-                <p className='mb-4'>We strive for timely shipping but cannot guarantee timeframes. Processing takes 1-2 business days.</p>
-
-                <h2 className='text-xl md:text-2xl font-semibold mb-2'>Incorrect/Damaged/Missing Products</h2>
-                <p className='mb-4'>Claims must be made within 7 days of delivery.</p>
-            </div>
-
-        </WithHeaderWrapper>
-    )
+        return <ReturnsAndShipping responseData={response?.data} />;
+    } catch (error) {
+        console.log(error);
+        return <div>Error: {error.message}</div>;
+    }
 }
-
-export default ReturnsAndShipping

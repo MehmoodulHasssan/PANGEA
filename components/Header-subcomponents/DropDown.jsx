@@ -3,11 +3,15 @@ import React from 'react'
 import firstImg from '@assets/dropDown1.webp'
 import secondImg from '@assets/dropDown2Short.jpg'
 import thirdImg from '@assets/dropDown3Shortre.jpg'
+import categoryDataToDisplay from "@/helpers/categoryDataToDisplay";
+import { useRouter } from 'next/navigation';
 
 const dropdownImages = [firstImg, secondImg, thirdImg];
 
 const items = Array.from({ length: 5 }, (_, index) => index + 1);
-const DropDown = ({ showDropdown, setShowDropdown }) => {
+const DropDown = ({ showDropdown, setShowDropdown, categories }) => {
+    const router = useRouter();
+    console.log(categoryDataToDisplay(categories))
     return (
         <>
             {showDropdown && (
@@ -18,14 +22,31 @@ const DropDown = ({ showDropdown, setShowDropdown }) => {
                 >
                     <div className="left">
                         <div className="grid">
-                            {items.map((item, index) => (
-                                <div key={index} className="row">
-                                    <p className="first">Heading</p>
-                                    <p className="header-links">First</p>
-                                    <p className="header-links">Second</p>
-                                    <p className="header-links">Third</p>
-                                    <p className="header-links">Fourth</p>
-                                    <p className="header-links">Fifth</p>
+                            {categories && categoryDataToDisplay(categories).map((categoryData, index) => (
+                                <div
+                                    key={categoryData.category.id}
+                                    className="row"
+                                >
+                                    <p
+                                        className="first"
+                                    >
+                                        {categoryData.category.name}
+                                    </p>
+
+                                    {categoryData.subCategories?.length > 0 && categoryData.subCategories.map((subcategory, index) => (
+                                        <p
+                                            key={subcategory.id} className="header-links"
+                                            onClick={() => router.push(`/shop/${subcategory.id}`)}
+                                        >
+                                            {subcategory.name}
+                                        </p>
+                                    ))}
+                                    {categoryData.subCategories?.length === 0 && <p
+                                        className="header-links"
+                                        onClick={() => router.push(`/shop/${categoryData.category.id}`)}
+                                    >
+                                        {categoryData.category.name}
+                                    </p>}
                                 </div>
                             ))}
                         </div>
