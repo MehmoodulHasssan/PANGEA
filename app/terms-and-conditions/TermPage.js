@@ -6,7 +6,7 @@ const TermsAndConditions = ({ responseData }) => {
   return (
     <WithHeaderWrapper categories={responseData && responseData}>
       <div className="mt-24 p-6 md:p-8 text-gray-800 bg-white shadow-md rounded-lg max-w-3xl mx-auto">
-        <h1 className="text-2xl md:text-3xl font-semibold text-center mb-6">
+        <h1 className="text-gray-800 text-2xl md:text-3xl font-semibold text-center mb-6">
           HYBRID TERMS AND CONDITIONS
         </h1>
 

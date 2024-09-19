@@ -142,7 +142,7 @@ const Header = ({ white, categories }) => {
             <div className="example05 flex items-center">
               <div
                 style={{ cursor: "pointer" }}
-                // onClick={() => (router.push(''))}
+                onClick={() => (router.push('/shop'))}
                 className=" dropdown-trigger text-[11px] "
                 onMouseOver={() => setShowDropdown(true)}
                 onMouseOut={() => setShowDropdown(false)}

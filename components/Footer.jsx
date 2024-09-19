@@ -75,7 +75,7 @@ const Footer = () => {
             </div>
             <div className="style-text flex flex-col justify-center  text-center lg:text-start lg:max-w-[968px]  max-w-full p-5 ">
               <p className="text-[13px] text-[#131212] font-semibold ">
-                Premium Workout Clothes & Athleisure
+                Precision Products, delivered with care
               </p>
               <span className="text-[10px] pt-2">
                 Discover top-quality, expertly crafted products tailored for your shelves. Elevate your store’s offerings with our curated collections, designed to meet your customers' needs. Shop now!
@@ -166,7 +166,10 @@ const Footer = () => {
             {" "}
             <div className="icons flex justify-center">
               <BsFacebook className="footerIcon" />
-              <BsInstagram className="footerIcon" />
+              <BsInstagram
+                className="footerIcon"
+                onClick={() => router.push('https://www.instagram.com/pang3a.shop')}
+              />
               <BsTiktok className="footerIcon" />
               <BsTwitter className="footerIcon" />
               <BsYoutube className="footerIcon" />

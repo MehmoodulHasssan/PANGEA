@@ -165,7 +165,7 @@ const HomePage = ({ data }) => {
               <DesktopSmallSwiper data={splicedDataArray} />
               <MobileSmallSwiper data={splicedDataArray} />
               {/* <BottomContainer /> */}
-              <LowerContainer data={topSmallBanners} videos={''} />
+              {/* <LowerContainer data={topSmallBanners} videos={''} /> */}
               <PreFooter />
             </div>
           </main>
