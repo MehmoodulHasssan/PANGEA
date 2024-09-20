@@ -151,7 +151,11 @@ const HomePage = ({ data }) => {
             {/* Upper new arrivals */}
             <SliderHeading />
             <div className="sliders overflow-x-hidden">
-              <SliderButtons toggle={toggle1} setToggle={setToggle1} />
+              <SliderButtons
+                toggle={toggle1}
+                setToggle={setToggle1}
+                texts={['THCA', 'DELTA 8']}
+              />
               <MobileSwiper data={splicedDataArray} />
               <DesktopLargeSwiper
                 handleNavigateDetails={handleNavigateDetails}
@@ -161,7 +165,11 @@ const HomePage = ({ data }) => {
               <LowerContainer data={topSmallBanners} />
               <SliderHeading toggle={toggle2} />{' '}
               {/* Lower new arrivals || !mt-14 */}
-              <SliderButtons toggle={toggle2} setToggle={setToggle2} />
+              <SliderButtons
+                toggle={toggle2}
+                setToggle={setToggle2}
+                texts={['THCA', 'DELTA 8']}
+              />
               <DesktopSmallSwiper data={splicedDataArray} />
               <MobileSmallSwiper data={splicedDataArray} />
               {/* <BottomContainer /> */}

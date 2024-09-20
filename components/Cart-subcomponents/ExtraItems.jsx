@@ -2,8 +2,6 @@ import React from 'react'
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import '@/app/styles/main.scss';
-// import { DUMMY_ITEMS } from '@/utils';
-import ProductSlide from '@/components/ProductDetails-subcomponents/ProductSlide';
 import DummyProductSlide from '../ProductDetails-subcomponents/DummyProductSlide';
 import HomeProductSlide from '../HomeProductSlide';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -15,13 +13,7 @@ import '@/app/styles/main.scss';
 
 const slides2 = [1, 2, 3, 4, 5, 6, 7, 8]
 
-const ExtraItems = ({ addItem, products, isLoading }) => {
-    const [recommended, setRecommended] = useState(true);
-    const router = useRouter()
-
-    function handleNavigateToDetails(product) {
-        return router.push('/product-details/' + product.id)
-    }
+const ExtraItems = ({ products, isLoading, isError, recommended, setRecommended }) => {
 
     return (
         <div className='main-card-res-none lg:w-9/12 flex md:items-center md:w-[550px] sm:w-[400px]  flex-col overflow-x-auto scrollbar-hide border border-t-gray-400'>
@@ -41,11 +33,17 @@ const ExtraItems = ({ addItem, products, isLoading }) => {
                     </span>
                 </div>
 
+                {isError && <div className='text-red-500 text-3xl h-full w-full flex items-center justify-center'>
+                    <p>Error Loading Items!</p>
+                </div>}
+                {products.length === 0 && <div className='text-gray-400 text-3xl h-full w-full flex items-center justify-center'>
+                    <p>No Items to display!</p>
+                </div>}
                 <div className='grid pl-4 pr-14 lg:grid-cols-3 2xl:grid-cols-4 '>
                     {isLoading && slides2.map((slide, index) => (
                         <DummyProductSlide key={Math.random()} maxW='250px' />
                     ))}
-                    {!isLoading && products.map((product, index) => (
+                    {!isLoading && products.length > 0 && products.map((product, index) => (
                         <SwiperSlide key={product.id}>
                             <div
                                 className="slider-items lg:ps-12 md:ps-8 sm:ps-4 ps-0"
@@ -57,13 +55,13 @@ const ExtraItems = ({ addItem, products, isLoading }) => {
                                     <HomeProductSlide
                                         key={product.id}
                                         product={product}
-                                    //   onAddItem={onAddItem}
-                                    //   handleNavigateDetails={handleNavigateDetails}
                                     />
                                 </div>
                             </div>
                         </SwiperSlide>
                     ))}
+
+
                     {/* {!isLoading && products.map((product, index) => (
                         <ProductSlide
                             key={product.id}

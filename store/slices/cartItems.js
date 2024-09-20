@@ -1,4 +1,5 @@
 import notify from '@/helpers/notify';
+import { setRecentItems } from '@/helpers/setRecentItems';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -18,6 +19,7 @@ export const itemsSlice = createSlice({
         state.items.push(action.payload);
         state.added += 1;
         notify({ product, quantity, adding: true, removing: false });
+        setRecentItems(action.payload.product);
       }
     },
     removeItem(state, action) {

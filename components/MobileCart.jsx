@@ -34,7 +34,11 @@ const MobileCart = ({ isOpen, products }) => {
 
     const handleSubmit = () => {
         //submit order to backend
-        return router.push('/payment')
+        if (addedItems.length === 0) {
+            alert('Please add items to checkout')
+            return;
+        }
+        router.push('/payment')
     }
 
     return (

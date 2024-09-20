@@ -25,7 +25,7 @@ export default async function Page() {
         // console.log(response)
         // const dataArray = Object.values(response?.data);
         // const reversedDataArray = dataArray.reverse();
-        console.log(categoryResponse);
+        // console.log(categoryResponse);
         return <ShopPage data={response} />;
     } catch (error) {
         console.log(error);

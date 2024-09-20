@@ -44,7 +44,7 @@ const ContactPage = ({ responseData }) => {
           <div className="flex flex-col items-center justify-center gap-2 border border-gray-400 p-5 rounded-xl">
             <IoLocationSharp className="text-2xl" />
             <p>Location</p>
-            <p>Santa Ana, CA</p>
+            <p>Costa Mesa, CA</p>
           </div>
         </div>
 

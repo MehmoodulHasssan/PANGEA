@@ -13,14 +13,11 @@ import SliderButtons from '@/components/HomePage-subcomponents/SliderButtons';
 
 export default function DetailsPage({ data }) {
     const dispatch = useDispatch()
+    const [recommended, setRecommended] = useState(true)
+    const [recentlyViewedItems, setRecentlyViewedItems] = useState([])
     const swiperRef = useRef(null);
 
-    //for displaying items in suggestion
-    const dataArray = Object.values(data?.suggestionItems);
-    const reversedDataArray = dataArray.reverse();
-    const splicedDataArray = reversedDataArray.splice(0, 30);
-
-    const images = data.item_data?.ecom_image_uris
+    const images = data?.itemsData.item_data?.ecom_image_uris
 
     const handleCenterSlide = (index) => {
         if (swiperRef.current && swiperRef.current.swiper) {
@@ -37,27 +34,44 @@ export default function DetailsPage({ data }) {
         }
     };
 
+    useEffect(() => {
+        const recentItems = JSON.parse(window.localStorage.getItem('recentlyViewed'))
+        setRecentlyViewedItems(recentItems)
+        console.log(recentItems)
+    }, [recommended])
+    // console.log(data?.itemsData)
+    // console.log(recentlyViewedItems)
+    // console.log(recommended)
+
     return (
-        <WithHeaderWrapper>
+        <WithHeaderWrapper categories={data?.categories}>
             <div className='lg:h-[87vh] relative apni-class-main'>
                 <DetailsSwiper
                     productImages={images && images}
                     ref={swiperRef}
                 />
                 <AbsolutePart
-                    product={data}
+                    product={data?.itemsData}
                     centerSlide={handleCenterSlide}
                 />
             </div>
             <ProductsGrid
-                products={splicedDataArray}
+                products={recommended ? (data?.itemsData?.recommendedItems || []) : (recentlyViewedItems || [])}
+                setRecommended={setRecommended}
+                recommended={recommended}
             />
-            <div className='px-6 pt-8 lg:hidden'>
+            <div className='lg:hidden'>
                 <div className='sliders'>
-                    <SliderButtons />
+                    <SliderButtons
+                        toggle={recommended}
+                        setToggle={setRecommended}
+                        texts={['Recommended', 'Recently Viewed']}
+                    />
                 </div>
+            </div>
+            <div className='px-6 lg:hidden'>
                 <ShopProductMobile
-                    products={splicedDataArray}
+                    products={recommended ? (data?.itemsData?.recommendedItems || []) : (recentlyViewedItems || [])}
                 />
             </div>
         </WithHeaderWrapper>

@@ -1,8 +1,10 @@
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 import { FaPlus } from 'react-icons/fa'
 
 const MobileSmallSwiperSlide = ({ product }) => {
+    const router = useRouter()
     const images = product?.item_data?.ecom_image_uris
     let imagesArray;
     if (images) {
@@ -13,6 +15,7 @@ const MobileSmallSwiperSlide = ({ product }) => {
             <div
                 className='relative w-full rounded-xl overflow-hidden flex items-center justify-center'
                 style={{ aspectRatio: '4/5', backgroundColor: '#F6F6F6' }}
+                onClick={() => { router.push('/product-details/' + product.id) }}
             >
                 <Image
                     layout='responsive'

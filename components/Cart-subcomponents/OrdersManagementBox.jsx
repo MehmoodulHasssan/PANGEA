@@ -12,9 +12,6 @@ import { modalActions } from '@/store/slices/openModel';
 import { useDispatch } from 'react-redux';
 
 
-
-const cartPricingOverflow = [1, 2, 3, 4, 5]
-
 const OrdersManagementBox = ({ addedItems, removeItem, onDecrement, onIncrement, isOpen }) => {
     const dispatch = useDispatch()
     // const [isImgLoading, setIsImgLoading] = useState(true)
@@ -23,6 +20,10 @@ const OrdersManagementBox = ({ addedItems, removeItem, onDecrement, onIncrement,
     const router = useRouter()
     const handleSubmit = () => {
         //submit order to backend
+        if (addedItems.length === 0) {
+            alert('Please add items to checkout')
+            return
+        }
         router.push('/payment')
         dispatch(modalActions.closeModal())
     }

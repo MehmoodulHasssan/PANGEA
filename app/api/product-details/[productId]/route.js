@@ -84,10 +84,8 @@ export const GET = async (request, { params }) => {
 
     const inventoryId = product?.item_data?.variations[0]?.id;
     console.log(inventoryId);
-    // Log the product response to ensure it's correct
-    // console.log('Product fetched:', product);
 
-    // Fetch inventory count for the product
+    console.log('fetching inventory');
     const inventoryResponse = await axios.post(
       'https://connect.squareup.com/v2/inventory/batch-retrieve-counts',
       {
@@ -104,8 +102,14 @@ export const GET = async (request, { params }) => {
 
     const inventory = inventoryResponse.data.counts;
 
-    const suggestionItems = await axios.get(
-      `${process.env.NEXT_VERCEL_DOMAIN_URL}/api/get-all-items`
+    const recommendedQuery = {
+      term1: 'Nuro Disposable 3ml - Broad Spec',
+      term2: 'Candy 5ml',
+    };
+    console.log('sending post');
+    const recommendedResponse = await axios.post(
+      `${process.env.NEXT_VERCEL_DOMAIN_URL}/api/filterItems`,
+      recommendedQuery
     );
 
     // Log the inventory response to debug issues
@@ -115,10 +119,10 @@ export const GET = async (request, { params }) => {
     const productDetails = {
       ...product,
       inventory,
-      suggestionItems: suggestionItems.data,
+      recommendedItems: recommendedResponse?.data,
     };
 
-    return NextResponse.json(productDetails); // Return the combined data
+    return NextResponse.json(productDetails, { status: 200 }); // Return the combined data
   } catch (error) {
     // Extract meaningful error information
     const errorMessage =

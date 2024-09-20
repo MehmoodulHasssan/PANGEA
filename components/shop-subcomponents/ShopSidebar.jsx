@@ -21,13 +21,13 @@ const ShopSidebar = ({ isStyles, setStyles, categoryData, itemsData }) => {
                             className={`inline-block text-gray-800 text-[10px] rounded-full px-3 py-1 hover:cursor-pointer ${isStyles ? 'bg-gray-300' : ''}`}
                             onClick={() => setStyles(true)}
                         >
-                            Styles
+                            Vapes
                         </span>
                         <span
                             className={`inline-block text-gray-800 text-[10px] rounded-full px-3 py-1 hover:cursor-pointer ${!isStyles ? 'bg-gray-300' : ''}`}
                             onClick={() => setStyles(false)}
                         >
-                            Flavors
+                            Others
                         </span>
                     </div>
                     <div className='w-full h-[1px] bg-gray-300 mt-4'></div>

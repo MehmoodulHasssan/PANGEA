@@ -13,6 +13,7 @@ import LargeSwiperCardSkeleton from './HomePage-subcomponents/LargeSwiperCardSke
 import { itemsActions } from '@/store/slices/cartItems';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
+import { setRecentItems } from '@/helpers/setRecentItems';
 
 let inventoryAlert = null
 const suggestionsImages = [
@@ -63,6 +64,7 @@ const HomeProductSlide = ({ product }) => {
     };
 
     const handleNavigateDetails = (product) => {
+        setRecentItems(product)
         return router.push('/product-details/' + product.id)
     }
 

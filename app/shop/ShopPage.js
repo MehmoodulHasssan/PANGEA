@@ -58,7 +58,7 @@ const ShopPage = ({ data }) => {
     };
   }, [searchTerm]);
 
-  console.log(selectedCategory);
+  // console.log(selectedCategory);
 
   useEffect(() => {
     if (selectedCategory !== '' || debouncedSearchTerm.trim() !== '') {
@@ -73,7 +73,7 @@ const ShopPage = ({ data }) => {
     }
   }, [selectedCategory, debouncedSearchTerm]);
 
-  console.log(data.categories);
+  // console.log(data.categories);
   return (
     <WithHeaderWrapper categories={data?.categories}>
       <div className="w-full bg-white">

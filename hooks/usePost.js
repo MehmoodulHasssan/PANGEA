@@ -16,7 +16,7 @@ const usePost = () => {
     setIsLoading(true);
     try {
       const res = await axios.post(url, data);
-      console.log(res.data);
+      // console.log(res.data);
       setResData(res.data);
       setIsSuccess(true);
     } catch (error) {

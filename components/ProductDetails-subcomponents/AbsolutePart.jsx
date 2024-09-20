@@ -20,18 +20,27 @@ const AbsolutePart = ({ product, centerSlide }) => {
     let description;
     const raw_description = product?.item_data?.description_plaintext
     if (raw_description) {
-        console.log(parseProductDetails(raw_description))
+        // console.log(parseProductDetails(raw_description))
         description = parseProductDetails(raw_description)
     }
 
     const handleAddItem = ({ product, quantity = 1 }) => {
-        dispatch(itemsActions.addItem({ product, quantity }))
+        const keysToRemove = ["recommendedItems", "inventory"]
+        const filteredProduct = Object.keys(product).reduce((acc, key) => {
+            if (!keysToRemove.includes(key)) {
+                acc[key] = product[key]
+            }
+            return acc;
+        })
+        dispatch(itemsActions.addItem({ product: filteredProduct, quantity }))
     };
 
     const handleSelectedImage = (index) => {
         setSelectedImage(index)
         centerSlide(index)
     }
+
+    console.log(product)
 
     return (
         <>

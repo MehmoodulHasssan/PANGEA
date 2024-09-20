@@ -11,6 +11,8 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import LargeSwiperCardSkeleton from '../HomePage-subcomponents/LargeSwiperCardSkeleton';
 import '@/app/styles/main.scss';
+import { current } from '@reduxjs/toolkit';
+import { setRecentItems } from '@/helpers/setRecentItems';
 
 
 let inventoryAlert = null
@@ -64,6 +66,7 @@ const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
         const itemId = product.item_data?.variations[0]?.id
         console.log(product.item_data?.variations[0]?.id)
         if (!showQuantity) {
+            setRecentItems(product)
             router.push('/product-details/' + product.id)
         }
     }

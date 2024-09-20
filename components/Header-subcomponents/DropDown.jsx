@@ -11,7 +11,7 @@ const dropdownImages = [firstImg, secondImg, thirdImg];
 const items = Array.from({ length: 5 }, (_, index) => index + 1);
 const DropDown = ({ showDropdown, setShowDropdown, categories }) => {
     const router = useRouter();
-    console.log(categoryDataToDisplay(categories))
+    // console.log(categoryDataToDisplay(categories))
     return (
         <>
             {showDropdown && (

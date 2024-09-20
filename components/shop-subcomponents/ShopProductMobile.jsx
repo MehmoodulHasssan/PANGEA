@@ -11,7 +11,7 @@ const ShopProductMobile = ({ addItem, products }) => {
             className={`py-8 h-auto grid grid-cols-2 md:grid-cols-3 gap-6 scrollbar-hide lg:hidden`}
             onClick={() => setBgClicked(true)}
         >
-            {products.map((product, index) => (
+            {products && products?.map((product, index) => (
                 <MobileProductSlide
                     key={index}
                     product={product}
@@ -21,6 +21,12 @@ const ShopProductMobile = ({ addItem, products }) => {
                     setBgClicked={setBgClicked}
                 />
             ))}
+
+            {!products || products.length === 0 && (
+                <div className="w-full h-full flex justify-center items-center">
+                    <p className="text-xl font-bold">No products found</p>
+                </div>
+            )}
 
         </div>
         // </AnimatePresence>

@@ -8,24 +8,33 @@ import ExtraItems from './Cart-subcomponents/ExtraItems';
 import OrdersManagementBox from './Cart-subcomponents/OrdersManagementBox';
 import { itemsActions } from '@/store/slices/cartItems';
 import { useSelector } from 'react-redux';
-import useFetch from '@/hooks/useFetch';
+import usePost from '@/hooks/usePost';
 
-
+const recommendedQuery = {
+    term1: "Nuro Disposable 3ml - Broad Spec",
+    term2: "Candy 5ml"
+}
+const CACHE_EXPIRATION = 30 * 60 * 1000; // 1/2 hour in milliseconds
 const DesktopCart = ({ isOpen }) => {
-    const [products, setProducts] = useState([]);
-    const { data,
-        isLoading,
-        isError,
-        fetchData,
-        isSuccess,
-        setIsSuccess, } = useFetch()
+    const [recommended, setRecommended] = useState(true);
+    const [dataToDisplay, setDataToDisplay] = useState([]);
+    const { resData, isLoading, isError, postData } = usePost()
 
-    let splicedDataArray = []
-    if (data) {
-        const dataArray = Object.values(data) || [];
-        const reversedDataArray = dataArray.reverse();
-        splicedDataArray = reversedDataArray.splice(0, 30) || []
-    }
+
+    useEffect(() => {
+        if (resData && recommended) {
+            setDataToDisplay(resData)
+
+            window.localStorage.setItem('recommendedItems', JSON.stringify(resData))
+            window.localStorage.setItem('recommendedItems_time', new Date().getTime())
+            // const reversedDataArray = dataArray.reverse();
+            // splicedDataArray = reversedDataArray.splice(0, 30) || []
+        }
+        // else {
+        //     window.localStorage.setItem('recentlyViewed', JSON.stringify(resData))
+        //     window.localStorage.setItem('recentlyViewed_time', new Date().getTime())
+        // }
+    }, [resData])
     //process the fetched array
     const addedItems = useSelector((state) => state.itemsFn.items)
     const dispatch = useDispatch()
@@ -54,8 +63,37 @@ const DesktopCart = ({ isOpen }) => {
     };
 
     useEffect(() => {
-        isOpen && fetchData(`/api/get-all-items`)
-    }, [isOpen])
+        const recommendedCached = localStorage.getItem('recommendedItems');
+        const recentlyViewedCached = localStorage.getItem('recentlyViewed');
+        const recommendedCachedTime = localStorage.getItem('recommendedItems_time');
+        // const recentlyViewedCachedTime = localStorage.getItem('recentlyViewed_time');
+
+        const now = new Date().getTime();
+
+        if (isOpen) {
+            if (recommended) {
+                if (recommendedCached && now - recommendedCachedTime < CACHE_EXPIRATION) {
+                    // If cached data is available, use it
+                    setDataToDisplay(JSON.parse(recommendedCached));
+                } else {
+                    // If no cache, fetch the data from the backend
+                    postData({ url: '/api/filterItems', data: recommendedQuery });
+                }
+            } else {
+                if (!recommended) {
+                    console.log('not recommended')
+                    if (recentlyViewedCached) {
+                        console.log(recentlyViewedCached)
+                        // If cached data is available, use it
+                        setDataToDisplay(JSON.parse(recentlyViewedCached));
+                    } else {
+                        // If no cache, fetch the data from the backend 
+                        setDataToDisplay([])
+                    }
+                }
+            }
+        }
+    }, [isOpen, recommended]);
 
     // console.log(isLoading)
 
@@ -72,8 +110,11 @@ const DesktopCart = ({ isOpen }) => {
             <div className='main-card-res w-screen h-[90vh]  md:flex-row flex justify-between bg-white text-black '>
                 <ExtraItems
                     addItem={handleAddItem}
-                    products={splicedDataArray}
+                    products={dataToDisplay}
+                    recommended={recommended}
+                    setRecommended={setRecommended}
                     isLoading={isLoading}
+                    isError={isError}
                 />
                 <OrdersManagementBox
                     isOpen={isOpen}
