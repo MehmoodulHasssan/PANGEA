@@ -111,9 +111,9 @@ const Header = ({ white, categories }) => {
             {/* </div> */}
 
             <div className="example05">
-              <Link className="border-s-[1px] ms-1 border-gray-600" href="/">
+              {/* <Link className="border-s-[1px] ms-1 border-gray-600" href="/">
                 Info
-              </Link>
+              </Link> */}
               {isLogin ?
                 <Link className="border-s-[1px] ms-1 border-gray-600" href="#">
                   My Account
@@ -167,7 +167,7 @@ const Header = ({ white, categories }) => {
               </p>
             </div>
             <RxHamburgerMenu
-              color="white"
+              // color="white"
               className={`burger ${isScrolled ? "scrolled" : ""}`}
               onClick={() => {
                 if (!showPopUp) {
@@ -187,6 +187,7 @@ const Header = ({ white, categories }) => {
         <PopUp
           showPopUp={showPopUp}
           handleClose={handleClosePopUp}
+          categories={categories}
         />
       </header>
     </>

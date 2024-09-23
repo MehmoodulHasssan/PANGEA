@@ -277,8 +277,10 @@ header {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: black;
-  color: white;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background-color: white;
+  color: rgba(81, 81, 81, 0.7725490196);
   box-sizing: border-box;
   display: block; /* Initially hidden */
   z-index: 1000;
@@ -287,7 +289,13 @@ header {
 .sub-container {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   padding: 20px 30px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
 }
 
 .left-col,
@@ -305,22 +313,23 @@ header {
 
 .popUp-first {
   padding-bottom: 5px;
-  color: #f2f2f2;
+  color: black;
   font-size: 16px;
 }
 
 .pop-Up-header-links {
-  font-weight: 400 !important;
+  // font-weight: 400 !important;
   font-size: 12px;
   display: block;
   line-height: 24px;
   text-decoration: none;
-  color: hsl(0deg 0% 96% / 80%);
+  // color: hsla(0, 0%, 57%, 0.8);
   position: relative;
   max-width: fit-content;
   // padding-bottom: 3px;
-  &:hover {
-    cursor: pointer;
+  &:active {
+    color: black;
+    // cursor: pointer;
   }
   /* Ensure positioning context for ::after */
 }
@@ -328,7 +337,7 @@ header {
 .swipe-bar {
   width: 50px;
   height: 5px;
-  background-color: white;
+  background-color: rgb(105, 105, 105);
   margin: 15px auto;
   border-radius: 3px;
   cursor: pointer;

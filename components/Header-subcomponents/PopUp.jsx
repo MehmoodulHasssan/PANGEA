@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 import { AnimatePresence, easeInOut, motion } from 'framer-motion';
+import categoryDataToDisplay from '@/helpers/categoryDataToDisplay';
+import { categoriesToLeftRight } from '@/helpers/categoriesToLeftRight';
 
 const left = Array.from({ length: 3 }, (_, index) => index + 1);
 const right = Array.from({ length: 2 }, (_, index) => index + 1);
 
 
 
-const PopUp = ({ showPopUp, handleClose }) => {
+const PopUp = ({ showPopUp, handleClose, categories }) => {
+    const displayCategories = categoryDataToDisplay(categories);
+    // console.log(displayCategories)
+    const categoriesArray = (categoriesToLeftRight(displayCategories))
+    // const displayCategories = Array.from({ length: 5 }, (_, index) => index + 1);
+    // const { leftCategories, rightCategories } = categoriesToLeftRight(displayCategories);
 
     const handleDragEnd = (e, info) => {
         if (info.offset.y > 70) {
@@ -36,28 +43,36 @@ const PopUp = ({ showPopUp, handleClose }) => {
                     // onClick={() => setIsOpen(!isOpen)}
                     ></div>
                     <div className="sub-container">
-                        <div className="left-col">
-                            {left.map((item, index) => (
-                                <div key={index} className="column">
-                                    <p className="popUp-first">Heading</p>
-                                    <p className="pop-Up-header-links">First</p>
-                                    <p className="pop-Up-header-links">Second</p>
-                                    <p className="pop-Up-header-links">Third</p>
-                                    <p className="pop-Up-header-links">Fourth</p>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="right-col">
-                            {right.map((item, index) => (
-                                <div key={index} className="column">
-                                    <p className="popUp-first">Heading</p>
-                                    <p className="pop-Up-header-links">First</p>
-                                    <p className="pop-Up-header-links">Second</p>
-                                    <p className="pop-Up-header-links">Third</p>
-                                    <p className="pop-Up-header-links">Fourth</p>
-                                </div>
-                            ))}
-                        </div>
+                        {categoriesArray.map((categoryPair, index) => (
+                            <div className="row">
+                                <>
+                                    <div className="left-col">
+                                        <div key={categoryPair[0].category.id} className="column">
+                                            <p className="popUp-first">{categoryPair[0].category.name}</p>
+                                            {categoryPair[0].subCategories?.length > 0 && categoryPair[0].subCategories?.map((subcategory, index) => (
+                                                <p key={subcategory.id} className="pop-Up-header-links">{subcategory.name}</p>
+                                            ))}
+                                            {categoryPair[0].subCategories?.length === 0 && <p className="pop-Up-header-links">
+                                                {categoryPair[0].category.name}
+                                            </p>}
+                                        </div>
+                                    </div>
+                                    <div className="right-col">
+                                        {categoryPair.length > 1 &&
+                                            <div key={categoryPair[1].category.id} className="column">
+                                                <p className="popUp-first">{categoryPair[1].category.name}</p>
+                                                {categoryPair[1].subCategories?.length > 0 && categoryPair[1].subCategories?.map((subcategory, index) => (
+                                                    <p key={subcategory.id} className="pop-Up-header-links">{subcategory.name}</p>
+                                                ))}
+                                                {categoryPair[1].subCategories?.length === 0 && <p className="pop-Up-header-links">
+                                                    {categoryPair[1].category.name}
+                                                </p>}
+                                            </div>
+                                        }
+                                    </div>
+                                </>
+                            </div>
+                        ))}
                     </div>
                 </motion.div>}
         </AnimatePresence>

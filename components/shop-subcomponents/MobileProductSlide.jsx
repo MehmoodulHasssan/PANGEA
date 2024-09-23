@@ -192,14 +192,14 @@ const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
                                                 setQuantity(quantity - 1)
                                             }
                                         }}
-                                        className='bg-[#eeecec] rounded-full p-1'
+                                        className='active:bg-[#eeecec] rounded-full p-1'
                                     >
                                         <FaMinus />
                                     </button>
-                                    <div>{quantity}</div>
+                                    <div style={{ lineHeight: 'initial' }}>{quantity}</div>
                                     <button
                                         onClick={() => { setQuantity(quantity + 1) }}
-                                        className='bg-[#eeecec] rounded-full p-1'
+                                        className='active:bg-[#eeecec] rounded-full p-1'
                                     >
                                         <FaPlus />
                                     </button>

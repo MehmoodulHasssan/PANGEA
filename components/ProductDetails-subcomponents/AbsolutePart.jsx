@@ -28,10 +28,11 @@ const AbsolutePart = ({ product, centerSlide }) => {
         const keysToRemove = ["recommendedItems", "inventory"]
         const filteredProduct = Object.keys(product).reduce((acc, key) => {
             if (!keysToRemove.includes(key)) {
+                console.log(key)
                 acc[key] = product[key]
             }
             return acc;
-        })
+        }, {})
         dispatch(itemsActions.addItem({ product: filteredProduct, quantity }))
     };
 

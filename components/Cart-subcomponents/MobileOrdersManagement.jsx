@@ -100,26 +100,26 @@ const MobileOrdersManagement = ({ addedItems, height, topMargin, isOpen }) => {
                         <div className='flex justify-between items-center p-4'>
                             <div className=" w-fit flex items-center space-x-2 px-[0.1rem] py-[0.1rem] rounded-full border border-gray-400">
                                 <button
-                                    className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-red-400 transition"
+                                    className="flex items-center justify-center w-8 h-8 rounded-full active:bg-red-400 transition"
                                     onClick={() => handleRemoveItem(item)}
                                 >
                                     <MdDelete className="text-gray-600 w-6" />
                                 </button>
-                                <button className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-200 transition">
+                                <button className="flex items-center justify-center w-8 h-8 rounded-full active:bg-gray-200 transition">
                                     <CgDetailsMore className="text-gray-600 w-6" />
                                 </button>
                             </div>
                             <span>{`$${((item.quantity * item.product?.item_data?.variations[0]?.item_variation_data.price_money.amount) / 100).toFixed(2)}`}</span>
                             <div className=" w-fit flex items-center space-x-2 px-[0.1rem] py-[0.1rem] rounded-full border border-gray-400">
                                 <button
-                                    className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-200 transition"
+                                    className="flex items-center justify-center w-8 h-8 rounded-full active:bg-gray-200 transition"
                                     onClick={() => handleDecrement(item)}
                                 >
                                     <FaMinus className="text-gray-600 w-3" />
                                 </button>
                                 <span>{item.quantity}</span>
                                 <button
-                                    className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-200 transition"
+                                    className="flex items-center justify-center w-8 h-8 rounded-full active:bg-gray-200 transition"
                                     onClick={() => handleIncrement(item)}
                                 >
                                     <FaPlus className="text-gray-600 w-3" />
