@@ -1,11 +1,18 @@
 'use client';
 import WithHeaderWrapper from '@/components/WithHeaderWrapper';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdEmail } from 'react-icons/md';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { IoLocationSharp } from 'react-icons/io5';
+import axios from 'axios';
+import usePost from '@/hooks/usePost';
+import { useRouter } from 'next/navigation';
+import { splitName } from '@/helpers/splitName';
+import { Toaster, toast } from 'react-hot-toast';
 
 const ContactPage = ({ responseData }) => {
+  const router = useRouter();
+  const { isLoading, isError, isSuccess, postData } = usePost();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,13 +27,42 @@ const ContactPage = ({ responseData }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    const { firstName, lastName } = splitName(formData.name);
+    const submissionData = {
+      firstName: firstName,
+      lastName: lastName,
+      email: formData.email,
+      message: formData.message,
+    };
+
+    await postData({ url: '/api/submit-contact', data: submissionData });
     // You can also handle the form submission here
     // e.g., sending the data to an API
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      console.log('submitted');
+      toast.success('Your response submitted successfully!');
+      setFormData({
+        name: '',
+        email: '',
+        message: '',
+      });
+      //show a modal
+      // router.push('/')
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    console.log(isError);
+    if (isError) {
+      console.log(isError);
+      toast.error(isError);
+    }
+  }, [isError]);
   return (
     <WithHeaderWrapper categories={responseData && responseData}>
       <div className="bg-white text-gray-800 text-xs p-5 rounded-xl max-w-lg mx-auto mt-24">
@@ -79,13 +115,15 @@ const ContactPage = ({ responseData }) => {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="p-2 w-24 border border-gray-400 bg-black text-white rounded-xl hover:opacity-70"
+              disabled={isLoading}
+              className={`p-2 w-24 border border-gray-400 bg-black text-white rounded-xl hover:opacity-70 disabled:opacity-70`}
             >
-              Submit
+              {isLoading ? 'Submitting...' : 'Submit'}
             </button>
           </div>
         </form>
       </div>
+      {/* <Toaster position="top-center" /> */}
     </WithHeaderWrapper>
   );
 };

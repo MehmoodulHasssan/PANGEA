@@ -58,17 +58,11 @@ const DetailsSwiper = forwardRef(({ productImages }, ref) => {
         productImages.map((image, index) => (
           <SwiperSlide key={index}>
             <div
+              className='relative overflow-hidden flex justify-center items-center bg-[#F6F6F6]'
               style={{
                 height: `${(slidesPerView === 1 && typeof window !== 'undefined') ? `${(5 / 4) * window.innerWidth}px` : '100vh'}`, // Set height to full viewport height
                 // width: `${(4 / 5) * 100}vw`, // Maintain 4:5 aspect ratio
                 width: `${typeof window !== 'undefined' ? `${((4 / 5) * window.innerHeight)}px` : '80vh'}`, // Maintain 4:5 aspect ratio
-                position: 'relative',
-                overflow: 'hidden',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: '#eeecec',
-                borderRadius: '10px',
               }}
             >
               <Image

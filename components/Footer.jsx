@@ -164,15 +164,18 @@ const Footer = () => {
           </div>
           <div className="social-links border-t border-[#3b3b3b]">
             {" "}
-            <div className="icons flex justify-center">
-              <BsFacebook className="footerIcon" />
+            <div className="flex justify-center items-center">
+              {/* <BsFacebook className="footerIcon" /> */}
+              <Link href={'https://www.instagram.com/pang3a.shop'}>
+                <span className="text-black hover:underline">Join us on Instagram</span>
+              </Link>
               <BsInstagram
                 className="footerIcon"
                 onClick={() => router.push('https://www.instagram.com/pang3a.shop')}
               />
-              <BsTiktok className="footerIcon" />
+              {/* <BsTiktok className="footerIcon" />
               <BsTwitter className="footerIcon" />
-              <BsYoutube className="footerIcon" />
+              <BsYoutube className="footerIcon" /> */}
             </div>
           </div>
         </div>
