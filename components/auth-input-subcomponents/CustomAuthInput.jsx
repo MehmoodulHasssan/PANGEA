@@ -26,13 +26,13 @@ const CustomAuthInput = ({ validFn, type, id, error, childType, placeholder, chi
                 id={id}
                 type={type}
                 name={id}
-                className="border-none rounded-lg w-full outline-none"
+                className="border-none rounded-lg w-full focus:outline-none"
                 placeholder={placeholder}
                 onChange={handleChange}
                 onBlur={handleBlur}
             />
             {children && children}
-            {hasError && <p className="text-red-500">{error}</p>}
+            {hasError && <p className="text-red-500 text-xs !font-normal">{error}</p>}
         </div>
     )
 }

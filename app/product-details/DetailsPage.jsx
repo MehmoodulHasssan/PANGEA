@@ -45,7 +45,7 @@ export default function DetailsPage({ data }) {
 
     return (
         <WithHeaderWrapper categories={data?.categories}>
-            <div className='lg:h-[87vh] relative apni-class-main'>
+            <div className='lg:h-screen relative apni-class-main'>
                 <DetailsSwiper
                     productImages={images && images}
                     ref={swiperRef}

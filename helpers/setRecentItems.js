@@ -9,9 +9,6 @@ export function setRecentItems(product) {
         currentIndex = index;
       }
     });
-    // const isAlreadyViewed = recentlyViewed.some(
-    //     (item) => item.id === product.id
-    // )
     if (!currentIndex) {
       window.localStorage.setItem(
         'recentlyViewed',

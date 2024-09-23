@@ -33,6 +33,9 @@ export const store = configureStore({
   preloadedState: typeof window !== 'undefined' ? preloadedState : undefined,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(localStorageMiddleware, authMiddleware),
+  // devTools:
+  //   window.__REDUX_DEVTOOLS_EXTENSION__ &&
+  //   window.__REDUX_DEVTOOLS_EXTENSION__(),
 });
 
 //render auth middleware on store initialization
