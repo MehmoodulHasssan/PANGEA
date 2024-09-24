@@ -366,7 +366,8 @@ body.no-scroll {
   }
 }
 
-.imageSwiper {
+
+/* .imageSwiper {
   position: relative;
 
   .button-overlay {
@@ -446,7 +447,7 @@ body.no-scroll {
       width: 8px;
       transition: width 0.5s;
     }
-  }
+  } */
 
   /* &::after{
     content: '<';
@@ -459,7 +460,7 @@ body.no-scroll {
     z-index: 100;
     transition: width 0.5s;
   } */
-}
+/* } */
 
 .bgCover {
   /* background: url("../assets/alphalete_white.svg"); */

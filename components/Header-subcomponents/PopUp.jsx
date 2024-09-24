@@ -1,19 +1,16 @@
 import React, { useState } from 'react'
 import { AnimatePresence, easeInOut, motion } from 'framer-motion';
 import categoryDataToDisplay from '@/helpers/categoryDataToDisplay';
-import { categoriesToLeftRight } from '@/helpers/categoriesToLeftRight';
-
-const left = Array.from({ length: 3 }, (_, index) => index + 1);
-const right = Array.from({ length: 2 }, (_, index) => index + 1);
+import { categoriesToPairs } from '@/helpers/categoriesToPairs';
 
 
 
 const PopUp = ({ showPopUp, handleClose, categories }) => {
     const displayCategories = categoryDataToDisplay(categories);
     // console.log(displayCategories)
-    const categoriesArray = (categoriesToLeftRight(displayCategories))
+    const categoriesArray = (categoriesToPairs(displayCategories))
     // const displayCategories = Array.from({ length: 5 }, (_, index) => index + 1);
-    // const { leftCategories, rightCategories } = categoriesToLeftRight(displayCategories);
+    // const { leftCategories, rightCategories } = categoriesToPairs(displayCategories);
 
     const handleDragEnd = (e, info) => {
         if (info.offset.y > 70) {
@@ -43,7 +40,7 @@ const PopUp = ({ showPopUp, handleClose, categories }) => {
                     // onClick={() => setIsOpen(!isOpen)}
                     ></div>
                     <div className="sub-container">
-                        {categoriesArray.map((categoryPair, index) => (
+                        {categoriesArray?.map((categoryPair, index) => (
                             <div className="row">
                                 <>
                                     <div className="left-col">

@@ -122,7 +122,6 @@ const Header = ({ white, categories }) => {
                   Login
                 </Link>
               }
-
             </div>
           </div>
         )}

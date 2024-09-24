@@ -1,4 +1,4 @@
-export function categoriesToLeftRight(categories) {
+export function categoriesToPairs(categories) {
   let result = [];
   if (categories.length % 2 === 0) {
     for (let i = 0; i < categories.length; i += 2) {

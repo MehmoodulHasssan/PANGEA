@@ -57,7 +57,6 @@ const ContactPage = ({ responseData }) => {
   }, [isSuccess]);
 
   useEffect(() => {
-    console.log(isError);
     if (isError) {
       console.log(isError);
       toast.error(isError);
