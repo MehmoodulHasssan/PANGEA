@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/pagination';
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 import { EffectFade, FreeMode, Grid, Navigation, Pagination } from 'swiper/modules';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr'
 import { FaPlus, FaMinus } from 'react-icons/fa6';
@@ -48,6 +49,12 @@ const HomeProductSlide = ({ product }) => {
     if (images) {
         totalImages = Object.keys(images).length
     }
+
+    // useEffect(() => {
+    //     if(images && images.length > 0){
+    //         setSelectedImageIndex(0)
+    //     }
+    // }, [])
     // console.log(totalImages)
     const handleImageLoad = () => {
         setLoadedImagesCount((prevCount) => {
@@ -72,6 +79,24 @@ const HomeProductSlide = ({ product }) => {
         swiperRef.current.slideTo(index, 300)
         setSelectedImageIndex(index)
     }
+
+    const handleSlideNext = ({ event }) => {
+        event.stopPropagation();
+        if (swiperRef.current) {
+            swiperRef.current.slideNext();
+            // console.log(swiperRef.current.activeIndex)
+            setSelectedImageIndex(prev => prev + 1);
+        }
+    }
+    const handleSlidePrev = ({ event }) => {
+        event.stopPropagation();
+        if (swiperRef.current) {
+            swiperRef.current.slidePrev();
+            setSelectedImageIndex(prev => prev - 1);
+        }
+    }
+
+    console.log(selectedImageIndex)
     return (
 
         <div className='h-full w-full overflow-hidden relative'>
@@ -94,15 +119,42 @@ const HomeProductSlide = ({ product }) => {
                         swiperRef.current = swiper;
                     }}
                 >
-                    <div className="button-overlay prev-button-overlay">
+                    {/* <div className="button-overlay prev-button-overlay">
                         <GrFormPrevious />
-                    </div>
+                    </div> */}
+                    {images && images.length > 1 && selectedImageIndex < (images.length - 1) &&
+                        <>
+                            <div className="next-overlay"></div>
+                            <div
+                                className='next-button-closure'
+                                onClick={(event) => handleSlideNext({ event })}
+                            >
+                                <div><FaAngleRight className='next-nav-icon' />
+                                </div>
+                            </div>
+                        </>
+                    }
+                    {images && images.length > 1 && selectedImageIndex > 0 &&
+                        <>
+                            <div className="prev-overlay"></div>
+                            <div
+                                className='prev-button-closure'
+                                onClick={(event) => handleSlidePrev({ event })}
+                            >
+                                <div><FaAngleLeft className='prev-nav-icon' />
+                                </div>
+                            </div>
+                        </>}
                     {images && images.map((key, imgIndex) => (
                         <SwiperSlide
                             // className="imageSlide"
                             key={imgIndex}
                             onClick={() => handleNavigateDetails(product)}
                         >
+                            {/* <div className='next-button-closure'>
+                                <div><FaAngleRight className='next-nav-icon' />
+                                </div>
+                            </div> */}
                             <div style={{ aspectRatio: '4/5', position: 'relative', width: '100%', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#F6F6F6', borderRadius: '10px' }}>
                                 <Image
                                     layout='responsive'
@@ -125,9 +177,9 @@ const HomeProductSlide = ({ product }) => {
                             </div>
                         </SwiperSlide>
                     ))}
-                    <div className="button-overlay next-button-overlay">
+                    {/* <div className="button-overlay next-button-overlay">
                         <GrFormNext />
-                    </div>
+                    </div> */}
                 </Swiper>
             </div>
             <div className="item-info">
