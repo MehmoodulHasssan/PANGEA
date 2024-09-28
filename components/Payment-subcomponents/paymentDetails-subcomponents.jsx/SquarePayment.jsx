@@ -11,6 +11,7 @@ import fulfilledCredentials from '@/helpers/fulfilledCredentials';
 import '@/app/styles/spinner.scss';
 import SuccessModal from '@/components/SuccessModal';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const SquarePayment = ({ loading, setLoading }) => {
     const successModalRef = useRef(null)
@@ -41,6 +42,7 @@ const SquarePayment = ({ loading, setLoading }) => {
         } catch (error) {
             console.error('Error processing payment:', { error: error.response?.data || error.message });
             setIsPaymentSuccess(false)
+            toast.error(error.response?.data || error.message)
             // setIsPaymentSuccess('Payment failed: Network error');
         } finally {
             setLoading(false); // Stop loader
@@ -76,30 +78,20 @@ const SquarePayment = ({ loading, setLoading }) => {
             >
                 <ApplePay />
                 <GooglePay />
+                <div className="h-2" />
                 <CreditCard
                     buttonProps={{
                         css: {
-                            backgroundColor: '#771520',
+                            backgroundColor: 'black',
                             fontSize: '14px',
                             color: '#fff',
                             '&:hover': {
-                                backgroundColor: '#530f16',
+                                backgroundColor: '#303030',
                             },
                         },
                     }}
                 />
             </PaymentForm>
-
-            {/* Display loader and payment status */}
-            {/* {loading && (
-            <div className="fixed h-full w-full top-0 inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 text-white">
-                <div class="loader"></div>
-                <div className="text-2xl">Processing Payment...</div>
-            </div>
-            )} */}
-            {/* {paymentStatus && <div className="payment-status">{paymentStatus}</div>} */}
-
-            {/* Display success or error message */}
             <SuccessModal ref={successModalRef} />
         </div>
     );

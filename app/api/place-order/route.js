@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
 import fulfilledCredentials from '@/helpers/fulfilledCredentials';
 import axios from 'axios';
+import getCountryCode from '@/helpers/getCountryCode';
 
 // Initialize the Square client
 const client = new Client({
@@ -24,10 +25,31 @@ export async function POST(req) {
   const reqBody = await req.json();
   const { items, sourceId, customerCredentials } = reqBody;
 
-  //adding validation for required fields
-  // if (!items || !sourceId || !customerCredentials) {
-  //   return NextResponse.json('All fields are required', { status: 400 });
-  // }
+  if (!items || !sourceId || !customerCredentials) {
+    return NextResponse.json('All fields are required', { status: 400 });
+  }
+
+  if (!fulfilledCredentials(customerCredentials)) {
+    return NextResponse.json('Please fulfill all the required fields', {
+      status: 400,
+    });
+  }
+  const {
+    firstName,
+    lastName,
+    company,
+    address,
+    apartment,
+    city,
+    postalCode,
+    phone,
+    country,
+    email,
+  } = customerCredentials;
+
+  // 'Text me with news and offers', 'Email me with news and offers', 'Remember me'
+
+  console.log(customerCredentials);
 
   // Generate a unique idempotency key
   const idempotency_key = uuidv4();
@@ -53,19 +75,21 @@ export async function POST(req) {
           type: 'SHIPMENT',
           shipment_details: {
             recipient: {
-              display_name: 'Customer Last Name',
+              display_name: `${firstName} ${lastName}`,
               address: {
-                address_line_1: 'Address line 1',
-                address_line_2: 'Address line 2',
-                address_line_3: 'Address line 3',
-                country: 'AU',
-                first_name: 'Customer',
-                last_name: 'Last Name',
+                address_line_1: address,
+                // address_line_2: 'Address line 2',
+                // address_line_3: 'Address line 3',
+                country: getCountryCode(
+                  country.slice(0, 1).toUpperCase() + country.slice(1)
+                ),
+                first_name: firstName,
+                last_name: lastName,
                 locality: 'Pk',
-                postal_code: '40000',
+                postal_code: postalCode.toString(),
               },
-              email_address: 'email@user.com',
-              phone_number: '033331213',
+              email_address: email,
+              phone_number: phone,
             },
           },
         },
@@ -149,10 +173,11 @@ export async function POST(req) {
       { status: 200 }
     );
   } catch (error) {
-    console.error('Error creating order or payment:', error);
+    // console.error('Error creating order or payment:', error);
     console.log('errored');
 
     // Handle Square API errors
+    console.log(error.response?.data);
     if (error.response && error.response.errors) {
       return NextResponse.json(
         {

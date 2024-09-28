@@ -17,10 +17,12 @@ import FooterLinks from "./paymentDetails-subcomponents.jsx/FooterLinks";
 import { useSelector, useDispatch } from 'react-redux'
 import { paymentActions } from '@/store/slices/paymentInputs'
 import { RadioProvider } from "@/store/paymentTypeContext";
+import SquarePayment from "./paymentDetails-subcomponents.jsx/SquarePayment";
 
-const PaymentDetails = ({ onReviewOrder }) => {
+const PaymentDetails = () => {
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(false)
+  const [isPaymentSubmitting, setIsPaymentSubmitting] = useState(false)
   const state = useSelector((state) => state.stateFn);
 
   useEffect(() => {
@@ -38,26 +40,19 @@ const PaymentDetails = ({ onReviewOrder }) => {
   return (
     // <div className="w-full lg:w-1/2">
     <div className="max-w-[710px] extrasmall:w-screen flex flex-wrap justify-center lg:justify-end ">
+      {isPaymentSubmitting &&
+        <div className="fixed h-screen w-screen top-0 inset-0 z-50 flex items-center justify-center bg-black gap-16 bg-opacity-90 text-white">
+          <div class="loader"></div>
+          <div className="text-2xl">Processing Payment...</div>
+        </div>
+      }
       <div className=" lg:p-[38px]  payment-insde  pe-12 sm:ps-0 sm:me-0 extrasmall:w-full extrasmall:pe-0 extrasmall:p-4 extrasmall:pr-4 sm:p-4">
-        {/* <div className=" lg:p-[38px]  payment-insde  extrasmall:max-w-[300px]  pe-12 sm:ps-0 sm:me-0 sm:max-w-full"> */}
         <div className="w-[150px] h-[22px]  mb-[2.6rem]">
           <Image
             className="w-[350px] object-contain"
             src={pang3a}
             alt="Logo Here"
           />
-        </div>
-
-        <div className="flex  gap-3 items-center  mt-3 justify-center lg:flex-nowrap flex-wrap  ">
-          <p className="text-center text-[#707070] text-[13px] font-normal">
-            Express checkout
-          </p>
-        </div>
-
-        <PaymentTypeButtons />
-
-        <div className="or-sec flex justify-center mt-4">
-          <p className="text-center text-[#707070] text-[13px]">OR</p>
         </div>
 
         <div className="flex justify-between  items-center mt-5">
@@ -81,69 +76,37 @@ const PaymentDetails = ({ onReviewOrder }) => {
         </div>
 
         <div
-          // action={onSubmit}
           className="flex flex-col sm:max-w-[650px] md:max-w-[700px] lg:max-w-[800px] "
-        // className="flex flex-col  max-w-[500px] sm:max-w-[650px] md:max-w-[700px] lg:max-w-[800px] "
         >
           <EmailSection isLogin={isLogin} email={state.userEmail} />
-          <Heading>DELIVERY</Heading>
 
-          <DeliverySection
-            childType={"delivery"}
-          />
+          <div className="mt-8">
+            <Heading>DELIVERY</Heading>
+            <DeliverySection
+              childType={"delivery"}
+            />
+          </div>
+
           <div className="mt-8">
             <Heading>SHIPPING</Heading>
-
             <div className="bg-gray-100 text-gray-600 p-4 rounded-md mt-2 text-sm">
               Enter your shipping address to view available shipping methods.
             </div>
           </div>
 
+          <div className="mt-8">
+            <Heading>REMEMBER ME</Heading>
+            <CheckBox value={"Remember me"} childType={'contact'} />
+          </div>
+
           {/* Payment Section */}
           <div className="mt-8">
             <Heading>PAYMENT</Heading>
-            <div className="text-sm text-gray-600 mt-2">
+            <div className="text-sm text-gray-600 -mt-2">
               All transactions are secure and encrypted.
             </div>
-
-            {/* Payment Options Section */}
-            <div className="mt-4">
-              <CreditCardInput />
-              <PaypalInput />
-              <Heading>REMEMBER ME</Heading>
-              <CheckBox value={"Remember me"} childType={'contact'} />
-
-              <div className="flex justify-between  items-center">
-                <div className="flex justify-start gap-2 items-center">
-                  <Image src={locksymbol} alt="locksymbol"></Image>
-                  <span className="text-xs">Secure and encrypted</span>
-                </div>
-                <Image src={shopImg} alt="shopImg"></Image>
-              </div>
-            </div>
-
-            {/* PayPal Button Section */}
-            <div className="mt-6 extrasmall:w-full md:max-w-[500px]">
-              <button
-                className="paypal-btn text-white py-4 px-6 rounded-md w-full text-lg flex flex-wrap justify-center items-center "
-                type="submit"
-              >
-                <span>Pay with &nbsp; </span>
-                <span>
-                  <Image
-                    src={paypalWhite}
-                    alt="paypal"
-                    className="paypalWhite"
-                  ></Image>
-                </span>
-              </button>
-              <button
-                className="review-order-btn text-white py-4 px-6 rounded-md w-full text-lg mt-6"
-                onClick={onReviewOrder}
-              >
-                Review order
-              </button>
-            </div>
+            <div className="w-full h-6"></div>
+            <SquarePayment loading={isPaymentSubmitting} setLoading={setIsPaymentSubmitting} />
           </div>
         </div>
         {/* Footer Links Section */}
