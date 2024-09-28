@@ -2,6 +2,8 @@ import ShopPage from "./ShopPage";
 import axios from "axios";
 // import { cookies } from "next/headers";
 
+export const revalidate = 60; // Revalidate every 60 seconds
+
 export default async function Page() {
     // const cookieStore = cookies(); // Get cookies from the request
     // const token = cookieStore.get('token'); // Fetch the 'token' cookie

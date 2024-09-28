@@ -59,6 +59,7 @@ const ShopPage = ({ data }) => {
   }, [searchTerm]);
 
   // console.log(selectedCategory);
+  console.log(resData);
 
   useEffect(() => {
     if (selectedCategory !== '' || debouncedSearchTerm.trim() !== '') {
