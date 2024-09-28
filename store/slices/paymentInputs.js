@@ -4,7 +4,17 @@ const paymentSlice = createSlice({
   name: 'payment',
   initialState: {
     contact: null,
-    deliveryDetails: null,
+    deliveryDetails: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      address: '',
+      city: '',
+      state: '',
+      country: '',
+      postalCode: '',
+    },
     creditCardDetails: null,
     BillingAddress: null,
   },
