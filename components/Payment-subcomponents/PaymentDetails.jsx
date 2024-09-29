@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import PaymentTypeButtons from "./paymentDetails-subcomponents.jsx/PaymentTypeButtons";
 import Link from "next/link";
 import EmailSection from "./paymentDetails-subcomponents.jsx/EmailSection";
 import DeliverySection from "./paymentDetails-subcomponents.jsx/DeliverySection";
 import "@/app/payment/payment.css";
 import Heading from "./paymentDetails-subcomponents.jsx/Heading";
-import paypalWhite from "../../assets/paypal-white.svg";
-import locksymbol from "../../assets/locksymbol1.png";
-import shopImg from "../../assets/shop-img.png";
 import pang3a from "@assets/Pang3aBlack.png";
-import CreditCardInput from "./payment-radios/CreditCardInput";
-import PaypalInput from "./payment-radios/PaypalInput";
 import CheckBox from "./paymentDetails-subcomponents.jsx/CheckBox";
 import FooterLinks from "./paymentDetails-subcomponents.jsx/FooterLinks";
 import { useSelector, useDispatch } from 'react-redux'
 import { paymentActions } from '@/store/slices/paymentInputs'
-import { RadioProvider } from "@/store/paymentTypeContext";
 import SquarePayment from "./paymentDetails-subcomponents.jsx/SquarePayment";
+import CheckoutDropDown from "./paymentDetails-subcomponents.jsx/CheckoutDropDown";
+import { useRouter } from "next/navigation";
 
 const PaymentDetails = () => {
+  const router = useRouter()
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(false)
   const [isPaymentSubmitting, setIsPaymentSubmitting] = useState(false)
@@ -49,11 +45,15 @@ const PaymentDetails = () => {
       <div className=" lg:p-[38px]  payment-insde  pe-12 sm:ps-0 sm:me-0 extrasmall:w-full extrasmall:pe-0 extrasmall:p-4 extrasmall:pr-4 sm:p-4">
         <div className="w-[150px] h-[22px]  mb-[2.6rem]">
           <Image
-            className="w-[350px] object-contain"
+            onClick={() => router.push('/')}
+            className="w-[350px] object-contain hover:cursor-pointer"
             src={pang3a}
             alt="Logo Here"
           />
         </div>
+
+        {/* order check out dropdown */}
+        <CheckoutDropDown />
 
         <div className="flex justify-between  items-center mt-5">
           <Heading>CONTACT</Heading>

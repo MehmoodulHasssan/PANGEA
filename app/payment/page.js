@@ -6,6 +6,7 @@ import PaymentDetails from '@/components/Payment-subcomponents/PaymentDetails';
 import OrderCheckout from '@/components/Payment-subcomponents/OrderCheckout';
 import { useSelector } from 'react-redux';
 import { RadioProvider } from '@/store/paymentTypeContext';
+import { FaAngleDown } from 'react-icons/fa6';
 const payment = () => {
   const paymentDetails = useSelector((state) => state.paymentFn);
 

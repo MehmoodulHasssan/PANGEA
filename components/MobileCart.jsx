@@ -103,9 +103,9 @@ const MobileCart = ({ isOpen, products }) => {
                             </div>
                             <div className='flex justify-center items-center'>
                                 <motion.button
-                                    className='text-black text-[0.75rem] font-bold py-4 px-24 rounded-full bg-green-400'
-                                    whileHover={{ scale: 1.1 }}
-                                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                                    className='text-white text-[0.75rem] font-bold py-4 px-24 rounded-full bg-green-400 active:bg-green-300'
+                                    // whileActive={{ scale: 1.1 }}
+                                    // transition={{ type: "spring", stiffness: 400, damping: 10 }}
                                     onClick={handleSubmit}
 
                                 >
