@@ -6,6 +6,7 @@ import axios from 'axios';
 import getCountryCode from '@/helpers/getCountryCode';
 
 // Initialize the Square client
+//check sandbox or production
 const client = new Client({
   // accessToken: process.env.NEXT_SQUARE_ACCESS_TOKEN,
   accessToken:
