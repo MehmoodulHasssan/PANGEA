@@ -20,7 +20,9 @@ const usePost = () => {
       setResData(res.data);
       setIsSuccess(true);
     } catch (error) {
-      setIsError(error.response?.data.error || error.message);
+      setIsError(
+        error.response?.data?.error || error.response?.data || error.message
+      );
       console.log(error.response?.data || error.message);
     } finally {
       setIsLoading(false);

@@ -2,18 +2,22 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import '@/app/payment/payment.css'
 import isymbol from '../../assets/i_symbol.png';
-import cartimg from '../../assets/cart-img.jpg';
-import { useSelector } from 'react-redux';
 import { totalPrice } from '@/helpers/totalPrice';
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
 
 const OrderCheckout = ({ onApply }) => {
     const orderItems = useSelector((state) => state.itemsFn.items);
     const [order, setOrder] = useState([])
+    const router = useRouter()
 
     useEffect(() => {
+        if (orderItems.length === 0) {
+            return router.push('/shop')
+        }
         setOrder(orderItems)
     }, [orderItems])
-    console.log(order)
+    // console.log(order)
     return (
         // <div className="w-full lg:w-1/2">
         <div className="checkout-main w-[604px] ">

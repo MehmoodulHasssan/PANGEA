@@ -9,8 +9,18 @@ export function optionalInput(value) {
   return true;
 }
 
+// export function canBeEmpty(value) {
+//   return true;
+// }
+
+export function isBirthDateValid(value) {
+  if (value.trim() === '') return true;
+  return value.match(/^\d{4}-\d{2}-\d{2}$/);
+}
+
 export function isPasswordValid(value) {
-  return value.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/);
+  return value.trim().length >= 8;
+  // return value.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/);
 }
 
 // const isEmailInvalid = isEdited.email && (!enteredValue.email || !enteredValue.email.includes('@'))

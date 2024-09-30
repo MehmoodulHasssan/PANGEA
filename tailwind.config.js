@@ -33,6 +33,10 @@ module.exports = {
         '2xl': '1536px',
         // => @media (min-width: 1536px) { ... }
       },
+      fontFamily: {
+        'gt-america': ['"GT America Extended Regular"', 'sans-serif'], // Add your custom font
+        'gt-america-bold': ['"GT America Extended Bold"', 'sans-serif'],
+      },
     },
   },
   plugins: [require('@tailwindcss/aspect-ratio')],

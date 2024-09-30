@@ -59,21 +59,32 @@ export async function POST(req) {
     idempotency_key,
     order: {
       location_id: process.env.NEXT_SQUARE_LOCATION_ID_DEV,
+      customer_id: 'Z0CJC2BT3YG2GBSBGPRXQ45WC0',
       line_items: [
         {
-          quantity: '1',
+          catalogObjectId: 'ACLRR4VOGB7TMMRC6TUN36I6', // Item ID
           base_price_money: {
             amount: 2000,
             currency: 'USD',
           },
+          quantity: '1', // Ordering 1 unit of the item
           name: 'Test Item',
-          uid: 'hghhgh7676gfgftburrfvv',
         },
+        // {
+        //   quantity: '1',
+        //   base_price_money: {
+        //     amount: 2000,
+        //     currency: 'USD',
+        //   },
+        //   name: 'Test Item',
+        //   uid: 'hghhgh7676gfgftburrfvv',
+        // },
       ],
       state: 'OPEN',
       fulfillments: [
         {
           type: 'SHIPMENT',
+          state: 'PROPOSED',
           shipment_details: {
             recipient: {
               display_name: `${firstName} ${lastName}`,
@@ -113,7 +124,8 @@ export async function POST(req) {
     );
 
     const order = orderResponse.data.order;
-    console.log(order);
+    // console.log(order);
+    console.log(order.id);
 
     // Calculate total amount (ensure consistency with frontend)
     const totalAmount = 2000;
@@ -131,6 +143,7 @@ export async function POST(req) {
     };
 
     // Create the payment
+    return NextResponse.json(order.id, { status: 201 });
     const paymentResponse = await paymentsApi.createPayment(paymentRequest);
     // console.log(paymentResponse.result);
 

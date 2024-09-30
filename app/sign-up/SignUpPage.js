@@ -5,6 +5,7 @@ import CustomAuthInput from '@/components/auth-input-subcomponents/CustomAuthInp
 import WithHeaderWrapper from '@/components/WithHeaderWrapper';
 import { useRouter } from 'next/navigation';
 import {
+  isBirthDateValid,
   isEmail,
   isEqualsToOtherValue,
   isNotEmpty,
@@ -16,6 +17,8 @@ import usePost from '@/hooks/usePost';
 import { useDispatch } from 'react-redux';
 import { stateActions } from '@/store/slices/currentState';
 import '@/app/styles/spinner.scss';
+import AuthSelect from '@/components/auth-input-subcomponents/AuthSelect';
+import toast from 'react-hot-toast';
 
 const SignUpPage = ({ responseData }) => {
   const dispatch = useDispatch();
@@ -29,10 +32,28 @@ const SignUpPage = ({ responseData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(data);
-    if (data.email.trim() === '' || data.password.trim() === '') {
+    if (
+      data.firstName.trim() === '' ||
+      data.lastName.trim() === '' ||
+      data.email.trim() === '' ||
+      data.address.trim() === '' ||
+      data.country.trim() === '' ||
+      data.phoneNumber.trim() === '' ||
+      data['state/province/district'].trim() === '' ||
+      data.password.trim() === '' ||
+      data.postalCode.trim() === ''
+    ) {
+      toast.error('Please fulfill all the required fields');
       return;
     }
-    postData({ url: 'https://pang3a-lilac.vercel.app/api/signup', data: data });
+    const reqData = {
+      ...data,
+      region: data['state/province/district'],
+      'state/province/district': undefined,
+      birthDate: data['birthDate (optional)'] || undefined,
+    };
+    console.log(reqData);
+    postData({ url: '/api/signup', data: reqData });
   };
 
   useEffect(() => {
@@ -42,17 +63,24 @@ const SignUpPage = ({ responseData }) => {
     }
   }, [isSuccess]);
 
+  useEffect(() => {
+    if (isError) {
+      console.log(isError);
+      toast.error(isError?.message || 'Something went wrong');
+    }
+  }, [isError]);
+
   return (
     <WithHeaderWrapper categories={responseData && responseData}>
       <div
-        className="h-screen max-w-[100%] flex items-center justify-center bg-white "
+        className="h-auto mt-24 max-w-[100%] flex items-center justify-center bg-white "
         // onClick={handleOutsideClick}
       >
         <div className="bg-white flex flex-col gap-3 rounded-lg w-full max-w-lg mx-4 sm:mx-0 p-6">
           <div className="flex items-center justify-center">
             <h2 className="text-xl text-black font-bold">REGISTER</h2>
           </div>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+          <form onSubmit={handleSubmit} className="flex flex-col">
             <CustomAuthInput
               validFn={(value) => !isNotEmpty(value)}
               id="firstName"
@@ -76,11 +104,74 @@ const SignUpPage = ({ responseData }) => {
             <div className="w-full h-[1px] bg-gray-300"></div>
 
             <CustomAuthInput
-              validFn={(value) => !isNotEmpty(value)}
+              validFn={(value) => !isNotEmpty(value) || !isEmail(value)}
               id="email"
               type="email"
               placeholder="liam@acme.com"
               error={'Enter a valid email'}
+              childType={'signUp'}
+            />
+
+            <div className="w-full h-[1px] bg-gray-300"></div>
+
+            <CustomAuthInput
+              validFn={(value) => !isNotEmpty(value) || !isPasswordValid(value)}
+              id="phoneNumber"
+              type={'text'}
+              placeholder="+91 9999999999"
+              error={'Invalid Phone number'}
+              childType={'signUp'}
+            />
+
+            <div className="w-full h-[1px] bg-gray-300"></div>
+            <CustomAuthInput
+              validFn={(value) => !isNotEmpty(value)}
+              id="address"
+              type={'text'}
+              placeholder="write your address"
+              error={'Should not be empty'}
+              childType={'signUp'}
+            />
+            <div className="w-full h-[1px] bg-gray-300"></div>
+            <CustomAuthInput
+              validFn={(value) => !isNotEmpty(value) || !isPasswordValid(value)}
+              id="state/province/district"
+              type={'text'}
+              placeholder="write your region"
+              error={'Should not be empty'}
+              childType={'signUp'}
+            />
+
+            <div className="w-full h-[1px] bg-gray-300"></div>
+            <CustomAuthInput
+              validFn={(value) => !isNotEmpty(value)}
+              id="postalCode"
+              type={'number'}
+              placeholder="XXXX"
+              error={'Should not be empty'}
+              childType={'signUp'}
+            />
+
+            <div className="w-full h-[1px] bg-gray-300"></div>
+            <AuthSelect />
+
+            <div className="w-full h-[1px] bg-gray-300"></div>
+
+            <CustomAuthInput
+              validFn={(value) => false}
+              id="companyName (optional)"
+              type={'text'}
+              placeholder="company"
+              error={'Should not be empty'}
+              childType={'signUp'}
+            />
+            <div className="w-full h-[1px] bg-gray-300"></div>
+            <CustomAuthInput
+              validFn={(value) => !isBirthDateValid(value)}
+              id="birthDate (optional)"
+              type={'text'}
+              placeholder="YYYY-MM-DD"
+              error={'Please write in this format: YYYY-MM-DD'}
               childType={'signUp'}
             />
 
@@ -100,13 +191,13 @@ const SignUpPage = ({ responseData }) => {
               />
             </CustomAuthInput>
 
-            <div className="w-full h-[1px] bg-gray-300"></div>
+            <div className="w-full h-[1px] bg-gray-300 mb-3"></div>
 
             <AuthInputButton>
               {isLoading ? <span className="small-loader"></span> : 'Sign Up'}
             </AuthInputButton>
           </form>
-          <div className="flex justify-center text-xs mt-2">
+          <div className="flex justify-center text-xs">
             <span className="text-gray-500 mx-1">Already have an account?</span>
             <button
               className="text-gray-800 mx-1 hover-line"

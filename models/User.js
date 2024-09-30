@@ -24,6 +24,30 @@ const userSchema = new mongoose.Schema({
     //   'Invalid email format',
     // ],
   },
+  customerId: {
+    type: String,
+    required: true,
+  },
+  // phone: {
+  //   type: String,
+  //   required: true,
+  // },
+  // address: {
+  //   type: String,
+  //   required: true,
+  // },
+  // region: {
+  //   type: String,
+  //   required: true,
+  // },
+  // company: {
+  //   type: String,
+  //   required: false,
+  // },
+  // birthDate: {
+  //   type: Date,
+  //   required: false,
+  // },
   password: {
     type: String,
     required: true,

@@ -33,7 +33,7 @@ const SignInPage = ({ responseData }) => {
     if (data.email.trim() === '' || data.password.trim() === '') {
       return;
     }
-    postData({ url: 'https://pang3a-lilac.vercel.app/api/login', data: data });
+    postData({ url: '/api/login', data: data });
   };
 
   useEffect(() => {

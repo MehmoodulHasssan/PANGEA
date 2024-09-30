@@ -6,11 +6,13 @@ import '@/app/payment/payment.css'
 import isymbol from '../../../assets/i_symbol.png';
 import { totalPrice } from '@/helpers/totalPrice';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 const CheckoutDropDown = () => {
     const orderItems = useSelector((state) => state.itemsFn.items);
     const [order, setOrder] = useState([])
     const [open, setOpen] = useState(false)
+    const router = useRouter()
 
     const divVariants = {
         isOpen: {
@@ -26,9 +28,12 @@ const CheckoutDropDown = () => {
         isCollapsed: { rotate: 0 }
     }
     useEffect(() => {
+        if (orderItems.length === 0) {
+            return router.push('/shop')
+        }
         setOrder(orderItems)
     }, [orderItems])
-    console.log(order)
+    // console.log(order)
 
     const onApply = (formData) => {
         const data = Object.fromEntries(formData.entries());

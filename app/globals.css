@@ -3,6 +3,22 @@
 @tailwind utilities;
 /* @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap");
+/* styles/globals.css */
+
+@import url(https://db.onlinewebfonts.com/c/879269be836bf8d970d4ef4fb0e54f42?family=GT+America+Extended+Regular);
+
+@font-face {
+  font-family: "GT America Extended Regular";
+  src: url("https://db.onlinewebfonts.com/t/879269be836bf8d970d4ef4fb0e54f42.eot");
+  src: url("https://db.onlinewebfonts.com/t/879269be836bf8d970d4ef4fb0e54f42.eot?#iefix") format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/879269be836bf8d970d4ef4fb0e54f42.woff2") format("woff2"),
+    url("https://db.onlinewebfonts.com/t/879269be836bf8d970d4ef4fb0e54f42.woff") format("woff"),
+    url("https://db.onlinewebfonts.com/t/879269be836bf8d970d4ef4fb0e54f42.ttf") format("truetype"),
+    url("https://db.onlinewebfonts.com/t/879269be836bf8d970d4ef4fb0e54f42.svg#GT+America+Extended+Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 @font-face {
   font-family: "GT America Extended Bold";
@@ -449,7 +465,7 @@ body.no-scroll {
     }
   } */
 
-  /* &::after{
+/* &::after{
     content: '<';
     position: absolute;
     top: 4px;
