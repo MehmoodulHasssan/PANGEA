@@ -56,7 +56,7 @@ const LoginModal = ({ setIsOpen }) => {
     return (
         <>
             <div
-                className="fixed inset-0 bg-gray-300 bg-opacity-80 z-50 flex items-center justify-center modal-backdrop"
+                className="fixed inset-0 bg-gray-300 bg-opacity-80 z-[200] flex items-center justify-center modal-backdrop"
                 onClick={handleOutsideClick}
             >
                 <motion.div
