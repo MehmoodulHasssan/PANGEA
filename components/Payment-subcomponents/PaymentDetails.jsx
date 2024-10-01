@@ -22,17 +22,10 @@ const PaymentDetails = () => {
   const state = useSelector((state) => state.stateFn);
 
   useEffect(() => {
-    if (state.currentState === 'userLogin') {
-      console.log(state)
-      setIsLogin(true);
-      dispatch(paymentActions.setValueInContact('email', state.userEmail))
-    } else {
-      if (state.currentState === 'loggedOut') {
-        setIsLogin(false)
-      }
+    if (state.currentState === 'loggedOut') {
+      router.push('/sign-in')
     }
-
-  }, [state])
+  }, [])
   return (
     // <div className="w-full lg:w-1/2">
     <div className="max-w-[710px] extrasmall:w-screen flex flex-wrap justify-center lg:justify-end ">

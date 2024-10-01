@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import Cookies from 'js-cookie';
 
 export const CURRENT_STATES = {
   LOGOUT: 'loggedOut',

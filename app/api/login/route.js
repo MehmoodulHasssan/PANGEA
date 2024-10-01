@@ -27,7 +27,10 @@ export const POST = async (request) => {
     // Check if the user exists
     const isUser = await User.findOne({ email }).exec();
     if (!isUser) {
-      return NextResponse.json({ message: 'User not found' }, { status: 400 });
+      return NextResponse.json(
+        { message: 'Email does not exists' },
+        { status: 400 }
+      );
     }
 
     // Check validity of password
@@ -72,7 +75,19 @@ export const POST = async (request) => {
     const response = NextResponse.json({
       message: 'Login Successful',
       success: true,
-      email: isUser.email,
+      userData: {
+        email: isUser.email,
+        customerId: customerData?.id,
+        firstName: customerData?.givenName,
+        lastName: customerData?.familyName,
+        address: customerData?.address?.addressLine1,
+        phoneNumber: customerData?.phoneNumber,
+        city: customerData?.address?.locality,
+        country: customerData?.address.country,
+        postalCode: customerData.address.postalCode,
+        phone: customerData?.address?.phoneNumber,
+        companyName: customerData?.companyName,
+      },
     });
     response.cookies.set('token', token, {
       httpOnly: true,
@@ -84,7 +99,7 @@ export const POST = async (request) => {
   } catch (error) {
     console.error('Error during authentication:', error);
     return NextResponse.json(
-      { message: 'Internal server error' },
+      { message: 'Failed To Login, please try again' },
       { status: 500 }
     );
   }

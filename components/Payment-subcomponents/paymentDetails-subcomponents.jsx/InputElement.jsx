@@ -42,9 +42,6 @@ const InputElement = ({ validFn, type, id, error, childType }) => {
                 case 'phone':
                     setEnteredValue(state.userData.phoneNumber || '')
                     break
-                // case 'country':
-                //     setEnteredValue(state.userData.country || '')
-                //     break
                 case 'city':
                     setEnteredValue(state.userData.city || '')
                     break
@@ -63,8 +60,8 @@ const InputElement = ({ validFn, type, id, error, childType }) => {
         if (state.currentState === 'userLogin') {
             setIsLogin(true)
         }
-    }, [state])
-    // console.log(filledValue)
+    }, [])
+    console.log(state)
     // console.log(isLogin)
     return (
         <>

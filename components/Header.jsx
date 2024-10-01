@@ -12,12 +12,16 @@ import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { modalActions } from "@/store/slices/openModel";
 import { itemsActions } from "@/store/slices/cartItems";
+import { stateActions } from "@/store/slices/currentState";
 import PopUp from "@/components/Header-subcomponents/PopUp";
 import Image from "next/image";
 import pang3aBlack from "@assets/headerPhoto.png";
 import pang3aWhite from "@assets/headerWhite.png";
 import _ from "lodash";
 import DropDown from "@/components/Header-subcomponents/DropDown";
+import Cookies from "js-cookie";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 
 
@@ -90,6 +94,14 @@ const Header = ({ white, categories }) => {
     dispatch(modalActions.openModal());
   };
 
+  const handleLogout = async () => {
+    const response = await axios.post('/api/logout')
+    if (response?.data.message === 'Logout successful') {
+      toast.success('Successfully Logged Out')
+      dispatch(stateActions.logout())
+    }
+  }
+
   return (
     <>
       <header
@@ -111,13 +123,16 @@ const Header = ({ white, categories }) => {
             {/* </div> */}
 
             <div className="example05">
-              {/* <Link className="border-s-[1px] ms-1 border-gray-600" href="/">
-                Info
-              </Link> */}
               {isLogin ?
-                <Link className="border-s-[1px] ms-1 border-gray-600" href="#">
-                  My Account
-                </Link> :
+                <>
+                  <Link className="border-s-[1px] ms-1 border-gray-600" onClick={handleLogout} href="#">
+                    Logout
+                  </Link>
+                  <Link className="border-s-[1px] ms-1 border-gray-600" href="#">
+                    My Account
+                  </Link>
+                </>
+                :
                 <Link className="border-s-[1px] ms-1 border-gray-600" href="/sign-in">
                   Login
                 </Link>

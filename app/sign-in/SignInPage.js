@@ -38,7 +38,7 @@ const SignInPage = ({ responseData }) => {
 
   useEffect(() => {
     if (isSuccess) {
-      dispatch(stateActions.userLogin(resData.email));
+      dispatch(stateActions.userLogin(resData?.userData));
       router.push('/');
     }
   }, [isSuccess]);
@@ -85,8 +85,8 @@ const SignInPage = ({ responseData }) => {
               {isLoading ? <span className="small-loader"></span> : 'Sign In'}
             </AuthInputButton>
           </form>
-          <div className="flex justify-center text-xs mt-2">
-            <span className="text-gray-500 font-gt-america font-[200] mx-1">
+          <div className="flex justify-center text-sm mt-2">
+            <span className="text-gray-500 font-gt-america font-[200] mb-1 mx-1">
               New to Pang3a UK?
             </span>
             <button
