@@ -19,7 +19,8 @@ export default function useInput(identifier, validationFunc) {
         setEnteredValue,
         handleChange,
         handleBlur,
-        hasError
+        hasError,
+        setEnteredValue
         //you can also just set the has error  as an argument here with definded logic like that: "hasError: isEdited && valueIsInValid" instead separately declaring it as variable outside the function statement
     }
 }

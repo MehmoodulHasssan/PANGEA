@@ -86,7 +86,9 @@ const SignInPage = ({ responseData }) => {
             </AuthInputButton>
           </form>
           <div className="flex justify-center text-xs mt-2">
-            <span className="text-gray-500 mx-1">New to Pang3a UK?</span>
+            <span className="text-gray-500 font-gt-america font-[200] mx-1">
+              New to Pang3a UK?
+            </span>
             <button
               className="text-gray-800 mx-1 hover-line"
               onClick={handleNavigateSignup}

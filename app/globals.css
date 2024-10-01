@@ -15,7 +15,7 @@
     url("https://db.onlinewebfonts.com/t/879269be836bf8d970d4ef4fb0e54f42.woff") format("woff"),
     url("https://db.onlinewebfonts.com/t/879269be836bf8d970d4ef4fb0e54f42.ttf") format("truetype"),
     url("https://db.onlinewebfonts.com/t/879269be836bf8d970d4ef4fb0e54f42.svg#GT+America+Extended+Regular") format("svg");
-  font-weight: normal;
+  font-weight: 200;
   font-style: normal;
 }
 
@@ -36,7 +36,7 @@
   --fullGrid: 1 / 1 / -1 / -1;
 
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 * {

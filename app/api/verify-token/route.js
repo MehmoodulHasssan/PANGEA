@@ -15,10 +15,10 @@ export async function POST(request) {
   }
   try {
     const decoded = jwt.verify(token, process.env.NEXT_TOKEN_KEY);
-    console.log(decoded);
+    // console.log(decoded);
     if (decoded) {
       return NextResponse.json(
-        { email: decoded.email, message: 'verified' },
+        { userData: decoded, message: 'verified' },
         { status: 200 }
       );
     } else {

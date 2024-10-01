@@ -39,7 +39,7 @@ const SignUpPage = ({ responseData }) => {
       data.address.trim() === '' ||
       data.country.trim() === '' ||
       data.phoneNumber.trim() === '' ||
-      data['state/province/district'].trim() === '' ||
+      data.city.trim() === '' ||
       data.password.trim() === '' ||
       data.postalCode.trim() === ''
     ) {
@@ -48,9 +48,8 @@ const SignUpPage = ({ responseData }) => {
     }
     const reqData = {
       ...data,
-      region: data['state/province/district'],
-      'state/province/district': undefined,
       birthDate: data['birthDate (optional)'] || undefined,
+      companyName: data['companyName (optional)'] || undefined,
     };
     console.log(reqData);
     postData({ url: '/api/signup', data: reqData });
@@ -135,9 +134,9 @@ const SignUpPage = ({ responseData }) => {
             <div className="w-full h-[1px] bg-gray-300"></div>
             <CustomAuthInput
               validFn={(value) => !isNotEmpty(value) || !isPasswordValid(value)}
-              id="state/province/district"
+              id="city"
               type={'text'}
-              placeholder="write your region"
+              placeholder="your city"
               error={'Should not be empty'}
               childType={'signUp'}
             />

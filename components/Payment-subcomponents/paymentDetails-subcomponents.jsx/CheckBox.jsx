@@ -18,12 +18,12 @@ const CheckBox = ({ value, childType, }) => {
     };
     return (
         <div className="flex items-center space-x-2 mb-4 border border-gray-300 p-2 rounded-md">
-            <label className="text-[13px] flex items-center gap-3 space-x-2">
+            <label className="text-[13px] font-gt-america font-[600] flex items-center gap-3 space-x-2 hover:cursor-pointer">
                 <input
                     type="checkbox"
                     name="options"
                     value={value}
-                    className="border-gray-100 h-4 w-4"
+                    className="border-gray-100 h-4 w-4 hover:cursor-pointer"
                     checked={isChecked} // Bind the state to the checkbox
                     onChange={handleCheckboxChange} // Update the state on change
                 />

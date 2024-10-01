@@ -87,12 +87,12 @@ const PaymentDetails = () => {
             />
           </div>
 
-          <div className="mt-8">
+          {/* <div className="mt-8">
             <Heading>SHIPPING</Heading>
             <div className="bg-gray-100 text-gray-600 p-4 rounded-md mt-2 text-sm">
               Enter your shipping address to view available shipping methods.
             </div>
-          </div>
+          </div> */}
 
           <div className="mt-8">
             <Heading>REMEMBER ME</Heading>

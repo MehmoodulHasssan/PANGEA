@@ -30,7 +30,7 @@ export const POST = async (request) => {
       address,
       phoneNumber,
       country,
-      region,
+      city,
       companyName,
       birthDate,
       postalCode,
@@ -46,7 +46,7 @@ export const POST = async (request) => {
       !address ||
       !phoneNumber ||
       !country ||
-      !region ||
+      !city ||
       !postalCode
     ) {
       return NextResponse.json(
@@ -69,14 +69,15 @@ export const POST = async (request) => {
     const customer = await client.customersApi.createCustomer({
       idempotencyKey: uuidv4(),
       companyName: companyName || '',
+      givenName: firstName,
+      familyName: lastName,
       emailAddress: email,
       address: {
-        locality: region,
+        locality: city,
+        addressLine1: address,
         // administrativeDistrictLevel1: 'Punjab',
         postalCode: postalCode,
         country: country,
-        firstName: firstName,
-        lastName: lastName,
       },
       phoneNumber: phoneNumber,
       // referenceId: '3b0af9d0-5159-4093-8795-64082750bf4g',

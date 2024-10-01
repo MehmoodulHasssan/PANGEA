@@ -48,12 +48,12 @@ const DeliverySection = ({ childType }) => {
 
             {/* Company Section */}
 
-            <InputElement
+            {/* <InputElement
                 childType={childType}
                 validFn={(value) => !optionalInput(value)}
                 type="text"
                 id="company"
-                error="company is required" />
+                error="company is required" /> */}
             {/* Address Section */}
 
             <InputElement
@@ -65,12 +65,12 @@ const DeliverySection = ({ childType }) => {
 
 
             {/* Apartment, Suite, etc. Section */}
-            <InputElement
+            {/* <InputElement
                 childType={childType}
                 validFn={(value) => !optionalInput(value)}
                 type="text"
                 id="apartment"
-                error="apartment is required" />
+                error="apartment is required" /> */}
 
 
             {/* City and Postcode Section */}

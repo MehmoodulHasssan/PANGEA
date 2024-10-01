@@ -3,8 +3,21 @@ import bcrypt from 'bcryptjs';
 import { NextRequest, NextResponse } from 'next/server';
 import User from '@/models/User'; // Ensure User model is correctly imported
 import { connectDb } from '@/configure/connectDb'; // Ensure correct path
+import { Client, Environment } from 'square';
+
+// Initialize the Square client
+const client = new Client({
+  accessToken:
+    process.env.NEXT_SQUARE_ENVIRONMENT === 'production'
+      ? process.env.NEXT_SQUARE_ACCESS_TOKEN_PROD
+      : process.env.NEXT_SQUARE_ACCESS_TOKEN_DEV,
+  environment:
+    process.env.NEXT_SQUARE_ENVIRONMENT === 'production'
+      ? Environment.Production
+      : Environment.Sandbox,
+});
 // Connect to the database
-connectDb();
+await connectDb();
 
 export const POST = async (request) => {
   try {
@@ -26,9 +39,29 @@ export const POST = async (request) => {
       );
     }
 
+    // getData from square Customer
+    const customer = await client.customersApi.retrieveCustomer(
+      isUser.customerId
+    );
+
+    const customerData = customer?.result.customer;
+    console.log(customerData);
     // Generate JWT token
     const token = jwt.sign(
-      { id: isUser._id, email: isUser.email },
+      {
+        id: isUser._id,
+        email: isUser.email,
+        customerId: customerData?.id,
+        firstName: customerData?.givenName,
+        lastName: customerData?.familyName,
+        address: customerData?.address?.addressLine1,
+        phoneNumber: customerData?.phoneNumber,
+        city: customerData?.address?.locality,
+        country: customerData.address.country,
+        postalCode: customerData.address.postalCode,
+        phone: customerData?.address?.phoneNumber,
+        companyName: customerData?.companyName,
+      },
       process.env.NEXT_TOKEN_KEY,
       {
         expiresIn: '1d',

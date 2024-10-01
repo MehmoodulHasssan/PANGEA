@@ -30,23 +30,25 @@ export async function POST(req) {
     return NextResponse.json('All fields are required', { status: 400 });
   }
 
-  if (!fulfilledCredentials(customerCredentials)) {
-    return NextResponse.json('Please fulfill all the required fields', {
-      status: 400,
-    });
-  }
   const {
     firstName,
     lastName,
-    company,
     address,
-    apartment,
     city,
     postalCode,
     phone,
     country,
     email,
   } = customerCredentials;
+
+  if (
+    (!email || !phone || !firstName || !lastName,
+    !address || !city || !postalCode || !country)
+  ) {
+    return NextResponse.json('Please fulfill all the required fields', {
+      status: 400,
+    });
+  }
 
   // 'Text me with news and offers', 'Email me with news and offers', 'Remember me'
 
@@ -70,15 +72,6 @@ export async function POST(req) {
           quantity: '1', // Ordering 1 unit of the item
           name: 'Test Item',
         },
-        // {
-        //   quantity: '1',
-        //   base_price_money: {
-        //     amount: 2000,
-        //     currency: 'USD',
-        //   },
-        //   name: 'Test Item',
-        //   uid: 'hghhgh7676gfgftburrfvv',
-        // },
       ],
       state: 'OPEN',
       fulfillments: [
@@ -92,9 +85,7 @@ export async function POST(req) {
                 address_line_1: address,
                 // address_line_2: 'Address line 2',
                 // address_line_3: 'Address line 3',
-                country: getCountryCode(
-                  country.slice(0, 1).toUpperCase() + country.slice(1)
-                ),
+                country,
                 first_name: firstName,
                 last_name: lastName,
                 locality: 'Pk',
@@ -143,7 +134,6 @@ export async function POST(req) {
     };
 
     // Create the payment
-    return NextResponse.json(order.id, { status: 201 });
     const paymentResponse = await paymentsApi.createPayment(paymentRequest);
     // console.log(paymentResponse.result);
 

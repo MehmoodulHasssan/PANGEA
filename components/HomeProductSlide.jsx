@@ -96,7 +96,7 @@ const HomeProductSlide = ({ product }) => {
         }
     }
 
-    console.log(selectedImageIndex)
+    // console.log(selectedImageIndex)
     return (
 
         <div className='h-full w-full overflow-hidden relative'>

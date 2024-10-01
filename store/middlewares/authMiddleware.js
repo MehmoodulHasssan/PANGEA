@@ -32,9 +32,10 @@ export const authMiddleware = (store) => (next) => async (action) => {
         // Verify token with backend
         const response = await axios.post('/api/verify-token', { token: null });
 
-        if (response.data && response.data.message === 'verified') {
+        if (response?.data && response?.data.message === 'verified') {
           // If the token is valid, log the user in
-          store.dispatch(stateActions.userLogin(response.data.email));
+          console.log(response?.data);
+          store.dispatch(stateActions.userLogin(response?.data?.userData));
         } else {
           // If token is invalid, log out the user and remove token
           store.dispatch(stateActions.logout());
