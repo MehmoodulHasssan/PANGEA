@@ -58,8 +58,8 @@ const DesktopCart = ({ isOpen }) => {
         dispatch(itemsActions.increment(item))
     }
 
-    const handleAddItem = ({ product, quantity = 1 }) => {
-        dispatch(itemsActions.addItem({ product, quantity }))
+    const handleAddItem = ({ product, availableStock, quantity = 1 }) => {
+        dispatch(itemsActions.addItem({ product, quantity, availableStock }))
     };
 
     useEffect(() => {

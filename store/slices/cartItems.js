@@ -1,6 +1,7 @@
 import notify from '@/helpers/notify';
 import { setRecentItems } from '@/helpers/setRecentItems';
 import { createSlice } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 
 const initialState = {
   items: [],
@@ -11,16 +12,18 @@ export const itemsSlice = createSlice({
   initialState,
   reducers: {
     addItem(state, action) {
-      const { product, quantity } = action.payload;
+      const { product, quantity, availableStock } = action.payload;
       const itemExists = state.items.some(
         (item) => item.product.id === product.id
       );
-      if (!itemExists) {
-        state.items.push(action.payload);
-        state.added += 1;
-        notify({ product, quantity, adding: true, removing: false });
-        setRecentItems(action.payload.product);
+      if (itemExists) {
+        toast.error('Item already in cart');
+        return;
       }
+      state.items.push(action.payload);
+      state.added += 1;
+      notify({ product, quantity, adding: true, removing: false });
+      setRecentItems(action.payload.product);
     },
     removeItem(state, action) {
       const { product, size, quantity } = action.payload;
@@ -33,17 +36,20 @@ export const itemsSlice = createSlice({
       }
     },
     increment(state, action) {
-      const { product, size, quantity } = action.payload;
-
+      const { product, availableStock, quantity } = action.payload;
+      if (availableStock && quantity >= availableStock) {
+        toast.error('No more stock available');
+        return;
+      }
       const itemIndex = state.items.findIndex(
-        (item) => item.product.id === product.id && item.size === size
+        (item) => item.product.id === product.id
       );
       if (itemIndex !== -1) {
         state.items[itemIndex].quantity += 1;
       }
     },
     decrement(state, action) {
-      const { product, size, quantity } = action.payload;
+      const { product } = action.payload;
       const itemIndex = state.items.findIndex(
         (item) => item.product.id === product.id
       );

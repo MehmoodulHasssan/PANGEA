@@ -13,12 +13,14 @@ import LargeSwiperCardSkeleton from '../HomePage-subcomponents/LargeSwiperCardSk
 import '@/app/styles/main.scss';
 import { current } from '@reduxjs/toolkit';
 import { setRecentItems } from '@/helpers/setRecentItems';
+import toast from 'react-hot-toast';
 
 
 let inventoryAlert = null
 let totalImages = 0
-const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
+const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked, inventoryArray }) => {
     const [showQuantity, setShowQuantity] = useState(false)
+    const [availableQuantity, setAvailableQuantity] = useState(null)
     const [loadedImagesCount, setLoadedImagesCount] = useState(0);
     const [imageLoading, setImageLoading] = useState(true);
     const [quantity, setQuantity] = useState(0)
@@ -33,12 +35,9 @@ const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
     }
     const productPrice = product?.item_data?.variations[0]?.item_variation_data.price_money?.amount
     const productName = product?.item_data?.name
-    const productType = product?.item_data?.product_type
-    if (Array.isArray(product?.item_data?.variations)) {
-        if (Array.isArray(product?.item_data?.variations[0]?.item_variation_data.location_overrides)) {
-            inventoryAlert = product?.item_data?.variations[0]?.item_variation_data.location_overrides[0]?.inventory_alert_type
-        }
-    }
+    // const productType = product?.item_data?.product_type
+    const itemVariations = product?.item_data?.variations[0]
+    const location_overrides = itemVariations?.item_variation_data?.location_overrides
     // const inventoryAlert = product?.item_data?.variations[0]?.item_variation_data.location_overrides[0]?.inventory_alert_type
     // console.log(product.item_data.variations[0])
 
@@ -57,8 +56,8 @@ const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
     };
 
     // console.log(product)
-    const handleAddItem = ({ product, quantity = 1 }) => {
-        dispatch(itemsActions.addItem({ product, quantity }))
+    const handleAddItem = ({ product, quantity = 1, availableStock }) => {
+        dispatch(itemsActions.addItem({ product, quantity, availableStock }));
     }
 
     const handleSlideClick = () => {
@@ -70,6 +69,29 @@ const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
             router.push('/product-details/' + product.id)
         }
     }
+
+    useEffect(() => {
+        if (inventoryArray?.length > 0) {
+
+            inventoryArray.forEach((element, index) => {
+                // console.log(element?.id, itemVariations?.id)
+                if (element?.id === itemVariations?.id) {
+                    const quantity = element.varData.quantity
+                    // {
+                    //     "catalogObjectId": "QITNJNSBP6TNL2RKPPVEJANC",
+                    //     "catalogObjectType": "ITEM_VARIATION",
+                    //     "state": "IN_STOCK",
+                    //     "locationId": "LZJ64CSPEV4Y9",
+                    //     "quantity": "27",
+                    //     "calculatedAt": "2024-09-24T17:22:33.256Z"
+                    // }
+                    // console.log(quantity)
+                    setAvailableQuantity(Number(quantity))
+                }
+            })
+        }
+    }, [inventoryArray])
+
     useEffect(() => {
         if (bgClicked) {
             if (showQuantity) {
@@ -150,9 +172,9 @@ const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
                     {productType} <span> 4 colors</span>
                 </p> */}
                     <p className="text-[10px] text-gray-700">${productPrice && (productPrice / 100).toFixed(2)}</p>
-                    {inventoryAlert && <p className="text-[8px] w-fit text-white bg-gradient-to-r from-[#3dbfff] to-[#a649ff] rounded-full p-1">
+                    {availableQuantity && location_overrides && availableQuantity < location_overrides[0]?.inventory_alert_threshold && <p className="text-[8px] w-fit text-white bg-gradient-to-r from-[#3dbfff] to-[#a649ff] rounded-full p-1">
                         <span className='mb-[-1px]'>
-                            {(inventoryAlert.replace('_', ' ')).replace('QUANTITY', 'STOCK')}
+                            Low Stock
                         </span></p>}
                     {/* padding: 2px 5px;
           background: linear-gradient(90deg, #3dbfff, #a649ff);
@@ -178,8 +200,10 @@ const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
                                         className='bg-[#eeecec] rounded-full p-1'
                                         onClick={() => {
                                             if (quantity > 0) {
-                                                handleAddItem({ product, quantity });
+                                                handleAddItem({ product, quantity, availableStock: availableQuantity });
+                                                return
                                             }
+                                            toast.error('Please select a quantity first')
                                         }}>
                                         <FaPlus />
                                     </button>
@@ -198,7 +222,13 @@ const MobileProductSlide = ({ product, vertical, bgClicked, setBgClicked }) => {
                                     </button>
                                     <div style={{ lineHeight: 'initial' }}>{quantity}</div>
                                     <button
-                                        onClick={() => { setQuantity(quantity + 1) }}
+                                        onClick={() => {
+                                            if (quantity >= availableQuantity) {
+                                                toast.error('No more items in stock')
+                                                return;
+                                            }
+                                            setQuantity(quantity + 1)
+                                        }}
                                         className='active:bg-[#eeecec] rounded-full p-1'
                                     >
                                         <FaPlus />

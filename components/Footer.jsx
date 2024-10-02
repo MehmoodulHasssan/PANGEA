@@ -47,7 +47,7 @@ const Footer = () => {
                 Address
               </h4>
               <Link href="#">
-                1685 Babcock Street Ste A, Costa Mesa, CA 92627
+                1685 Babcock Street Suite A, Costa Mesa, CA 92627
               </Link>
             </div>
           </div>

@@ -3,7 +3,7 @@ import MobileProductSlide from '@/components/shop-subcomponents/MobileProductSli
 // import { DUMMY_ITEMS } from '@/utils'
 
 
-const MobileSwiper = ({ data }) => {
+const MobileSwiper = ({ data, inventoryArray }) => {
     const [bgClicked, setBgClicked] = useState(false)
     return (
         <div className='w-screen flex gap-4 overflow-x-scroll scrollbar-hide px-6 lg:hidden'
@@ -16,6 +16,7 @@ const MobileSwiper = ({ data }) => {
                         product={product}
                         bgClicked={bgClicked}
                         setBgClicked={setBgClicked}
+                        inventoryArray={inventoryArray}
                     />
                 </div>
             ))}

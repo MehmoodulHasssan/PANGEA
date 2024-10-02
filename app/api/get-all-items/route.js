@@ -29,6 +29,7 @@ export const GET = async (request) => {
       items = items.concat(response?.data?.objects);
       cursor = response?.data?.cursor;
     } while (cursor);
+    // console.log('crossed');
     // const filePath = path.join(process.cwd(), 'data', 'output.json'); // Ensure the 'data' folder exists
     // const dirPath = path.dirname(filePath);
 

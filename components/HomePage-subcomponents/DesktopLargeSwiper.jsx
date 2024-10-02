@@ -9,9 +9,10 @@ import HomeProductSlide from '../HomeProductSlide';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 
 
-const DesktopLargeSwiper = ({ onAddItem, handleNavigateDetails, data }) => {
+const DesktopLargeSwiper = ({ onAddItem, handleNavigateDetails, data, inventoryArray }) => {
 
   const swiperRef = useRef(null);
+
 
   return (
     <div className="hidden lg:block">
@@ -83,6 +84,7 @@ const DesktopLargeSwiper = ({ onAddItem, handleNavigateDetails, data }) => {
                   product={product}
                   onAddItem={onAddItem}
                   handleNavigateDetails={handleNavigateDetails}
+                  inventoryArray={inventoryArray}
                 />
               </div>
             </div>

@@ -4,7 +4,7 @@ import 'swiper/css/grid';
 import 'swiper/css/pagination';
 import '@/app/styles/main.scss';
 // import { DUMMY_ITEMS } from '@/utils';
-import ProductSlide from './ProductSlide';
+// import ProductSlide from './ProductSlide';
 import HomeProductSlide from '../HomeProductSlide';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';

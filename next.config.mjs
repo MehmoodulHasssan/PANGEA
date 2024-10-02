@@ -10,6 +10,10 @@ const nextConfig = {
     ],
   },
   webpack(config, { isServer }) {
+    if (isServer) {
+      console.warn = () => {}; // Suppress warnings during server-side rendering
+    }
+
     // Add support for video files
     config.module.rules.push({
       test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)$/,

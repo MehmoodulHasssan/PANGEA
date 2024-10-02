@@ -15,6 +15,9 @@ import { itemsActions } from '@/store/slices/cartItems';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { setRecentItems } from '@/helpers/setRecentItems';
+import axios from 'axios';
+import { prod_client } from './shop-subcomponents/InitializeSquareClient';
+import toast from 'react-hot-toast';
 
 let inventoryAlert = null
 const suggestionsImages = [
@@ -25,10 +28,11 @@ const suggestionsImages = [
 ];
 
 let totalImages = 0
-const HomeProductSlide = ({ product }) => {
+const HomeProductSlide = ({ product, inventoryArray }) => {
     const swiperRef = useRef(null)
     const dispatch = useDispatch()
     const router = useRouter()
+    const [availableQuantity, setAvailableQuantity] = useState(null)
     const [selectedImageIndex, setSelectedImageIndex] = useState(null)
     const [imageLoading, setImageLoading] = useState(true)
     const [loadedImagesCount, setLoadedImagesCount] = useState(0)
@@ -36,15 +40,33 @@ const HomeProductSlide = ({ product }) => {
     const images = product?.item_data?.ecom_image_uris
     const productPrice = product?.item_data?.variations[0]?.item_variation_data.price_money?.amount / 100
     const productName = product?.item_data?.name
-    const productType = product?.item_data?.product_type
-    if (product?.item_data?.variations) {
-        if (Array.isArray(product?.item_data?.variations[0]?.item_variation_data.location_overrides)) {
-            inventoryAlert = product?.item_data?.variations[0]?.item_variation_data.location_overrides[0]?.inventory_alert_type
+    // const productType = product?.item_data?.product_type
+    const itemVariations = product?.item_data?.variations[0]
+    const location_overrides = itemVariations?.item_variation_data?.location_overrides
+    // console.log(location_overrides && location_overrides[0]?.inventory_alert_threshold)
+    // console.log(inventoryArray)
+    useEffect(() => {
+        if (inventoryArray?.length > 0) {
+
+            inventoryArray.forEach((element, index) => {
+                // console.log(element?.id, itemVariations?.id)
+                if (element?.id === itemVariations?.id) {
+                    const quantity = element.varData.quantity
+                    // {
+                    //     "catalogObjectId": "QITNJNSBP6TNL2RKPPVEJANC",
+                    //     "catalogObjectType": "ITEM_VARIATION",
+                    //     "state": "IN_STOCK",
+                    //     "locationId": "LZJ64CSPEV4Y9",
+                    //     "quantity": "27",
+                    //     "calculatedAt": "2024-09-24T17:22:33.256Z"
+                    // }
+                    // console.log(quantity)
+                    setAvailableQuantity(Number(quantity))
+                }
+            })
         }
-    }
-    // const inventoryAlert = product?.item_data?.variations[0]?.item_variation_data.location_overrides[0]?.inventory_alert_type
-    // console.log(inventoryAlert)
-    // console.log(imageLoading)
+    }, [inventoryArray])
+
 
     if (images) {
         totalImages = Object.keys(images).length
@@ -66,8 +88,8 @@ const HomeProductSlide = ({ product }) => {
         });
     };
 
-    const handleAddItem = ({ product, quantity = 1 }) => {
-        dispatch(itemsActions.addItem({ product, quantity }));
+    const handleAddItem = ({ product, availableStock, quantity = 1 }) => {
+        dispatch(itemsActions.addItem({ product, quantity, availableStock }));
     };
 
     const handleNavigateDetails = (product) => {
@@ -185,9 +207,9 @@ const HomeProductSlide = ({ product }) => {
             <div className="item-info">
                 <h5 className="hide">{productName && productName}</h5>
                 <p className="hide text-gray-700">{`$${productPrice.toFixed(2)}`}</p>
-                {inventoryAlert && <p className="hide text-white bg-gradient">
+                {availableQuantity && location_overrides && availableQuantity < location_overrides[0]?.inventory_alert_threshold && <p className="hide text-white bg-gradient">
                     <span className='mt-[1px] line-clamp-1'>
-                        {(inventoryAlert.replace('_', ' ')).replace('QUANTITY', 'STOCK')}
+                        Low Stock
                     </span>
                 </p>}
 
@@ -199,7 +221,7 @@ const HomeProductSlide = ({ product }) => {
 
                             onClick={() => {
                                 if (quantity > 0) {
-                                    handleAddItem({ product, quantity })
+                                    handleAddItem({ product, quantity, availableStock: availableQuantity })
                                 }
                             }
                             }
@@ -224,7 +246,13 @@ const HomeProductSlide = ({ product }) => {
                         <div>{quantity}</div>
                         <button
                             onClick={
-                                () => setQuantity(quantity + 1)
+                                () => {
+                                    if (quantity >= availableQuantity) {
+                                        toast.error('No more stock available')
+                                        return
+                                    }
+                                    setQuantity(quantity + 1)
+                                }
                             }
                         >
                             <FaPlus />

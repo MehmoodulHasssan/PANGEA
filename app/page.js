@@ -2,7 +2,7 @@ import HomePage from '@/app/HomePage';
 import axios from 'axios';
 // import { cookies } from 'next/headers';
 
-export const revalidate = 60; // Revalidate every 60 seconds
+export const dynamic = 'force-dynamic';
 
 export default async function Page() {
   // const cookieStore = cookies(); // Get cookies from the request
@@ -26,6 +26,7 @@ export default async function Page() {
       items: itemsResponse?.data,
       categories: categoryResponse?.data,
     };
+    // console.log(response.items);
     // const dataArray = Object.values(response?.data);
     // const reversedDataArray = dataArray.reverse();
     return <HomePage data={response} />;

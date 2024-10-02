@@ -30,6 +30,8 @@ import DesktopCart from '@/components/DesktopCart';
 import { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { AnimatePresence, motion } from 'framer-motion';
+import getVariationIds from '@/helpers/getVariationIds';
+import useFetchInventory from '@/hooks/useFetchInventory';
 
 const topSmallBanners = [
   {
@@ -65,7 +67,8 @@ const HomePage = ({ data }) => {
   const [toggle1, setToggle1] = useState(true);
   const [toggle2, setToggle2] = useState(true);
   const [ageVerification, setageVerification] = useState(false);
-  const [products, setProducts] = useState([]);
+  const [displayProducts, setDisplayProducts] = useState([]);
+  const { inventoryArray } = useFetchInventory(displayProducts);
 
   useEffect(() => {
     const handleResize = () => {
@@ -85,10 +88,17 @@ const HomePage = ({ data }) => {
   // console.log(data);
 
   const innerSwiperRef = useRef();
+  const splicedDataArray = data.items;
 
   // const dataArray = Object.values(data.items);
   // const reversedDataArray = dataArray.reverse();
-  const splicedDataArray = data.items;
+
+  useEffect(() => {
+    console.log('setting display products');
+    // console.log(splicedDataArray);
+    setDisplayProducts(splicedDataArray);
+  }, []);
+
   // const splicedDataArray = dataArray.splice(0, 30);
   // console.log(splicedDataArray);
 
@@ -105,7 +115,10 @@ const HomePage = ({ data }) => {
       setageVerification(false);
     };
   }, []);
-  console.log(state);
+  // console.log(state);
+  // console.log(inventoryArray);
+  // console.log(displayProducts);
+  console.log(inventoryArray);
   return (
     // <WithHeaderWrapper>
     <>
@@ -116,9 +129,9 @@ const HomePage = ({ data }) => {
           <AnimatePresence>
             {isOpen &&
               (device === 'mobile' || device === 'tablet' ? (
-                <MobileCart isOpen={isOpen} products={products} />
+                <MobileCart isOpen={isOpen} />
               ) : (
-                <DesktopCart isOpen={isOpen} products={products} />
+                <DesktopCart isOpen={isOpen} />
               ))}
           </AnimatePresence>
           <main className="home">
@@ -156,11 +169,15 @@ const HomePage = ({ data }) => {
                 setToggle={setToggle1}
                 texts={['THCA', 'DELTA 8']}
               />
-              <MobileSwiper data={splicedDataArray} />
+              <MobileSwiper
+                data={splicedDataArray}
+                inventoryArray={inventoryArray}
+              />
               <DesktopLargeSwiper
                 handleNavigateDetails={handleNavigateDetails}
                 onAddItem={onAddItem}
                 data={splicedDataArray}
+                inventoryArray={inventoryArray}
               />
               <LowerContainer data={topSmallBanners} />
               <SliderHeading toggle={toggle2} />{' '}
