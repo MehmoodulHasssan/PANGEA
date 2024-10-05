@@ -1,3 +1,4 @@
+import ErrorPage from "@/components/ErrorPage";
 import DetailsPage from "../DetailsPage";
 import axios from "axios";
 
@@ -8,13 +9,21 @@ export default async function Page({ params }) {
         const itemsResponse = await axios.get(`${process.env.NEXT_VERCEL_DOMAIN_URL}/api/product-details/` + productId);
 
         const categoryResponse = await axios.get(
-            `${process.env.NEXT_VERCEL_DOMAIN_URL}/api/get-all-categories`,
+            `https://connect.squareup.com/v2/catalog/list`,
             {
-                withCredentials: true,
+                headers: {
+                    Authorization: `Bearer ${process.env.NEXT_SQUARE_ACCESS_TOKEN_PROD}`,
+                    'Square-Version': '2023-08-16',
+                    'Content-Type': 'application/json',
+                },
+                // params: cursor ? { cursor } : {},
+                params: {
+                    types: 'CATEGORY', // Fetch only objects of type ITEM
+                },
             }
         );
 
-        const response = { itemsData: itemsResponse?.data, categories: categoryResponse?.data };
+        const response = { itemsData: itemsResponse?.data, categories: categoryResponse?.data?.objects };
         // const dataArray = Object.values(response?.data);
         // const reversedDataArray = dataArray.reverse();
 
@@ -22,6 +31,6 @@ export default async function Page({ params }) {
 
     } catch (error) {
         // console.log(error);
-        return <div>Error: {error.message}</div>;
+        return <ErrorPage statusCode={500} content={error?.message || 'Oops! Something went wrong'} />;
     }
 }

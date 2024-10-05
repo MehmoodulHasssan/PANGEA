@@ -1,6 +1,7 @@
 import getVariationIds from '@/helpers/getVariationIds';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const useFetchInventory = (dataArray) => {
   const [inventoryArray, setInventoryArray] = useState([]);
@@ -19,6 +20,7 @@ const useFetchInventory = (dataArray) => {
         setInventoryArray(response?.data);
       } catch (error) {
         console.log(error);
+        toast.error('Error fetching inventory counts');
       }
     };
     fetchInventoryCounts();

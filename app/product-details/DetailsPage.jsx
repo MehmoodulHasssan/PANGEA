@@ -9,12 +9,15 @@ import { itemsActions } from '@/store/slices/cartItems';
 import { useDispatch } from 'react-redux';
 import ShopProductMobile from '@/components/shop-subcomponents/ShopProductMobile';
 import SliderButtons from '@/components/HomePage-subcomponents/SliderButtons';
+import useFetchInventory from '@/hooks/useFetchInventory';
 
 
 export default function DetailsPage({ data }) {
     const dispatch = useDispatch()
     const [recommended, setRecommended] = useState(true)
     const [recentlyViewedItems, setRecentlyViewedItems] = useState([])
+    const [displayProducts, setDisplayProducts] = useState([])
+    const { inventoryArray } = useFetchInventory(displayProducts)
     const swiperRef = useRef(null);
 
     const images = data?.itemsData.item_data?.ecom_image_uris
@@ -39,6 +42,16 @@ export default function DetailsPage({ data }) {
         setRecentlyViewedItems(recentItems)
         console.log(recentItems)
     }, [recommended])
+
+    useEffect(() => {
+        if (recommended) {
+            console.log('recommended')
+            setDisplayProducts(data?.itemsData?.recommendedItems || [])
+        } else {
+            console.log('recentlyViewd')
+            setDisplayProducts(recentlyViewedItems || [])
+        }
+    }, [recommended])
     // console.log(data?.itemsData)
     // console.log(recentlyViewedItems)
     // console.log(recommended)
@@ -57,6 +70,7 @@ export default function DetailsPage({ data }) {
             </div>
             <ProductsGrid
                 products={recommended ? (data?.itemsData?.recommendedItems || []) : (recentlyViewedItems || [])}
+                inventoryArray={inventoryArray}
                 setRecommended={setRecommended}
                 recommended={recommended}
             />
@@ -72,6 +86,7 @@ export default function DetailsPage({ data }) {
             <div className='px-6 lg:hidden'>
                 <ShopProductMobile
                     products={recommended ? (data?.itemsData?.recommendedItems || []) : (recentlyViewedItems || [])}
+                    inventoryArray={inventoryArray}
                 />
             </div>
         </WithHeaderWrapper>

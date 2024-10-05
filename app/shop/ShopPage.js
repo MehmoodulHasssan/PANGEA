@@ -20,6 +20,7 @@ import TopImage from '@/components/shop-subcomponents/TopImage';
 import usePost from '@/hooks/usePost';
 import { categoryToId } from '@/helpers/categoryToId';
 import categoryDataToDisplay from '@/helpers/categoryDataToDisplay';
+import useFetchInventory from '@/hooks/useFetchInventory';
 
 const slides = Array.from({ length: 15 }, (_, index) => index + 1);
 const ShopPage = ({ data }) => {
@@ -31,13 +32,15 @@ const ShopPage = ({ data }) => {
   const searchTerm = useSelector((state) => state.categoryFn.searchTerm);
   const [showPopUp, setShowPopUp] = useState(false);
   const [isStyles, setStyles] = useState(true);
+  const [displayProducts, setDisplayProducts] = useState([]);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+  const { inventoryArray } = useFetchInventory(displayProducts);
   const dispatch = useDispatch();
 
-  const dataArray = Object.values(data.data);
+  const dataArray = data.data;
   // console.log(data.categories);
   // const reversedDataArray = dataArray.reverse();
-  const splicedDataArray = dataArray;
+  // const splicedDataArray = dataArray;
   // const splicedDataArray = reversedDataArray.splice(0, 30);
   // console.log(splicedDataArray);
 
@@ -47,6 +50,10 @@ const ShopPage = ({ data }) => {
     dispatch(itemsActions.addItem({ product, quantity }));
     // notify({ product, quantity, adding: true, removing: false });
   };
+
+  useEffect(() => {
+    setDisplayProducts(dataArray);
+  }, []);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -94,14 +101,16 @@ const ShopPage = ({ data }) => {
           <>
             <ShopDesktopProduct
               addItem={addItem}
-              products={Array.isArray(resData) ? resData : splicedDataArray}
+              products={Array.isArray(resData) ? resData : dataArray}
               isLoading={isLoading}
+              inventoryArray={inventoryArray}
             />
             <ShopProductMobile
               addItem={addItem}
               showPopUp={showPopUp}
-              products={Array.isArray(resData) ? resData : splicedDataArray}
+              products={Array.isArray(resData) ? resData : dataArray}
               isLoading={isLoading}
+              inventoryArray={inventoryArray}
             />
           </>
           {/* )} */}

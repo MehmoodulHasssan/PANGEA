@@ -42,6 +42,7 @@ const MobileCart = ({ isOpen, products }) => {
             return;
         }
         if (currentState === 'loggedOut') {
+            document.body.classList.add('no-scroll')
             setIsOpenModal(true)
             // dispatch(modalActions.closeModal())
             return

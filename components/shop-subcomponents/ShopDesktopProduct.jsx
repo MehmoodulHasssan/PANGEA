@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 import '@/app/styles/main.scss';
 
 const slides2 = [1, 2, 3, 4, 5, 6, 7, 8];
-const ShopDesktopProduct = ({ addItem, products, isLoading }) => {
+const ShopDesktopProduct = ({ addItem, products, isLoading, inventoryArray }) => {
     return (
         <div className="sliders w-4/5 hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {isLoading && slides2.map((slide, index) => (
@@ -29,6 +29,7 @@ const ShopDesktopProduct = ({ addItem, products, isLoading }) => {
                             <HomeProductSlide
                                 key={product.id}
                                 product={product}
+                                inventoryArray={inventoryArray}
                             //   onAddItem={onAddItem}
                             //   handleNavigateDetails={handleNavigateDetails}
                             />

@@ -3,7 +3,7 @@ import MobileProductSlide from './MobileProductSlide'
 import { AnimatePresence } from 'framer-motion'
 // import { DUMMY_ITEMS } from '@/utils'
 
-const ShopProductMobile = ({ addItem, products }) => {
+const ShopProductMobile = ({ addItem, products, inventoryArray }) => {
     const [bgClicked, setBgClicked] = useState(false)
     return (
         // <AnimatePresence>
@@ -19,6 +19,7 @@ const ShopProductMobile = ({ addItem, products }) => {
                     vertical={false}
                     bgClicked={bgClicked}
                     setBgClicked={setBgClicked}
+                    inventoryArray={inventoryArray}
                 />
             ))}
 

@@ -3,15 +3,13 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request) {
   const variationIds = await request.json();
-  console.log(variationIds);
+  // console.log(variationIds);
   try {
     let variationData = [];
     const response =
       await prod_client.inventoryApi.batchRetrieveInventoryCounts({
         catalogObjectIds: variationIds,
       });
-
-    // console.log(response.result);
 
     variationIds.forEach((id, ind) => {
       variationData.push({
@@ -21,6 +19,8 @@ export async function POST(request) {
     });
     return NextResponse.json(variationData, { status: 200 });
   } catch (error) {
-    console.log(error.message);
+    console.log('errored');
+    return NextResponse.json(error, { status: 500 });
+    // console.log('ErrorLog: ', error);
   }
 }

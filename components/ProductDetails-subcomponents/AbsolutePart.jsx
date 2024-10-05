@@ -28,7 +28,7 @@ const AbsolutePart = ({ product, centerSlide }) => {
         const keysToRemove = ["recommendedItems", "inventory"]
         const filteredProduct = Object.keys(product).reduce((acc, key) => {
             if (!keysToRemove.includes(key)) {
-                console.log(key)
+                // console.log(key)
                 acc[key] = product[key]
             }
             return acc;
@@ -41,7 +41,7 @@ const AbsolutePart = ({ product, centerSlide }) => {
         centerSlide(index)
     }
 
-    console.log(product)
+    // console.log(product)
 
     return (
         <>

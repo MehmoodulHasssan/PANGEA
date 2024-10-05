@@ -20,6 +20,7 @@ const LoginModal = ({ setIsOpen }) => {
     const data = useSelector((state) => state.authInputFn.signIn);
 
     const handleClose = () => {
+        document.classList.remove('no-scroll');
         setIsOpen(false);
     };
 

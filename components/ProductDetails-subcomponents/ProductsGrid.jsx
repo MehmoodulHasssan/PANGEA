@@ -13,7 +13,7 @@ import 'swiper/css/pagination';
 import SliderButtons from '../HomePage-subcomponents/SliderButtons';
 
 
-const ProductsGrid = ({ products, recommended, setRecommended }) => {
+const ProductsGrid = ({ products, recommended, setRecommended, inventoryArray }) => {
 
     // console.log(products)
     return (
@@ -46,6 +46,7 @@ const ProductsGrid = ({ products, recommended, setRecommended }) => {
                                         <HomeProductSlide
                                             key={product.id}
                                             product={product}
+                                            inventoryArray={inventoryArray}
                                         //   onAddItem={onAddItem}
                                         //   handleNavigateDetails={handleNavigateDetails}
                                         />

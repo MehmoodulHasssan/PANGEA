@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '@assets/Pang3aBlack.png'
 import Image from 'next/image';
 import { AnimatePresence, motion, useAnimate } from 'framer-motion'
@@ -9,10 +9,20 @@ const AgeVerificationModal = () => {
     const [scope, animate] = useAnimate();
 
 
+    useEffect(() => {
+        if (isOpen) {
+            document.body.classList.add('no-scroll');
+        }
+        // Cleanup the class when component unmounts
+        return () => {
+            document.body.classList.remove('no-scroll');
+        }
+    }, []);
     const handleShake = () => {
         animate('#modal', { x: [-10, 0, 10, 0, -10, 0] }, { transition: { duration: 0.1 } });
     }
     const handleClose = () => {
+        document.body.classList.remove('no-scroll');
         setIsOpen(false);
     };
     const handleVerify = () => {

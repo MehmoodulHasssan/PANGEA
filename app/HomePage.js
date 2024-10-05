@@ -111,14 +111,15 @@ const HomePage = ({ data }) => {
 
   useEffect(() => {
     setageVerification(true);
-    return () => {
-      setageVerification(false);
-    };
+    // return () => {
+    //   setageVerification(false);
+    // };
   }, []);
+
   // console.log(state);
   // console.log(inventoryArray);
   // console.log(displayProducts);
-  console.log(inventoryArray);
+  // console.log(inventoryArray);
   return (
     // <WithHeaderWrapper>
     <>

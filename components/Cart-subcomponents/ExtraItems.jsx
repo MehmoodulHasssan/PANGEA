@@ -13,7 +13,7 @@ import '@/app/styles/main.scss';
 
 const slides2 = [1, 2, 3, 4, 5, 6, 7, 8]
 
-const ExtraItems = ({ products, isLoading, isError, recommended, setRecommended }) => {
+const ExtraItems = ({ products, isLoading, isError, recommended, setRecommended, inventoryArray }) => {
 
     return (
         <div className='main-card-res-none lg:w-9/12 flex md:items-center md:w-[550px] sm:w-[400px]  flex-col overflow-x-auto scrollbar-hide border border-t-gray-400'>
@@ -55,21 +55,12 @@ const ExtraItems = ({ products, isLoading, isError, recommended, setRecommended 
                                     <HomeProductSlide
                                         key={product.id}
                                         product={product}
+                                        inventoryArray={inventoryArray}
                                     />
                                 </div>
                             </div>
                         </SwiperSlide>
                     ))}
-
-
-                    {/* {!isLoading && products.map((product, index) => (
-                        <ProductSlide
-                            key={product.id}
-                            product={product}
-                            addItem={addItem}
-                            handleNavigateToDetails={handleNavigateToDetails}
-                        />
-                    ))} */}
 
                 </div>
             </div>

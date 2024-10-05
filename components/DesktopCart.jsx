@@ -9,6 +9,7 @@ import OrdersManagementBox from './Cart-subcomponents/OrdersManagementBox';
 import { itemsActions } from '@/store/slices/cartItems';
 import { useSelector } from 'react-redux';
 import usePost from '@/hooks/usePost';
+import useFetchInventory from '@/hooks/useFetchInventory';
 
 const recommendedQuery = {
     term1: "Nuro Disposable 3ml - Broad Spec",
@@ -19,7 +20,7 @@ const DesktopCart = ({ isOpen }) => {
     const [recommended, setRecommended] = useState(true);
     const [dataToDisplay, setDataToDisplay] = useState([]);
     const { resData, isLoading, isError, postData } = usePost()
-
+    const { inventoryArray } = useFetchInventory(dataToDisplay)
 
     useEffect(() => {
         if (resData && recommended) {
@@ -35,6 +36,19 @@ const DesktopCart = ({ isOpen }) => {
         //     window.localStorage.setItem('recentlyViewed_time', new Date().getTime())
         // }
     }, [resData])
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.classList.add('no-scroll');
+        } else {
+            document.body.classList.remove('no-scroll');
+        }
+
+        // Cleanup the class when component unmounts
+        return () => {
+            document.body.classList.remove('no-scroll');
+        }
+    }, [isOpen]);
     //process the fetched array
     const addedItems = useSelector((state) => state.itemsFn.items)
     const dispatch = useDispatch()
@@ -115,6 +129,7 @@ const DesktopCart = ({ isOpen }) => {
                     setRecommended={setRecommended}
                     isLoading={isLoading}
                     isError={isError}
+                    inventoryArray={inventoryArray}
                 />
                 <OrdersManagementBox
                     isOpen={isOpen}

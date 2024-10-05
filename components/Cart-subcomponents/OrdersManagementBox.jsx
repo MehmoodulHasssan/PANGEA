@@ -29,6 +29,7 @@ const OrdersManagementBox = ({ addedItems, removeItem, onDecrement, onIncrement,
             return
         }
         if (currentState === 'loggedOut') {
+            document.body.classList.add('no-scroll')
             setIsOpenModal(true)
             return
         }
