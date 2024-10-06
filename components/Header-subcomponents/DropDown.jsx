@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation';
 
 const dropdownImages = [firstImg, secondImg, thirdImg];
 
-const items = Array.from({ length: 5 }, (_, index) => index + 1);
 const DropDown = ({ showDropdown, setShowDropdown, categories }) => {
     const router = useRouter();
     // console.log(categoryDataToDisplay(categories))
@@ -30,7 +29,7 @@ const DropDown = ({ showDropdown, setShowDropdown, categories }) => {
                                     <p
                                         className="first"
                                     >
-                                        {categoryData.category.name}
+                                        {(categoryData.category.name).toUpperCase()}
                                     </p>
 
                                     {categoryData.subCategories?.length > 0 && categoryData.subCategories.map((subcategory, index) => (

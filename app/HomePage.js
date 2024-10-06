@@ -2,7 +2,7 @@
 import Hero from '@assets/Top-banner.png';
 import '@/app/styles/main.scss';
 import { useRouter } from 'next/navigation';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import firstImg from '@assets/Nuro-1ml-Hybrid-GOAT-with deivce-min.png';
 import secondImg from '@assets/Candy 5ml pack open-Jolly dub-broad spec 01-min.png';
 import thirdImg from '@assets/Nuro 3ml-black-with device-Sativa-Berryland-min.png';
@@ -28,9 +28,7 @@ import Footer from '@/components/Footer';
 import MobileCart from '@/components/MobileCart';
 import DesktopCart from '@/components/DesktopCart';
 import { Toaster } from 'react-hot-toast';
-import axios from 'axios';
 import { AnimatePresence, motion } from 'framer-motion';
-import getVariationIds from '@/helpers/getVariationIds';
 import useFetchInventory from '@/hooks/useFetchInventory';
 
 const topSmallBanners = [
@@ -88,7 +86,7 @@ const HomePage = ({ data }) => {
   // console.log(data);
 
   const innerSwiperRef = useRef();
-  const splicedDataArray = data.items;
+  // const splicedDataArray = data.items;
 
   // const dataArray = Object.values(data.items);
   // const reversedDataArray = dataArray.reverse();
@@ -96,7 +94,7 @@ const HomePage = ({ data }) => {
   useEffect(() => {
     console.log('setting display products');
     // console.log(splicedDataArray);
-    setDisplayProducts(splicedDataArray);
+    setDisplayProducts(data?.items);
   }, []);
 
   // const splicedDataArray = dataArray.splice(0, 30);
@@ -111,15 +109,12 @@ const HomePage = ({ data }) => {
 
   useEffect(() => {
     setageVerification(true);
+
     // return () => {
     //   setageVerification(false);
     // };
   }, []);
 
-  // console.log(state);
-  // console.log(inventoryArray);
-  // console.log(displayProducts);
-  // console.log(inventoryArray);
   return (
     // <WithHeaderWrapper>
     <>
@@ -170,16 +165,23 @@ const HomePage = ({ data }) => {
                 setToggle={setToggle1}
                 texts={['THCA', 'DELTA 8']}
               />
-              <MobileSwiper
-                data={splicedDataArray}
-                inventoryArray={inventoryArray}
-              />
-              <DesktopLargeSwiper
-                handleNavigateDetails={handleNavigateDetails}
-                onAddItem={onAddItem}
-                data={splicedDataArray}
-                inventoryArray={inventoryArray}
-              />
+              {useMemo(
+                () => (
+                  <>
+                    <MobileSwiper
+                      data={data?.items}
+                      inventoryArray={inventoryArray}
+                    />
+                    <DesktopLargeSwiper
+                      handleNavigateDetails={handleNavigateDetails}
+                      onAddItem={onAddItem}
+                      data={data?.items}
+                      inventoryArray={inventoryArray}
+                    />
+                  </>
+                ),
+                [toggle1, inventoryArray]
+              )}
               <LowerContainer data={topSmallBanners} />
               <SliderHeading toggle={toggle2} />{' '}
               {/* Lower new arrivals || !mt-14 */}
@@ -188,8 +190,15 @@ const HomePage = ({ data }) => {
                 setToggle={setToggle2}
                 texts={['THCA', 'DELTA 8']}
               />
-              <DesktopSmallSwiper data={splicedDataArray} />
-              <MobileSmallSwiper data={splicedDataArray} />
+              {useMemo(
+                () => (
+                  <>
+                    <DesktopSmallSwiper data={data?.items} />
+                    <MobileSmallSwiper data={data?.items} />
+                  </>
+                ),
+                [toggle2]
+              )}
               {/* <BottomContainer /> */}
               {/* <LowerContainer data={topSmallBanners} videos={''} /> */}
               <PreFooter />

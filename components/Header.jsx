@@ -36,7 +36,7 @@ const Header = ({ white, categories }) => {
   // const stateMessage = useSelector((state) => state.itemsFn.message);
   const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(true);
 
 
 
@@ -157,7 +157,7 @@ const Header = ({ white, categories }) => {
               <div
                 style={{ cursor: "pointer" }}
                 onClick={() => (router.push('/shop'))}
-                className=" dropdown-trigger text-[11px] "
+                className=" dropdown-trigger text-[11px] font-gt-america-bold "
                 onMouseOver={() => setShowDropdown(true)}
                 onMouseOut={() => setShowDropdown(false)}
               >
@@ -176,7 +176,7 @@ const Header = ({ white, categories }) => {
             {/* <FaSearch /> */}
             <div onClick={showCartModal} className="relative">
               <SlBag className="relative" />
-              <p className="mt-[15px] w-[20px] absolute pr-0 top-2 right-0.5 bg-white !text-black border-0 rounded-full text-center cart-num hover:cursor-pointer">
+              <p className={`mt-[15px] w-[20px] absolute pr-0 top-2 right-0.5 ${(isHovered || isScrolled) ? "bg-black !text-white" : "bg-white !text-black"} border-0 rounded-full text-center cart-num hover:cursor-pointer`}>
                 {cartItemsNo}
               </p>
             </div>

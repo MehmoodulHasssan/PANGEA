@@ -122,7 +122,7 @@ header {
   // box-sizing: border-box;
 }
 .header-links {
-  font-weight: 400 !important;
+  // font-weight: 600;
   font-size: 12px;
   display: block;
   line-height: 24px;
@@ -168,11 +168,13 @@ header {
 .left {
   // background-color: rgba(2, 2, 2, 1);
   .grid {
-    font-weight: 200;
+    // font-weight: 4;
+    font-family: 'GT America Extended Bold';
+    font-size: 12px;
     display: flex;
     width: 100%;
     height: 100%;
-    padding: 30px 30px 30px 55px;
+    padding: 30px 30px 30px 30px;
     .row {
       display: flex;
       flex-grow: inherit;

@@ -9,23 +9,35 @@
 
 @font-face {
   font-family: "GT America Extended Regular";
-  src: url("https://db.onlinewebfonts.com/t/879269be836bf8d970d4ef4fb0e54f42.eot");
-  src: url("https://db.onlinewebfonts.com/t/879269be836bf8d970d4ef4fb0e54f42.eot?#iefix") format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/879269be836bf8d970d4ef4fb0e54f42.woff2") format("woff2"),
-    url("https://db.onlinewebfonts.com/t/879269be836bf8d970d4ef4fb0e54f42.woff") format("woff"),
-    url("https://db.onlinewebfonts.com/t/879269be836bf8d970d4ef4fb0e54f42.ttf") format("truetype"),
-    url("https://db.onlinewebfonts.com/t/879269be836bf8d970d4ef4fb0e54f42.svg#GT+America+Extended+Regular") format("svg");
-  font-weight: 200;
-  font-style: normal;
+  src: url("../public/fonts/GT-America-Extended-Regular-Trial.otf") format("opentype");
+  /* font-weight: norm; */
 }
 
+@font-face {
+  font-family: "GT America Extended Medium";
+  src: url("../public/fonts/GT-America-Extended-Medium-Trial.otf") format("opentype");
+  /* font-weight: bold; */
+  font-weight: 500;
+  /* Adjust based on your font’s weight if needed */
+  /* font-style: normal; */
+  /* Adjust if the font style is italic or oblique */
+}
+
+@font-face {
+  font-family: "GT America Extended Light";
+  src: url("../public/fonts/GT-America-Extended-Light-Trial.otf") format("opentype");
+  /* font-weight: bold; */
+  /* Adjust based on your font’s weight if needed */
+  /* font-style: normal; */
+  /* Adjust if the font style is italic or oblique */
+}
 
 @font-face {
   font-family: "GT America Extended Bold";
   src: url("../public/fonts/GT-America-Extended-Bold-Trial.woff2") format("woff2");
   /* font-weight: bold; */
   /* Adjust based on your font’s weight if needed */
-  font-style: normal;
+  /* font-style: normal; */
   /* Adjust if the font style is italic or oblique */
 }
 
@@ -36,7 +48,11 @@
   --fullGrid: 1 / 1 / -1 / -1;
 
   font-size: 14px;
-  font-weight: 400;
+  /* font-weight: 400; */
+  -ms-overflow-style: none;
+  /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 * {
@@ -46,9 +62,10 @@
 body {
   /* font-family: Helvetica Neue, Helvetica, Arial, sans-serif; */
   /* font-family: Inter, Helvetica, sans-serif !important; */
-  font-family: "GT America Extended Bold", sans-serif !important;
+  font-family: "GT America Extended Medium", sans-serif !important;
   color: #868484;
   /* background-color: #0d0d0d; */
+  /* Firefox */
   margin: 0;
   padding: 0;
 }
@@ -118,7 +135,7 @@ body.no-scroll {
 }
 
 .cart-num {
-  line-height: unset;
+  line-height: 10px;
   padding: 5px;
 }
 

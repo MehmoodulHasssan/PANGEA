@@ -113,6 +113,7 @@ h1 {
   // width: 90%;
   // margin: auto;
   // margin-top: 50px;
+  font-family: 'GT America Extended Bold';
   display: flex;
   flex-direction: row;
   border-radius: 20px;
@@ -131,6 +132,7 @@ h1 {
     display: block;
   }
   button {
+    font-family: 'GT America Extended Medium';
     display: block;
     background-color: black;
     color: white;
@@ -364,6 +366,7 @@ h1 {
         h5 {
           font-size: 11px;
           text-align: start;
+          font-family: 'GT America Extended Bold';
         }
         p {
           font-size: 12px;

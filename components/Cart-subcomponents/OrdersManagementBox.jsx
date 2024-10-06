@@ -55,7 +55,7 @@ const OrdersManagementBox = ({ addedItems, removeItem, onDecrement, onIncrement,
     return (
         <>
             <motion.div className='hidden lg:flex lg:flex-col lg:w-3/12 md-[430px] text-black border border-gray-400 justify-between'>
-                <div className='flex items-center justify-center h-20 border-b border-gray-400'>
+                <div className='flex font-gt-america-bold items-center justify-center h-20 border-b border-gray-400'>
                     YOUR BAG
                 </div>
                 <motion.div className='h-full overflow-y-scroll scrollbar-hide'>
@@ -163,7 +163,7 @@ const OrdersManagementBox = ({ addedItems, removeItem, onDecrement, onIncrement,
                         </div>
                         <div className='flex justify-center items-center'>
                             <motion.button
-                                className='text-white text-[0.75rem] font-bold py-2 px-24 rounded-full bg-green-400'
+                                className='text-white text-[0.75rem] py-2 px-24 rounded-full bg-green-400'
                                 whileHover={{ scale: 1.1 }}
                                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
                                 onClick={handleSubmit}

@@ -34,8 +34,11 @@ module.exports = {
         // => @media (min-width: 1536px) { ... }
       },
       fontFamily: {
-        'gt-america': ['"GT America Extended Regular"', 'sans-serif'], // Add your custom font
+        'gt-america': ['"GT America Extended Regular"', 'sans-serif'],
         'gt-america-bold': ['"GT America Extended Bold"', 'sans-serif'],
+        'gt-america-medium': ['"GT America Extended Medium"', 'sans-serif'],
+        'gt-america-light': ['"GT America Extended Light"', 'sans-serif'],
+        'gt-america-regular': ['"GT America Extended Regular"', 'sans-serif'],
       },
     },
   },
