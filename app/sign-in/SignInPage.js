@@ -51,11 +51,11 @@ const SignInPage = ({ responseData }) => {
       >
         <div className="bg-white flex flex-col gap-3 rounded-lg w-full max-w-lg mx-4 sm:mx-0 p-6">
           <div className="flex items-center justify-center">
-            <h2 className="text-xl text-black font-bold">SIGN IN</h2>
+            <h2 className="text-xl text-black font-gt-america-bold">SIGN IN</h2>
           </div>
           <form onSubmit={hanldeSubmit} className="flex flex-col gap-2">
             <CustomAuthInput
-              validFn={(value) => !isNotEmpty(value) || !isEmail(value)}
+              validFn={(value) => false}
               id="email"
               type="email"
               placeholder="liam@acme.com"
@@ -86,11 +86,11 @@ const SignInPage = ({ responseData }) => {
             </AuthInputButton>
           </form>
           <div className="flex justify-center text-sm mt-2">
-            <span className="text-gray-500 font-gt-america font-[200] mb-1 mx-1">
-              New to Pang3a UK?
+            <span className="text-gray-500 font-[200] mx-1">
+              New to Pang3a?
             </span>
             <button
-              className="text-gray-800 mx-1 hover-line"
+              className="text-gray-800 mx-1 font-gt-america-bold hover-line"
               onClick={handleNavigateSignup}
             >
               Create An Account

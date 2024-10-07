@@ -1,6 +1,6 @@
 import axios from "axios";
 import ContactPage from "./ContactPage";
-import { prod_client } from "@/components/shop-subcomponents/InitializeSquareClient";
+import { prod_client } from "@/helpers/InitializeSquareClient";
 
 export const dynamic = "force-dynamic";
 

@@ -22,7 +22,7 @@ const Footer = () => {
         <div className="flex-col flex flex-wrap justify-between xl:w-[1568px] w-full">
           <div className="links flex flex-wrap justify-start p-6 gap-7">
             <div className="flex flex-wrap flex-col">
-              <h4 className="mb-3 text-black font-semibold text-[13px]">
+              <h4 className="mb-3 text-black font-gt-america-bold text-[13px]">
                 Help
               </h4>
               <Link href="/contact-us">Contact us</Link>
@@ -31,7 +31,7 @@ const Footer = () => {
               <Link href="/returns-and-shipping">Returns & Shipping Policy</Link>
             </div>
             <div className="flex flex-wrap flex-col">
-              <h4 className="mb-3 footer-div-h4 text-black font-semibold text-[13px]">
+              <h4 className="mb-3 footer-div-h4 text-black font-gt-america-bold text-[13px]">
                 More
               </h4>
               <Link href="/sign-up">Sign Up</Link>
@@ -43,12 +43,18 @@ const Footer = () => {
               <Link href="#">Summer Shredding</Link> */}
             </div>
             <div className="flex flex-wrap flex-col">
-              <h4 className="mb-3 footer-div-h4 text-black font-semibold text-[13px]">
+              <h4 className="mb-3 footer-div-h4 text-black font-gt-america-bold text-[13px]">
                 Address
               </h4>
-              <Link href="#">
-                1685 Babcock Street Suite A, Costa Mesa, CA 92627
-              </Link>
+              <p className="text-[12px] mt-1 text-[#636363]">
+                1685 Babcock Street
+              </p>
+              <p className="text-[12px] text-[#636363]">
+                Suite A
+              </p>
+              <p className="text-[12px] text-[#636363]">
+                Costa Mesa, CA 92627
+              </p>
             </div>
           </div>
           <div className="flex justify-center lg:flex-nowrap flex-wrap lg:justify-start items-center border-t border-[#3b3b3b] max-w-full lg:border-b-none sm:border-b-gray-500">
@@ -58,10 +64,10 @@ const Footer = () => {
                   <ul className="flex flex-wrap lg:flex-nowrap">
                     <li onClick={() => router.push("/privacy-policy")} className="hover:cursor-pointer">PRIVACY POLICY</li>
                     <li onClick={() => router.push("/terms-and-conditions")} className="hover:cursor-pointer">TERMS OF SERVICE</li>
-                    <li>SITEMAP</li>
+                    {/* <li>SITEMAP</li>
                     <li style={{ marginLeft: 0 }}>
                       DO NOT SELL OR SHARE MY PERSONAL INFORMATION
-                    </li>{" "}
+                    </li>{" "} */}
                   </ul>
 
                   {/* <p>PRIVACY POLICY</p> <p>TERMS OF SERVICE</p> <p>SITEMAP</p>{" "}

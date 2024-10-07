@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import BannerInfo from '@/components/HomePage-subcomponents/Container-subcomponents/BannerInfo'
 import Image from 'next/image'
 
 const ContainerImage = ({ data }) => {
-    const [hovered, setHovered] = React.useState(false)
+    const [hovered, setHovered] = useState(false)
     return (
         <div
             style={{
+                overflow: 'hidden',
+                borderRadius: '15px',
                 aspectRatio: '4/5',
                 position: 'relative',
                 width: '100%',
@@ -14,7 +16,7 @@ const ContainerImage = ({ data }) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 // backgroundImage: `url(${image})`,
-                backgroundColor: 'rgb(216 215 215)',
+                backgroundColor: '#F6F6F6',
             }}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}

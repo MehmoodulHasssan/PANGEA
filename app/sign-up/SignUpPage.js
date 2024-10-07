@@ -37,6 +37,7 @@ const SignUpPage = ({ responseData }) => {
       data.lastName.trim() === '' ||
       data.email.trim() === '' ||
       data.address.trim() === '' ||
+      data.companyName.trim() === '' ||
       data.country.trim() === '' ||
       data.phoneNumber.trim() === '' ||
       data.city.trim() === '' ||
@@ -46,13 +47,9 @@ const SignUpPage = ({ responseData }) => {
       toast.error('Please fulfill all the required fields');
       return;
     }
-    const reqData = {
-      ...data,
-      birthDate: data['birthDate (optional)'] || undefined,
-      companyName: data['companyName (optional)'] || undefined,
-    };
-    console.log(reqData);
-    postData({ url: '/api/signup', data: reqData });
+
+    console.log(data);
+    postData({ url: '/api/signup', data });
   };
 
   useEffect(() => {
@@ -77,7 +74,9 @@ const SignUpPage = ({ responseData }) => {
       >
         <div className="bg-white flex flex-col gap-3 rounded-lg w-full max-w-lg mx-4 sm:mx-0 p-6">
           <div className="flex items-center justify-center">
-            <h2 className="text-xl text-black font-bold">REGISTER</h2>
+            <h2 className="text-xl text-black font-gt-america-bold">
+              REGISTER
+            </h2>
           </div>
           <form onSubmit={handleSubmit} className="flex flex-col">
             <CustomAuthInput
@@ -125,6 +124,15 @@ const SignUpPage = ({ responseData }) => {
             <div className="w-full h-[1px] bg-gray-300"></div>
             <CustomAuthInput
               validFn={(value) => !isNotEmpty(value)}
+              id="companyName"
+              type={'text'}
+              placeholder="company"
+              error={'Should not be empty'}
+              childType={'signUp'}
+            />
+            <div className="w-full h-[1px] bg-gray-300"></div>
+            <CustomAuthInput
+              validFn={(value) => !isNotEmpty(value)}
               id="address"
               type={'text'}
               placeholder="write your address"
@@ -156,16 +164,7 @@ const SignUpPage = ({ responseData }) => {
 
             <div className="w-full h-[1px] bg-gray-300"></div>
 
-            <CustomAuthInput
-              validFn={(value) => false}
-              id="companyName (optional)"
-              type={'text'}
-              placeholder="company"
-              error={'Should not be empty'}
-              childType={'signUp'}
-            />
-            <div className="w-full h-[1px] bg-gray-300"></div>
-            <CustomAuthInput
+            {/* <CustomAuthInput
               validFn={(value) => !isBirthDateValid(value)}
               id="birthDate (optional)"
               type={'text'}
@@ -174,7 +173,7 @@ const SignUpPage = ({ responseData }) => {
               childType={'signUp'}
             />
 
-            <div className="w-full h-[1px] bg-gray-300"></div>
+            <div className="w-full h-[1px] bg-gray-300"></div> */}
 
             <CustomAuthInput
               validFn={(value) => !isNotEmpty(value) || !isPasswordValid(value)}
@@ -196,10 +195,10 @@ const SignUpPage = ({ responseData }) => {
               {isLoading ? <span className="small-loader"></span> : 'Sign Up'}
             </AuthInputButton>
           </form>
-          <div className="flex justify-center text-xs">
+          <div className="flex justify-center text-sm">
             <span className="text-gray-500 mx-1">Already have an account?</span>
             <button
-              className="text-gray-800 mx-1 hover-line"
+              className="text-gray-800 font-gt-america-bold mx-1 hover-line"
               onClick={handleNavigateSignup}
             >
               Sign In

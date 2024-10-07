@@ -108,11 +108,11 @@ const HomePage = ({ data }) => {
   };
 
   useEffect(() => {
-    setageVerification(true);
-
-    // return () => {
-    //   setageVerification(false);
-    // };
+    if (typeof window !== 'undefined') {
+      if (!localStorage.getItem('ageVerified')) {
+        setageVerification(true);
+      }
+    }
   }, []);
 
   return (

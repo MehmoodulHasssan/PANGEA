@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import logo from '@assets/Pang3aBlack.png'
+import logo from "@assets/headerPhoto.png";
 import Image from 'next/image';
 import { AnimatePresence, motion, useAnimate } from 'framer-motion'
 
@@ -26,6 +26,7 @@ const AgeVerificationModal = () => {
         setIsOpen(false);
     };
     const handleVerify = () => {
+        window.localStorage.setItem('ageVerified', 'true');
         //add verification logic
         handleClose();
     };
@@ -73,18 +74,18 @@ const AgeVerificationModal = () => {
                                     <span className="text-black">a</span>
                                 </h1> */}
                                 </div>
-                                <h2 className="text-3xl text-black font-bold text-center mt-6">Welcome to our site</h2>
-                                <p className="text-gray-600 text-center mt-4">Please, verify your age to enter</p>
-                                <div className="flex justify-center mt-6">
+                                <h2 className="text-3xl text-black font-gt-america-bold text-center mt-6">Welcome to our site</h2>
+                                <p className="text-gray-600 text-center mt-3">Please, verify your age to enter</p>
+                                <div className="flex justify-center mt-4">
                                     <button
-                                        className=" text-black font-extrabold py-2 px-6 rounded-full border border-black shadow-sm hover:bg-slate-100"
+                                        className=" text-white text-sm bg-black py-3 px-6 rounded-full border border-black shadow-sm hover:opacity-80"
                                         onClick={handleVerify}
 
                                     >
                                         I am 18 or older
                                     </button>
                                 </div>
-                                <p className="text-gray-600 text-sm mt-4">
+                                <p className="text-gray-600 text-xs text-center mt-4">
                                     By entering this site you are agreeing to the Terms of Use and Privacy Policy.
                                 </p>
                             </div>

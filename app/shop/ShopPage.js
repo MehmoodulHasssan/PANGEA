@@ -15,14 +15,11 @@ import ShopSidebar from '@/components/shop-subcomponents/ShopSidebar';
 import ShopDesktopProduct from '@/components/shop-subcomponents/ShopDesktopProduct';
 import ShopProductMobile from '@/components/shop-subcomponents/ShopProductMobile';
 import { useSelector } from 'react-redux';
-import notify from '@/helpers/notify';
 import TopImage from '@/components/shop-subcomponents/TopImage';
 import usePost from '@/hooks/usePost';
-import { categoryToId } from '@/helpers/categoryToId';
 import categoryDataToDisplay from '@/helpers/categoryDataToDisplay';
 import useFetchInventory from '@/hooks/useFetchInventory';
 
-const slides = Array.from({ length: 15 }, (_, index) => index + 1);
 const ShopPage = ({ data }) => {
   const { isLoading, isSuccess, resData, isError, postData } = usePost();
   const device = useSelector((state) => state.deviceFn.deviceType);
@@ -34,15 +31,9 @@ const ShopPage = ({ data }) => {
   const [isStyles, setStyles] = useState(true);
   const [displayProducts, setDisplayProducts] = useState([]);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
   const { inventoryArray } = useFetchInventory(displayProducts);
   const dispatch = useDispatch();
-
-  const dataArray = data.data;
-  // console.log(data.categories);
-  // const reversedDataArray = dataArray.reverse();
-  // const splicedDataArray = dataArray;
-  // const splicedDataArray = reversedDataArray.splice(0, 30);
-  // console.log(splicedDataArray);
 
   const addItem = ({ product, quantity = 1 }) => {
     // const item = DUMMY_ITEMS.find((item) => item.id === product.id);
@@ -52,7 +43,7 @@ const ShopPage = ({ data }) => {
   };
 
   useEffect(() => {
-    setDisplayProducts(dataArray);
+    setDisplayProducts(data?.data);
   }, []);
 
   useEffect(() => {
@@ -65,21 +56,32 @@ const ShopPage = ({ data }) => {
     };
   }, [searchTerm]);
 
-  // console.log(selectedCategory);
-  console.log(resData);
-
   useEffect(() => {
-    if (selectedCategory !== '' || debouncedSearchTerm.trim() !== '') {
-      // console.log(selectedCategory);
-      postData({
-        url: '/api/search-items',
-        data: {
-          categoryId: selectedCategory,
-          searchTerm: debouncedSearchTerm,
-        },
-      });
+    if (isSearching) {
+      if (debouncedSearchTerm?.trim() !== '') {
+        console.log('searching');
+        postData({
+          url: '/api/search-items',
+          data: {
+            categoryId: selectedCategory,
+            searchTerm: debouncedSearchTerm,
+          },
+        });
+      }
+    } else {
+      if (selectedCategory !== '') {
+        postData({
+          url: '/api/search-items',
+          data: {
+            categoryId: selectedCategory,
+            searchTerm: '',
+          },
+        });
+      } else {
+        setDisplayProducts(data?.data);
+      }
     }
-  }, [selectedCategory, debouncedSearchTerm]);
+  }, [selectedCategory, debouncedSearchTerm, isSearching]);
 
   // console.log(data.categories);
   return (
@@ -92,6 +94,8 @@ const ShopPage = ({ data }) => {
             itemsData={data.data}
             isStyles={isStyles}
             setStyles={setStyles}
+            isSearching={isSearching}
+            setIsSearching={setIsSearching}
           />
           {/* {isLoading ? (
             <div className="fixed h-screen w-screen top-0 inset-0 z-50 flex items-center justify-center bg-black gap-16 bg-opacity-90 text-white">
@@ -101,14 +105,22 @@ const ShopPage = ({ data }) => {
           <>
             <ShopDesktopProduct
               addItem={addItem}
-              products={Array.isArray(resData) ? resData : dataArray}
+              products={
+                Array.isArray(resData) || resData?.length !== 0
+                  ? resData
+                  : data?.data
+              }
               isLoading={isLoading}
               inventoryArray={inventoryArray}
             />
             <ShopProductMobile
               addItem={addItem}
               showPopUp={showPopUp}
-              products={Array.isArray(resData) ? resData : dataArray}
+              products={
+                Array.isArray(resData) || resData?.length !== 0
+                  ? resData
+                  : data?.data
+              }
               isLoading={isLoading}
               inventoryArray={inventoryArray}
             />

@@ -32,7 +32,6 @@ export const POST = async (request) => {
       country,
       city,
       companyName,
-      birthDate,
       postalCode,
     } = reqBody;
     console.log(reqBody);
@@ -42,6 +41,7 @@ export const POST = async (request) => {
       !firstName ||
       !lastName ||
       !email ||
+      !companyName ||
       !password ||
       !address ||
       !phoneNumber ||
@@ -68,7 +68,7 @@ export const POST = async (request) => {
     //Creating new customer on square
     const customer = await client.customersApi.createCustomer({
       idempotencyKey: uuidv4(),
-      companyName: companyName || '',
+      companyName: companyName,
       givenName: firstName,
       familyName: lastName,
       emailAddress: email,
@@ -81,7 +81,6 @@ export const POST = async (request) => {
       },
       phoneNumber: phoneNumber,
       // referenceId: '3b0af9d0-5159-4093-8795-64082750bf4g',
-      birthday: birthDate || '',
     });
 
     console.log(customer?.result);

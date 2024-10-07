@@ -16,7 +16,7 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { setRecentItems } from '@/helpers/setRecentItems';
 import axios from 'axios';
-import { prod_client } from './shop-subcomponents/InitializeSquareClient';
+import { prod_client } from '../helpers/InitializeSquareClient';
 import toast from 'react-hot-toast';
 
 let inventoryAlert = null

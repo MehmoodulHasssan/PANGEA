@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
+import { FaPlus } from 'react-icons/fa6';
 
 const AnimatingButtons = ({ name, detail }) => {
     const controls = useAnimation();
@@ -16,27 +17,27 @@ const AnimatingButtons = ({ name, detail }) => {
     };
 
     const addSignVariants = {
-        open: { rotate: 45, transition: { duration: 0.5 } },
+        open: { rotate: 225, transition: { duration: 0.5 } },
         collapsed: { rotate: 0, transition: { duration: 0.5 } }
     };
 
     return (
         <>
             <div
-                className="flex justify-between items-center text-[12px] text-gray-800 cursor-pointer"
+                className="flex justify-between items-center font-gt-america-bold text-[13px] text-gray-800 cursor-pointer"
                 onClick={toggleOpen}
             >
                 <span>{name}</span>
                 <motion.span
-                    className='text-lg'
+                    className='text-sm'
                     animate={controls}
                     variants={addSignVariants}
                 >
-                    +
+                    <FaPlus />
                 </motion.span>
             </div>
             <motion.li
-                className="text-[12px] text-gray-400 block overflow-hidden"
+                className="text-[12px] font-gt-america-medium block overflow-hidden"
                 initial="collapsed"
                 animate={controls}
                 variants={listItemsVariants}

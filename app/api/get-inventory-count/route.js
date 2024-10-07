@@ -1,4 +1,4 @@
-import { prod_client } from '@/components/shop-subcomponents/InitializeSquareClient';
+import { prod_client } from '@/helpers/InitializeSquareClient';
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {

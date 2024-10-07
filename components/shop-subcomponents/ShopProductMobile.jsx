@@ -8,7 +8,7 @@ const ShopProductMobile = ({ addItem, products, inventoryArray }) => {
     return (
         // <AnimatePresence>
         <div
-            className={`py-8 h-auto grid grid-cols-2 md:grid-cols-3 gap-6 scrollbar-hide lg:hidden`}
+            className={`relative min-h-48 w-full py-8 h-auto grid grid-cols-2 md:grid-cols-3 gap-6 scrollbar-hide lg:hidden`}
             onClick={() => setBgClicked(true)}
         >
             {products && products?.map((product, index) => (
@@ -24,8 +24,9 @@ const ShopProductMobile = ({ addItem, products, inventoryArray }) => {
             ))}
 
             {!products || products.length === 0 && (
-                <div className="w-full h-full flex justify-center items-center">
-                    <p className="text-xl font-bold">No products found</p>
+                <div className="absolute w-full h-full flex flex-col justify-center items-center">
+                    <p className="text-xl font-gt-america-bold" >No products match this </p>
+                    <p className="text-xl font-gt-america-bold" >search term!</p>
                 </div>
             )}
 

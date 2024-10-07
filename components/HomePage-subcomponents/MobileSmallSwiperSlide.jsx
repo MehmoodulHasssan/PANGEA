@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React from 'react'
-import { FaPlus } from 'react-icons/fa'
+import { FaPlus } from 'react-icons/fa6'
 
 const MobileSmallSwiperSlide = ({ product }) => {
     const router = useRouter()
@@ -26,7 +26,7 @@ const MobileSmallSwiperSlide = ({ product }) => {
                     alt={`Slide`}
                 />
             </div>
-            <p className="absolute font-normal w-6 h-6 flex p-1 bg-slate-300 bg-opacity-45 justify-center items-center bottom-1 right-1 text-black text-xs rounded-full"
+            <p className="absolute font-normal w-5 h-5 flex p-1 bg-white bg-opacity-70  justify-center items-center bottom-1 right-1 text-black text-xs rounded-full"
             // onClick={() => { setShowQuantity(true) }}
             >
                 <FaPlus />

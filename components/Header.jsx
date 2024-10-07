@@ -1,6 +1,4 @@
 "use client";
-/* eslint-disable @next/next/no-img-element */
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "../app/header.scss";
 import { FaSearch } from "react-icons/fa";
@@ -11,7 +9,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { modalActions } from "@/store/slices/openModel";
-import { itemsActions } from "@/store/slices/cartItems";
 import { stateActions } from "@/store/slices/currentState";
 import PopUp from "@/components/Header-subcomponents/PopUp";
 import Image from "next/image";
@@ -19,7 +16,6 @@ import pang3aBlack from "@assets/headerPhoto.png";
 import pang3aWhite from "@assets/headerWhite.png";
 import _ from "lodash";
 import DropDown from "@/components/Header-subcomponents/DropDown";
-import Cookies from "js-cookie";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -36,7 +32,7 @@ const Header = ({ white, categories }) => {
   // const stateMessage = useSelector((state) => state.itemsFn.message);
   const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(true);
+  const [showDropdown, setShowDropdown] = useState(false);
 
 
 
@@ -111,12 +107,12 @@ const Header = ({ white, categories }) => {
         onMouseLeave={() => setIsHovered(false)}
       >
         {!isScrolled && (
-          <div className="preheader ">
+          <div className="preheader">
             {/* <div className="mySwiper"> */}
             {/* <div className="swiper-wrapper"> */}
             {/* <div className="swiper-slide"> */}
-            <p className="ps-7">
-              Free Domestic Shipping over $120 and 30 Day Returns
+            <p className="ps-7 font-gt-america-bold">
+              Free Shipping over $30
             </p>
             {/* </div> */}
             {/* </div> */}
@@ -176,7 +172,7 @@ const Header = ({ white, categories }) => {
             {/* <FaSearch /> */}
             <div onClick={showCartModal} className="relative">
               <SlBag className="relative" />
-              <p className={`mt-[15px] w-[20px] absolute pr-0 top-2 right-0.5 ${(isHovered || isScrolled) ? "bg-black !text-white" : "bg-white !text-black"} border-0 rounded-full text-center cart-num hover:cursor-pointer`}>
+              <p className={`mt-[15px] w-[20px] absolute pr-0 top-2 right-0.5 ${(!white || isHovered || isScrolled) ? "bg-black !text-white" : "bg-white !text-black"} border-0 rounded-full text-center cart-num hover:cursor-pointer`}>
                 {cartItemsNo}
               </p>
             </div>

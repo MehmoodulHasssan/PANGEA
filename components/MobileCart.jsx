@@ -103,17 +103,17 @@ const MobileCart = ({ isOpen, products }) => {
                         addItem={handleAddItem}
                     /> */}
                         <div className=' w-full flex flex-col bg-white'>
-                            <div className='flex items-center justify-center h-12 border border-slate-200'>
-                                Free Standard Shipping Unlocked
+                            <div className={`flex items-center justify-center font-gt-america-bold text-sm ${totalPrice(addedItems) >= 300 ? 'gradient-text' : ''} h-12 border border-slate-200`}>
+                                {totalPrice(addedItems) >= 300 ? 'Free Standard Shipping Unlocked' : 'Your shipping charges are only $20.00'}
                             </div>
-                            <div className='flex flex-col gap-3 border-y h-32 border border-slate-200 py-4 '>
+                            <div className='flex flex-col gap-3 font-gt-america-bold border-y h-32 border border-slate-200 py-4 '>
                                 <div className='flex justify-between px-6'>
                                     <span>Total:</span>
                                     <span>{`$${addedItems.length === 0 ? 0 : totalPrice(addedItems)}`}</span>
                                 </div>
                                 <div className='flex justify-center items-center'>
                                     <motion.button
-                                        className='text-white text-[0.75rem] font-bold py-4 px-24 rounded-full bg-green-400 active:bg-green-300'
+                                        className='text-white text-[0.75rem] py-4 px-24 rounded-full bg-green-400 active:bg-green-300'
                                         // whileActive={{ scale: 1.1 }}
                                         // transition={{ type: "spring", stiffness: 400, damping: 10 }}
                                         onClick={handleSubmit}

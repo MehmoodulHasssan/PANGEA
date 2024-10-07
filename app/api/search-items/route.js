@@ -10,7 +10,8 @@ export const POST = async (request) => {
   let items = [];
 
   if (!categoryId && searchTerm.trim() === '') {
-    return NextResponse.json('All fields are required', { status: 400 });
+    NextResponse.json('All fields are required', { status: 400 });
+    return;
   }
 
   if (!searchTerm) {
@@ -46,7 +47,8 @@ export const POST = async (request) => {
       }
     );
 
-    items = Object.values(response?.data.items) || [];
+    items = response?.data.items || [];
+    console.log(items);
     // console.log(response);
     // console.log(items);
     return NextResponse.json(items, { status: 200 }); // Return the items;

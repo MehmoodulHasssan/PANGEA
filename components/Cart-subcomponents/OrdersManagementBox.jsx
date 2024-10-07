@@ -153,8 +153,8 @@ const OrdersManagementBox = ({ addedItems, removeItem, onDecrement, onIncrement,
 
                 </motion.div>
                 <div className='flex flex-col'>
-                    <div className='flex items-center justify-center h-12 border-t border-gray-400'>
-                        Free Standard Shipping Unlocked
+                    <div className={`flex items-center font-gt-america-bold text-sm ${totalPrice(addedItems) > 300 ? "gradient-text" : ""} justify-center h-12 border-t border-gray-400`}>
+                        {totalPrice(addedItems) > 300 ? "Free Standard Shipping Unlocked" : "Your shipping charges are only $20.00"}
                     </div>
                     <div className='flex flex-col gap-3 border-y h-32 border-b border-gray-400 py-4 '>
                         <div className='flex justify-between px-6'>

@@ -19,14 +19,14 @@ const CustomAuthInput = ({ validFn, type, id, error, childType, placeholder, chi
 
     return (
         <div className='relative'>
-            <label htmlFor="email" className="block text-gray-700 font-bold mt-3">
+            <label htmlFor="email" className="block text-gray-700 font-gt-america-bold mt-3">
                 {splitAndCapitalize(id)}
             </label>
             <input
                 id={id}
                 type={type}
                 name={id}
-                className="border-none text-gray-600 font-gt-america font-[200] rounded-lg w-full focus:!outline-none"
+                className="border-none text-gray-600 font-[200] w-full focus:!outline-none"
                 placeholder={placeholder}
                 onChange={handleChange}
                 onBlur={handleBlur}

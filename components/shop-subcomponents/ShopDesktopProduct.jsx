@@ -10,13 +10,13 @@ import 'swiper/css/pagination';
 import '@/app/styles/main.scss';
 
 const slides2 = [1, 2, 3, 4, 5, 6, 7, 8];
-const ShopDesktopProduct = ({ addItem, products, isLoading, inventoryArray }) => {
+const ShopDesktopProduct = ({ products, isLoading, inventoryArray }) => {
     return (
-        <div className="sliders w-4/5 hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="relative sliders w-4/5 hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {isLoading && slides2.map((slide, index) => (
                 <DummyProductSlide key={index} maxW={'250px'} />
             ))}
-            {!isLoading && products.map((product, index) => (
+            {!isLoading && Array.isArray(products) && products.map((product, index) => (
                 <SwiperSlide key={index}>
                     <div
                         className="slider-items lg:ps-12 md:ps-8 sm:ps-4 ps-0"
@@ -37,6 +37,11 @@ const ShopDesktopProduct = ({ addItem, products, isLoading, inventoryArray }) =>
                     </div>
                 </SwiperSlide>
             ))}
+            {!isLoading && products?.length === 0 && (
+                <div className='hidden lg:flex absolute w-full h-full items-center justify-center'>
+                    <p className="text-3xl text-gray-400 font-gt-america-bold">No Products match this search term!</p>
+                </div>
+            )}
         </div>
     );
 };

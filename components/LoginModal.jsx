@@ -20,7 +20,7 @@ const LoginModal = ({ setIsOpen }) => {
     const data = useSelector((state) => state.authInputFn.signIn);
 
     const handleClose = () => {
-        document.classList.remove('no-scroll');
+        document.body.classList.remove('no-scroll');
         setIsOpen(false);
     };
 
@@ -68,7 +68,7 @@ const LoginModal = ({ setIsOpen }) => {
                     className="bg-white flex flex-col border-gray-400 border-2 gap-3 rounded-xl shadow-lg w-full max-w-lg mx-4 sm:mx-0 p-6">
                     <div className='flex flex-col'>
                         <div className="flex justify-between items-center">
-                            <h2 className="text-lg text-black font-bold"></h2>
+                            <h2 className="text-lg text-black"></h2>
                             <button
                                 className="text-gray-500 hover:text-gray-700 focus:outline-none"
                                 onClick={handleClose}
@@ -86,13 +86,13 @@ const LoginModal = ({ setIsOpen }) => {
                                 </svg>
                             </button>
                         </div>
-                        <p className="text-gray-700 mt-2 text-lg text-center">SIGN IN FIRST TO PROCEED TO CHECKOUT</p>
+                        <p className="text-gray-700 mt-2 font-gt-america-bold text-lg text-center">SIGN IN FIRST TO PROCEED TO CHECKOUT</p>
 
                     </div>
                     <div className='w-full h-[1px] bg-gray-300'></div>
                     <form onSubmit={hanldeSubmit} className="flex flex-col gap-2">
                         <CustomAuthInput
-                            validFn={(value) => !isNotEmpty(value) || !isEmail(value)}
+                            validFn={(value) => false}
                             id='email'
                             type="email"
                             placeholder='liam@acme.com'
@@ -120,11 +120,11 @@ const LoginModal = ({ setIsOpen }) => {
                         </AuthInputButton>
                     </form>
                     <div className="flex justify-center text-sm mt-2">
-                        <span className="text-gray-500 mb-1 font-gt-america font-[200] mx-1">
-                            New to Pang3a UK?
+                        <span className="text-gray-500 font-gt-america-medium font-[200] mx-1">
+                            New to Pang3a?
                         </span>
                         <button
-                            className="text-gray-800 mx-1 hover-line"
+                            className="text-gray-800 mx-1 font-gt-america-bold hover-line"
                             onClick={handleNavigateSignup}
                         >
                             Create An Account

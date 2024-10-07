@@ -3,9 +3,9 @@ import Link from 'next/link'
 
 const BannerInfo = ({ data }) => {
     return (
-        <div className="absolute bottom-6 left-6">
+        <div className="absolute font-gt-america-bold bottom-6 left-6">
             <h1>{data.name}</h1>
-            <p className='text-white'>{data.subtitle}</p>
+            <p className='text-white font-gt-america-bold'>{data.subtitle}</p>
             <button className="button">
                 <Link href="/shop">{data.btn1}</Link>
             </button>
